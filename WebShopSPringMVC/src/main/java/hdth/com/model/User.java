@@ -11,33 +11,42 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Entity
+@Table(name = "user" ,uniqueConstraints = {
+        @UniqueConstraint(name = "unique_username_constraint",columnNames = "username"),
+        @UniqueConstraint(name = "unique_email_constraint", columnNames = "email")
+})
 public class User implements Serializable {
 
-    public static final String ADMIN="ROLE_ADMIN";
-    public static final String USER="ROLE_USER";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "first_name")
-    private String fisrtName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "full_name")
+    private String fullName;
     private String email;
     private String phone;
+    private String avatar;
+
+    @Column(name = "address_default")
+    private String addressDefault;
+
     private String username;
     private String password;
-
     @Transient
     private String confirmPassword;
-    private boolean active;
-    @Column(name = "user_role")
-    private String userRole;
+
+
+    @Column(name = "reset_password_code")
+    private String resetPasswordCode;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")// id la ten ben bang cua user
+    private Role role;
+
 
 }
