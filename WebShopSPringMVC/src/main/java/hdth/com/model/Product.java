@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 
 @Setter
@@ -50,6 +51,9 @@ public class Product implements Serializable {
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Cart> cart;
 
 }
 
