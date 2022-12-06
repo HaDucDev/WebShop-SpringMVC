@@ -1,0 +1,22 @@
+package hdth.com.service.impl;
+
+import hdth.com.model.Category;
+import hdth.com.repositpry.CategoryRepository;
+import hdth.com.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CategotyServiceImpl implements CategoryService {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+
+    @Override
+    public List<Category> getCategories() {
+        return this.categoryRepository.getCategories();
+    }
+}
