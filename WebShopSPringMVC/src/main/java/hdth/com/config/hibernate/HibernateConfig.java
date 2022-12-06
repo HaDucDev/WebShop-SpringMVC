@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import javax.sql.DataSource;
@@ -48,6 +49,13 @@ public class HibernateConfig {
         properties.setProperty(FORMAT_SQL,env.getProperty("hibernate.formatSql"));
         properties.setProperty(HBM2DDL_AUTO,env.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
+    }
+
+    @Bean
+    public HibernateTransactionManager transactionManager(){
+        HibernateTransactionManager h=new HibernateTransactionManager();
+        h.setSessionFactory(getSessionFactory().getObject());
+        return h;
     }
 
 }

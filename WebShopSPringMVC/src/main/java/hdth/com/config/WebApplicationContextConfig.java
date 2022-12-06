@@ -4,6 +4,8 @@ package hdth.com.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan(basePackages = "hdth.com.controller")
 public class WebApplicationContextConfig implements WebMvcConfigurer {
 
@@ -28,6 +31,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         resourceView.setSuffix(".jsp");
         return resourceView;
     }
+
+
 
 
 
