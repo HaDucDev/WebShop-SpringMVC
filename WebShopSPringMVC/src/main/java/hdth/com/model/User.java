@@ -53,4 +53,8 @@ public class User implements Serializable {
     private Set<Cart> cart;
 
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Order> orders;
+
+
 }
