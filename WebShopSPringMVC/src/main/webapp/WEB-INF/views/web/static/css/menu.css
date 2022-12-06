@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header, nav{
+    margin: 5px 10%;
+}
+nav{
+    background: #ccc; 
+    border-radius: 5px;
+}
+nav ul{
+    display: flex;
+    z-index: 1;
+}
+nav> ul li{
+    list-style: none; 
+    border-right: 1px solid #ccc;
+    border-left:1px solid #322;
+    z-index: 2;
+}
+nav> ul li a{
+    display: block;
+    padding: 0 25px;
+    line-height: 50px;
+    color: black;
+    text-decoration: none;
+}
+nav ul li:first-child {
+    border-left: none;
+}
+nav> ul li:first-child a{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+nav ul li:hover>a{
+    background: red;
+    opacity: .7;
+    color: yellow;
+}
+
+nav li ul{
+    display: none;
+    min-width: 350px;
+    position: absolute;
+}
+nav li>ul li{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: #999;
+    text-align: left;
+}
+nav li>ul li:first-child a{
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+nav li>ul li:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+nav li>ul li:last-child a{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+nav  li:hover > ul{
+    display:  block;
+}
+nav > ul li > ul li >ul{
+    margin-left: 352px;
+    margin-top: -50px;
+}
+
+ul .search-container {
+    float: right;
+    margin-left: 250px;
+}
+
+nav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+}
+
+nav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+nav .search-container button:hover {
+    background: #ccc;
+}
