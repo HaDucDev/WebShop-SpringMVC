@@ -24,15 +24,14 @@ public class OrderDetail implements Serializable {
 
     private Long amount;
 
-    private boolean isDelete;
 
-    //private String isReview;// trạng thái đánh giá sản phẩm được mua
+    //private String isReview;// trạng thái đánh giá sản phẩm được mua. tuc la nguoi dung danh gia san pham nay tai don hang nay ntn
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
     private Order order;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
     private Product product;
 }

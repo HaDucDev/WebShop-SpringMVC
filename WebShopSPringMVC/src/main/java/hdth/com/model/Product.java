@@ -47,16 +47,18 @@ public class Product implements Serializable {
     private Category category;
 
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "supplier_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "supplier_id",referencedColumnName = "id")
     private Supplier supplier;
-
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Cart> cart;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany( fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "product")
     private Set<OrderDetail> orderDetails;
+
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "product")
+    private Set<Reviews> reviews;
 
 }
 

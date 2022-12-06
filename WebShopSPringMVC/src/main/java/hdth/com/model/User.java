@@ -49,12 +49,14 @@ public class User implements Serializable {
     @JoinColumn(name = "role_id", referencedColumnName = "id")// id la ten ben bang cua user
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Cart> cart;
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Order> orders;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Reviews> reviews;
 
 }
