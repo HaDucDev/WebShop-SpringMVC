@@ -39,8 +39,6 @@ public class Product implements Serializable {
     @Column(name = "description_product")
     private String descriptionProduct;
 
-    @Column(columnDefinition = "boolean default false")// 0 la con hang. 1 la het hang
-    private boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -59,6 +57,10 @@ public class Product implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Reviews> reviews;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "producstatus_id",referencedColumnName = "id")
+    private ProducStatus productstatus;
 
 }
 
