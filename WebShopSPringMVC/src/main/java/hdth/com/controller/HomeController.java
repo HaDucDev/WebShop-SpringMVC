@@ -18,8 +18,8 @@ public class HomeController {
         return "redirect:/category";
     }
 
-    @RequestMapping("/category")
-    public String testCategory(){
-        return "/admin/view/list-category";
-    }
+//    @RequestMapping("/category")
+//    public String testCategory(){
+//        return "/admin/view/list-category";
+//    }
 }

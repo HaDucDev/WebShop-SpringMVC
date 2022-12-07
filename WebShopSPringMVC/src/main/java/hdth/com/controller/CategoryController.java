@@ -16,6 +16,6 @@ public class CategoryController {
     @GetMapping("/category")
     private String getCategorys(Model model){
         model.addAttribute("cateList",this.categoryService.getCategories());
-        return "admin/view/list-user";
+        return "a-list-category";
     }
 }
