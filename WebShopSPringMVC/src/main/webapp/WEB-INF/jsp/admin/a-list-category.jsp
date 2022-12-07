@@ -41,8 +41,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value=""/>' style="color: white">Thêm loại hàng</a></button>
+                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin/category/add"/>' style="color: white">Thêm loại hàng</a></button>
                     </div>
+
+                    <c:if test="${msg != null}">
+                        <div class="alert alert-danger">${msg}</div>
+                    </c:if>
 
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
@@ -62,16 +66,17 @@
                                     <tbody>
                                     <c:forEach items="${cateList}" var="category" >
                                         <tr class="odd gradeX">
-                                            <td>${category.id }</td>
-                                            <td>${category.name }</td>
+                                            <td>${category.id}</td>
+                                            <td>${category.name}</td>
                                             <td>
                                                 <button style="width: 70px;">
-                                                    <a href="<c:url value=""/>"
+                                                    <a href="<c:url value="/admin/category/edit/${category.id}"/>"
                                                        class="center">Xem/Sửa</a>
                                                 </button>
                                                 |
-                                                <button id="btnDelete" type ="button" onclick = ""
-                                                        class="center">Xóa
+                                                <button id="btnDelete" type ="button" class="center">
+                                                    <a href="<c:url value="/admin/category/delete/${category.id}"/>"
+                                                       class="center">Xóa</a>
                                                 </button>
                                             </td>
                                         </tr>
