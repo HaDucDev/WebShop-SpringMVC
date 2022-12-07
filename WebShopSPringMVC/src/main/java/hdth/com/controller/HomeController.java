@@ -15,7 +15,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(){
-        return "redirect:/admin/category-list";
+        return "redirect:/admin/supplier-list";
     }
 
 //    @RequestMapping("/category")
