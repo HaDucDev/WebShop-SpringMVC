@@ -12,6 +12,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+
+
+
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
@@ -44,5 +47,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         resourceView.setSuffix(".jsp");
         return resourceView;
     }
+
 
 }
