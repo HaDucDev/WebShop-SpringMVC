@@ -19,4 +19,21 @@ public class CategotyServiceImpl implements CategoryService {
     public List<Category> getCategories() {
         return this.categoryRepository.getCategories();
     }
+
+    @Override
+    public boolean addOrUpdateCategories(Category category) {
+        return this.categoryRepository.addOrUpdateCategories(category);
+    }
+
+    @Override
+    public Category getCategoryById(Integer id) {
+        return this.categoryRepository.getCategoryById(id);
+    }
+
+    @Override
+    public boolean deleteCategoryById(Integer id) {
+        return this.categoryRepository.deletecategoryById(id);
+    }
+
+
 }

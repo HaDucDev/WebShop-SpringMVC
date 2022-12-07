@@ -15,11 +15,11 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(){
-        return "redirect:/category";
+        return "redirect:/admin/category-list";
     }
 
-    @RequestMapping("/category")
-    public String testCategory(){
-        return "/admin/view/list-category";
-    }
+//    @RequestMapping("/category")
+//    public String testCategory(){
+//        return "/admin/view/list-category";
+//    }
 }
