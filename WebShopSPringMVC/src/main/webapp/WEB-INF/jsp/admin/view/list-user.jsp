@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<c:url value="/views/admin/static" var="url"></c:url>
+<c:url value="/admin" var="url"></c:url>
 <c:url value="/api-admin-user" var="APIurl"></c:url>
 <c:url value="/admin-user-list" var="ACurl"></c:url>
 <!DOCTYPE html>
@@ -27,11 +27,11 @@
 <body>
 <div id="wrapper">
 
-	<jsp:include page="/views/admin/view/nav-bar.jsp"></jsp:include>
+	<jsp:include page="/admin-view/nav-bar.jsp"></jsp:include>
 
-	<!-- /. NAV TOP  -->
-	<jsp:include page="/views/admin/view/slide-bar.jsp"></jsp:include>
-	<!-- /. NAV SIDE  -->
+
+	<jsp:include page="slide-bar.jsp"></jsp:include>
+
 	<div id="page-wrapper">
 		<div id="page-inner">
 			<div class="row">
@@ -135,26 +135,26 @@
 </script>
 
 <%--DeleteUser--%>
-<script>
+<%--<script>--%>
 
-	function deleteUser(data){
-		console.log(typeof (data.id))
-		$.ajax({
-			url: '${APIurl}',
-			type: 'DELETE',
-			contentType: 'application/json',
-			data:JSON.stringify(data),
-			dataType: 'json',
-			success: function (result){
-				console.log("Success");
-				window.location.href = "${ACurl}?type=list";
-			},
-			errMode: function (error){
-				console.log("Error");
-			}
-		})
-	}
-</script>
+<%--	function deleteUser(data){--%>
+<%--		console.log(typeof (data.id))--%>
+<%--		$.ajax({--%>
+<%--			url: '${APIurl}',--%>
+<%--			type: 'DELETE',--%>
+<%--			contentType: 'application/json',--%>
+<%--			data:JSON.stringify(data),--%>
+<%--			dataType: 'json',--%>
+<%--			success: function (result){--%>
+<%--				console.log("Success");--%>
+<%--				window.location.href = "${ACurl}?type=list";--%>
+<%--			},--%>
+<%--			errMode: function (error){--%>
+<%--				console.log("Error");--%>
+<%--			}--%>
+<%--		})--%>
+<%--	}--%>
+<%--</script>--%>
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
 
