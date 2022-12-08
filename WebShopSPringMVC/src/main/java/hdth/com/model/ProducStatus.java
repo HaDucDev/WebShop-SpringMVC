@@ -1,7 +1,6 @@
 package hdth.com.model;
 
 
-import hdth.com.utils.enums.ERole;
 import hdth.com.utils.enums.EStatusProduct;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

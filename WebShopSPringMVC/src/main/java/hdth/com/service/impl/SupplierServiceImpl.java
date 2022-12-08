@@ -3,7 +3,7 @@ package hdth.com.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import hdth.com.model.Supplier;
-import hdth.com.repositpry.SupplierRepository;
+import hdth.com.repository.SupplierRepository;
 import hdth.com.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

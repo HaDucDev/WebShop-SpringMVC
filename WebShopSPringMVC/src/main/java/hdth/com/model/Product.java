@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +29,9 @@ public class Product implements Serializable {
 
     private Integer quantity;// so luong san pham con trong kho
 
+    @Transient
+    private MultipartFile productFile;
+
     @Column(name = "product_image")
     private String productImage;
 
@@ -40,8 +44,8 @@ public class Product implements Serializable {
     private String descriptionProduct;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 
 
