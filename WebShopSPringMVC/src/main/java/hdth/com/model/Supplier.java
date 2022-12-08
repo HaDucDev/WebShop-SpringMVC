@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -26,6 +27,9 @@ public class Supplier {
 
     @Column(name = "logo_image")
     private String logoImage;
+
+    @Transient
+    private MultipartFile file;// thuoc tinh nay chi dung de xu ly va khong anh huong den csdl
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "supplier")
     private Set<Product> productSet;

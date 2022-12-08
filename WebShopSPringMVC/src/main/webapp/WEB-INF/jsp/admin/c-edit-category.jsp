@@ -52,7 +52,7 @@
 										</c:if>
 										<form:form role="form" action="${action}" method="post" modelAttribute="cateList">
 											<div class="form-group">
-												<label>Tên loại hàng</label>
+												<label>Mã loại hàng:</label>
 												<form:input class="form-control" path="id"
 															placeholder="Nhập tên loại hàng" name="name" id="cateName" readonly="true"/>
 											</div>
