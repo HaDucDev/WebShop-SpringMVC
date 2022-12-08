@@ -43,22 +43,30 @@ public class SupplierServiceImpl implements SupplierService {
                 return this.supplierRepository.addOrUpdateSuppliers(supplier);
             }
             catch (IOException e) {
-                System.out.println("loi post add produc" + e.getMessage());
+                System.out.println("loi post add supplier" + e.getMessage());
             }
 
         }
         if (supplier.getFile() == null || (supplier.getFile().isEmpty()))
         {
-            String image= "https://res.cloudinary.com/dkdyl2pcy/image/upload/v1670464883/samples/avatar_icon_lo4bff.png";
-            supplier.setLogoImage(image);
-            return this.supplierRepository.addOrUpdateSuppliers(supplier);
+            if(supplier.getId() == null){
+                String image= "https://res.cloudinary.com/dkdyl2pcy/image/upload/v1670464883/samples/avatar_icon_lo4bff.png";
+                supplier.setLogoImage(image);
+                return this.supplierRepository.addOrUpdateSuppliers(supplier);
+            }
+            else {
+                Supplier s= this.getSupplierById(supplier.getId());
+                String imageDefault= s.getLogoImage();
+                supplier.setLogoImage(imageDefault);
+                return this.supplierRepository.addOrUpdateSuppliers(supplier);
+            }
         }
         return false;
     }
 
     @Override
     public Supplier getSupplierById(Integer id) {
-        return null;
+        return this.supplierRepository.getSupplierById(id);
     }
 
     @Override

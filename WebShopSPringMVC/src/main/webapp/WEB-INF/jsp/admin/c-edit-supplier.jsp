@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<c:url value="/api-admin-supplier" var="APIurl"></c:url>
-<c:url value="/views/admin/static" var="url"></c:url>
-<c:url value="/admin-supplier-list" var="PCurl"></c:url>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:url value="/admin" var="url"></c:url>
+<%--<c:url value="/admin-supplier-list" var="PCurl"></c:url>--%>
 <!DOCTYPE html>
 <html>
 <head>
-<script src="<c:url value="/ckeditor/ckeditor.js" />"></script>
+<%--<script src="<c:url value="/ckeditor/ckeditor.js" />"></script>--%>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Edit User</title>
@@ -23,9 +23,9 @@
 </head>
 <body>
 	<div id="wrapper">
-		<jsp:include page="/views/admin/view/nav-bar.jsp"></jsp:include>
+		<jsp:include page="nav-bar.jsp"></jsp:include>
 		<!-- /. NAV TOP  -->
-		<jsp:include page="/views/admin/view/slide-bar.jsp"></jsp:include>
+		<jsp:include page="slide-bar.jsp"></jsp:include>
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner">
@@ -45,25 +45,39 @@
 								<div class="row">
 									<div class="col-md-6">
 										<h3>Nhập thông tin nhà cung cấp</h3>
-
-										<form role="form" action="api-admin-product" method="post" enctype="multipart/form-data">
-											<input id="id" type="hidden" value="${supplier.id}">
+										<c:url value="/admin/supplier/add" var="action"/>
+										<form:form role="form" action="${action}" method="post" enctype="multipart/form-data" modelAttribute="supplier">
 											<div class="form-group">
-												<label>Tên nhà cung cấp</label> <input class="form-control" value="${supplier.nameSupplier}"
+												<label for="id">Tên nhà cung cấp</label>
+												<form:input id="id" class="form-control"
+															placeholder="Mã nhà cung cấp" name="supplierName" path="id" readonly="true"/>
+											</div>
+
+
+											<div class="form-group">
+												<label for="supplierName">Tên nhà cung cấp</label>
+												<form:input path="supplierName" class="form-control"
 													placeholder="Nhập tên nhà cung cấp" name="supplierName" id="supplierName" />
 											</div>
 											<div class="form-group">
-												<label>SĐT nhà cung cấp</label> <input class="form-control" value="${supplier.phoneNumber}"
-																					   placeholder="Nhập SĐT nhà cung cấp" name="phone" id="phone" />
+												<label for="file">Logo nhà cung cấp</label>
+												<form:input type="file" path="file" class="form-control"
+																					   placeholder="Nhập SĐT nhà cung cấp" name="file" id="file" />
 											</div>
 											<div class="form-group">
-												<label>Địa chỉ nhà cung cấp</label> <input class="form-control" value="${supplier.address}"
-																					   placeholder="Nhập địa chỉ nhà cung cấp" name="address" id="address" />
+												<c:choose>
+													<c:when test="${supplier.logoImage != null}">
+														<img style="width: 100px;height: 100px;object-fit: cover" src="<c:url value="${supplier.logoImage}"/>" alt="${supplier.supplierName}">
+													</c:when>
+													<c:otherwise>
+														<img style="width: 100px;height: 100px;object-fit: cover" src="<c:url value="/images/logo.png"/>" alt="${supplier.supplierName}">
+													</c:otherwise>
+												</c:choose>
 											</div>
 
-											<button type="button" id="btnAdd" class="btn btn-default">Cập nhật</button>
-											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=edit'">Reset</button>
-										</form>
+											<input type="submit" id="btnAdd" class="btn btn-default" value="Cập nhật"/>
+											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}'">Reset</button>
+										</form:form>
 
 
 									</div>
@@ -88,46 +102,6 @@
 	<script src="${url}/js/jquery.metisMenu.js"></script>
 	<!-- CUSTOM SCRIPTS -->
 	<script src="${url}/js/custom.js"></script>
-
-	<%--	Addition--%>
-	<script>
-		$('#btnAdd').click(function (e){
-			e.preventDefault();
-			var id= $('#id').val();
-			var supplierName= $('#supplierName').val();
-			var phone= $('#phone').val();
-			var address= $('#address').val();
-
-			var data={
-				"id":id,
-				"nameSupplier":supplierName,
-				"phoneNumber":phone,
-				"address":address
-			}
-
-			updateProduct(data)
-		});
-		function updateProduct(data){
-			$.ajax({
-				url: '${APIurl}',
-				type: 'PUT',
-				enctype: 'multipart/form-data',
-				processData:false,
-				contentType: 'application/json',
-				data:JSON.stringify(data),
-				dataType: 'json',
-				success: function (result){
-					console.log("Success");
-					window.location.href = "${PCurl}?type=list&message=insert_success";
-				},
-				errMode: function (error){
-					console.log("Error");
-				}
-			})
-		}
-	</script>
-
-
 
 	<script type="text/javascript" language="javascript">
    CKEDITOR.replace('editer', {width: '700px',height: '300px'});

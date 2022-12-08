@@ -52,6 +52,9 @@
                         }
                     </style>
                     <!-- Advanced Tables -->
+                    <c:if test="${msg != null}">
+                        <div class="alert alert-danger">${msg}</div>
+                    </c:if>
                     <div class="panel panel-default">
                         <div class="panel-heading"></div>
                         <div class="panel-body">
@@ -85,7 +88,7 @@
                                             </td>
                                             <td>
                                                 <button style="width: 70px;">
-                                                    <a href="<c:url value=""/>"
+                                                    <a href="<c:url value="/admin/supllier/edit/${supplier.id}"/>"
                                                        class="center">Xem/Sửa</a>
                                                 </button>
                                                 |

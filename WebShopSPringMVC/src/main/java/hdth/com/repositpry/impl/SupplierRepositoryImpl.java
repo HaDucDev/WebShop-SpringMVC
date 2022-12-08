@@ -41,18 +41,21 @@ public class SupplierRepositoryImpl implements SupplierRepository {
             }
         }
         else {// edit
-//            System.out.println("ok roi nha");
-//            Category c=this.getCategoryById(category.getId());
-//            c.setName(category.getName());
-//            session.save(c);
-//            return true;
+            System.out.println("ok supplier nha");
+            Supplier c=this.getSupplierById(supplier.getId());
+            c.setSupplierName(supplier.getSupplierName());
+            c.setLogoImage(supplier.getLogoImage());
+            session.save(c);
+            return true;
         }
         return false;
     }
 
     @Override
-    public Category getSupplierById(Integer id) {
-        return null;
+    public Supplier getSupplierById(Integer id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Supplier s = session.get(Supplier.class, id);
+        return s;
     }
 
     @Override

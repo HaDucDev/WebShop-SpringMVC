@@ -31,20 +31,15 @@ public class SupplierController {
         return "admin/b-add-supplier";
     }
 
+    @GetMapping(path = "/admin/supllier/edit/{id}")
+    private String getEdit(@PathVariable(name = "id") Integer id, Model model){
+
+        model.addAttribute("supplier",this.supplierService.getSupplierById(id));
+        return "admin/c-edit-supplier";
+    }
+
     @PostMapping("/admin/supplier/add")
     private String addOrUpdateSuppliers(@ModelAttribute Supplier supplier, Model model) {
-//        if(this.categoryService.addOrUpdateCategories(category)==true){
-//            return "redirect:/admin/category-list";
-//        }
-//        else{// them that bai
-//            model.addAttribute("msg","Them bi loi roi. hay thu lai sau");
-//            if (category.getId()==null){
-//                return "admin/b-add-category";
-//            }
-//        }
-//        model.addAttribute("iderror",category.getId());// lay id
-//        return "forward:/admin/category/edit/{id}";// chuyen tiep nhung du lieu id van con neu truong hop loi
-//    }
         System.out.println(supplier.getSupplierName());
         System.out.println(supplier.getFile());
         if (this.supplierService.addOrUpdateSuppliers(supplier) == true)
@@ -52,6 +47,6 @@ public class SupplierController {
             return "redirect:/admin/supplier-list"; // redirect:/template tức là chuyển đến controller khác đấy. nhưng cái này nó lại quét
         }
         else model.addAttribute("msg", "Them bi loi roi. hay thu lai sau");
-        return "redirect:/admin/supplier/add";// quet urlResolver xong roi den InternalView va cai nay se vo InternalView
+        return "redirect:/admin/supplier-list";// quet urlResolver xong roi den InternalView va cai nay se vo InternalView
     }
 }
