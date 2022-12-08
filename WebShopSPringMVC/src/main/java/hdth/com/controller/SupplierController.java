@@ -49,4 +49,12 @@ public class SupplierController {
         else model.addAttribute("msg", "Them bi loi roi. hay thu lai sau");
         return "redirect:/admin/supplier-list";// quet urlResolver xong roi den InternalView va cai nay se vo InternalView
     }
+
+    @GetMapping("/admin/supplier/delete/{id}")
+    private String deleteCategorybyId(@PathVariable("id") Integer id,Model model){
+        if(this.supplierService.deleteSupplierById(id)==false){
+            model.addAttribute("msg","Xoa bi loi roi. hay thu lai sau");
+        }
+        return "redirect:/admin/supplier-list";
+    }
 }

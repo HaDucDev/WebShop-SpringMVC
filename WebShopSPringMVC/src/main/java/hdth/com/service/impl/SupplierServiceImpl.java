@@ -71,6 +71,6 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public boolean deleteSupplierById(Integer id) {
-        return false;
+        return this.supplierRepository.deleteSupplierById(id);
     }
 }

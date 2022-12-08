@@ -60,6 +60,12 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
     @Override
     public boolean deleteSupplierById(Integer id) {
+        Session session=this.sessionFactory.getObject().getCurrentSession();
+        Supplier c= this.getSupplierById(id);
+        if (this.getSupplierById(id) != null){
+            session.delete(c);
+            return true;
+        }
         return false;
     }
 }
