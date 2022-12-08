@@ -11,6 +11,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 public class CloudinaryConfig {
 
     @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        return resolver;
+
+    }
+    @Bean
     public Cloudinary cloudinary() {
         Cloudinary c = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "dyatpgcxn",
@@ -21,11 +28,5 @@ public class CloudinaryConfig {
         return c;
     }
 
-    @Bean
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("UTF-8");
-        return resolver;
 
-    }
 }

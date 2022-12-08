@@ -29,6 +29,24 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
     @Override
     public boolean addOrUpdateSuppliers(Supplier supplier) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        if(supplier.getId() == null){
+            try {
+
+                session.save(supplier);
+                return true;
+            } catch (Exception ex) {
+                System.out.println("loi add supplier" + ex);
+                ex.printStackTrace();// in ra cac buoc den dau bi loi
+            }
+        }
+        else {// edit
+//            System.out.println("ok roi nha");
+//            Category c=this.getCategoryById(category.getId());
+//            c.setName(category.getName());
+//            session.save(c);
+//            return true;
+        }
         return false;
     }
 

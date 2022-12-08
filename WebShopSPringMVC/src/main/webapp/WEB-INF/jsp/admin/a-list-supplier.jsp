@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value=""/>' style="color: white">Thêm nhà cung cấp</a></button>
+                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin/supplier/add"/>' style="color: white">Thêm nhà cung cấp</a></button>
                     </div>
                     <style>
                         .tablecenterCSS td{
