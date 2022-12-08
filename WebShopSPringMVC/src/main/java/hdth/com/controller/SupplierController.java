@@ -51,7 +51,7 @@ public class SupplierController {
     }
 
     @GetMapping("/admin/supplier/delete/{id}")
-    private String deleteCategorybyId(@PathVariable("id") Integer id,Model model){
+    private String deleteSupplierbyId(@PathVariable("id") Integer id,Model model){
         if(this.supplierService.deleteSupplierById(id)==false){
             model.addAttribute("msg","Xoa bi loi roi. hay thu lai sau");
         }

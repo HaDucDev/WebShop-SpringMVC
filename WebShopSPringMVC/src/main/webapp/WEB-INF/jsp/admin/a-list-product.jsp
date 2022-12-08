@@ -43,7 +43,7 @@
                 <div class="col-md-12">
                     <div>
                         <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a
-                                href='<c:url value=""/>' style="color: white">Thêm sản phẩm</a></button>
+                                href='<c:url value="/admin/product/add"/>' style="color: white">Thêm sản phẩm</a></button>
                     </div>
 
                     <!-- Advanced Tables -->

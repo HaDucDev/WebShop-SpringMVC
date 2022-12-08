@@ -2,6 +2,7 @@ package hdth.com.repository.impl;
 
 
 import hdth.com.model.Product;
+import hdth.com.model.Supplier;
 import hdth.com.repository.ProductRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -28,6 +29,25 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public boolean addOrUpdateProducts(Product product) {
+
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        if(product.getId() == null){
+            try {
+                session.save(product);
+                return true;
+            } catch (Exception ex) {
+                System.out.println("loi add supplier" + ex);
+                ex.printStackTrace();// in ra cac buoc den dau bi loi
+            }
+        }
+        else {// edit
+//            System.out.println("ok supplier nha");
+//            Supplier c=this.getSupplierById(supplier.getId());
+//            c.setSupplierName(supplier.getSupplierName());
+//            c.setLogoImage(supplier.getLogoImage());
+//            session.save(c);
+//            return true;
+        }
         return false;
     }
 
