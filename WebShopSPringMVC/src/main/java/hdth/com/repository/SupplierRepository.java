@@ -1,4 +1,4 @@
-package hdth.com.repositpry;
+package hdth.com.repository;
 
 
 import hdth.com.model.Supplier;

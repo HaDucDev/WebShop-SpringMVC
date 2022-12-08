@@ -1,7 +1,7 @@
-package hdth.com.repositpry.impl;
+package hdth.com.repository.impl;
 
-import hdth.com.model.Category;
-import hdth.com.repositpry.CategoryRepository;
+import hdth.com.model.Supplier;
+import hdth.com.repository.SupplierRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,35 +14,36 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class CategoryRepositoryImpl implements CategoryRepository {
+public class SupplierRepositoryImpl implements SupplierRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<Category> getCategories() {
+    public List<Supplier> getSuppliers() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Category ");
+        Query q = session.createQuery("FROM Supplier ");
         return q.getResultList();
     }
 
     @Override
-    public boolean addOrUpdateCategories(Category category) {
-
+    public boolean addOrUpdateSuppliers(Supplier supplier) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        if(category.getId() == null){
+        if(supplier.getId() == null){
             try {
-                session.save(category);
+
+                session.save(supplier);
                 return true;
             } catch (Exception ex) {
-                System.out.println("loi add category" + ex);
+                System.out.println("loi add supplier" + ex);
                 ex.printStackTrace();// in ra cac buoc den dau bi loi
             }
         }
-        else {
-            System.out.println("ok roi nha");
-            Category c=this.getCategoryById(category.getId());
-            c.setName(category.getName());
+        else {// edit
+            System.out.println("ok supplier nha");
+            Supplier c=this.getSupplierById(supplier.getId());
+            c.setSupplierName(supplier.getSupplierName());
+            c.setLogoImage(supplier.getLogoImage());
             session.save(c);
             return true;
         }
@@ -50,18 +51,17 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Category getCategoryById(Integer id) {
+    public Supplier getSupplierById(Integer id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Category c = session.get(Category.class, id);
-        return c;
-
+        Supplier s = session.get(Supplier.class, id);
+        return s;
     }
 
     @Override
-    public boolean deletecategoryById(Integer id) {
+    public boolean deleteSupplierById(Integer id) {
         Session session=this.sessionFactory.getObject().getCurrentSession();
-        Category c= this.getCategoryById(id);
-        if (this.getCategoryById(id) != null){
+        Supplier c= this.getSupplierById(id);
+        if (this.getSupplierById(id) != null){
             session.delete(c);
             return true;
         }

@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = {
         "hdth.com.controller",
         "hdth.com.service",
-        "hdth.com.repositpry"
+        "hdth.com.repository"
 })
 public class WebApplicationContextConfig implements WebMvcConfigurer {
 
