@@ -41,19 +41,28 @@ public class ProductRepositoryImpl implements ProductRepository {
             }
         }
         else {// edit
-//            System.out.println("ok supplier nha");
-//            Supplier c=this.getSupplierById(supplier.getId());
-//            c.setSupplierName(supplier.getSupplierName());
-//            c.setLogoImage(supplier.getLogoImage());
-//            session.save(c);
-//            return true;
+            System.out.println("sua product nha");
+            Product c=this.getProductById(product.getId());
+            c.setProductImage(product.getProductImage());
+            c.setProductName(product.getProductName());
+            c.setQuantity(product.getQuantity());
+            c.setUnitPrice(product.getUnitPrice());
+            c.setDiscount(product.getDiscount());
+            c.setDescriptionProduct(product.getDescriptionProduct());
+            c.setCategory(product.getCategory());
+            c.setSupplier(product.getSupplier());;
+            c.setProductstatus(product.getProductstatus());
+            session.save(c);
+            return true;
         }
         return false;
     }
 
     @Override
-    public Product getSupplierById(Integer id) {
-        return null;
+    public Product getProductById(Integer id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Product s = session.get(Product.class, id);
+        return s;
     }
 
     @Override

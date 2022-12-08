@@ -43,7 +43,8 @@
                 <div class="col-md-12">
                     <div>
                         <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a
-                                href='<c:url value="/admin/product/add"/>' style="color: white">Thêm sản phẩm</a></button>
+                                href='<c:url value="/admin/product/add"/>' style="color: white">Thêm sản phẩm</a>
+                        </button>
                     </div>
 
                     <!-- Advanced Tables -->
@@ -95,12 +96,14 @@
                                             <td>${pro.getDescriptionProduct()} </td>
                                             <td>${pro.category.name}</td>
                                             <td>${pro.supplier.supplierName}</td>
-                                            <td>${pro.productstatus.name}</td>
-
-
+                                            <td>
+                                                <c:if test="${pro.productstatus.id == 1}">
+                                                    Còn hàng</c:if>
+                                                <c:if test="${pro.productstatus.id == 2}">
+                                                    Hết hàng</c:if>
                                             <td>
                                                 <button style="width: 70px;">
-                                                    <a href="<c:url value=""/>"
+                                                    <a href="<c:url value="/admin/product/edit/${pro.id}"/>"
                                                        class="center">Xem/Sửa</a>
                                                 </button>
                                                 |

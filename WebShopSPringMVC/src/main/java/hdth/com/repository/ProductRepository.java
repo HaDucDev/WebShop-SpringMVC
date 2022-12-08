@@ -10,7 +10,7 @@ public interface ProductRepository {
 
     boolean addOrUpdateProducts(Product product);
 
-    Product getSupplierById(Integer id);
+    Product getProductById(Integer id);
 
     boolean deleteProductById(Integer id);
 }

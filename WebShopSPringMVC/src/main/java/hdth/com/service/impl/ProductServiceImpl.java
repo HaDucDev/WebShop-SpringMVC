@@ -47,26 +47,26 @@ public class ProductServiceImpl implements ProductService {
             }
 
         }
-//        if (supplier.getFile() == null || (supplier.getFile().isEmpty()))
-//        {
-//            if(supplier.getId() == null){
-//                String image= "https://res.cloudinary.com/dkdyl2pcy/image/upload/v1670464883/samples/avatar_icon_lo4bff.png";
-//                supplier.setLogoImage(image);
-//                return this.supplierRepository.addOrUpdateSuppliers(supplier);
-//            }
-//            else {
-//                Supplier s= this.getSupplierById(supplier.getId());
-//                String imageDefault= s.getLogoImage();
-//                supplier.setLogoImage(imageDefault);
-//                return this.supplierRepository.addOrUpdateSuppliers(supplier);
-//            }
-//        }
+        if (product.getProductFile() == null || (product.getProductFile().isEmpty()))
+        {
+            if(product.getId() == null){
+                String image= "https://res.cloudinary.com/dkdyl2pcy/image/upload/v1670464883/samples/avatar_icon_lo4bff.png";
+                product.setProductImage(image);
+                return this.productRepository.addOrUpdateProducts(product);
+            }
+            else {
+                Product s= this.getProductById(product.getId());
+                String imageDefault= s.getProductImage();
+                product.setProductImage(imageDefault);
+                return this.productRepository.addOrUpdateProducts(product);
+            }
+        }
         return false;
     }
 
     @Override
     public Product getProductById(Integer id) {
-        return null;
+        return this.productRepository.getProductById(id);
     }
 
     @Override

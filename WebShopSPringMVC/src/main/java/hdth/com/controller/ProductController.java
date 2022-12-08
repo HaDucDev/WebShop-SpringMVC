@@ -9,21 +9,20 @@ import hdth.com.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@ControllerAdvice
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private SupplierService supplierService;
+//    @Autowired
+//    private CategoryService categoryService;
+//
+//    @Autowired
+//    private SupplierService supplierService;
 
     @Autowired
     private ProductStatusService productStatusService;
@@ -38,10 +37,10 @@ public class ProductController {
 
     @GetMapping("/admin/product/add")
     private String getAdd(Model model) {
-        model.addAttribute("product", new Product());
-        model.addAttribute("categoryList",this.categoryService.getCategories());
-        model.addAttribute("supplierList",this.supplierService.getSuppliers());
-        model.addAttribute("productStatusList",this.productStatusService.getProductStatuses());
+          model.addAttribute("product", new Product());
+//        model.addAttribute("categoryList",this.categoryService.getCategories());
+//        model.addAttribute("supplierList",this.supplierService.getSuppliers());
+//        model.addAttribute("productStatusList",this.productStatusService.getProductStatuses());
         return "admin/b-add-product";
     }
 
@@ -57,4 +56,18 @@ public class ProductController {
         else model.addAttribute("msg", "Them bi loi roi. hay thu lai sau");
         return "redirect:/admin/product-list";// quet urlResolver xong roi den InternalView va cai nay se vo InternalView
     }
+
+
+    @GetMapping(path = "/admin/product/edit/{id}")
+    private String getEdit(@PathVariable(name = "id") Integer id, Model model){
+
+        model.addAttribute("product",this.productService.getProductById(id));
+        return "admin/c-edit-product";
+    }
+
+    @ModelAttribute
+    public void commonAtrr(Model model){
+        model.addAttribute("productStatusList",this.productStatusService.getProductStatuses());
+    }
+
 }

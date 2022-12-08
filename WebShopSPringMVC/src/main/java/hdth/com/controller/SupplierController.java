@@ -7,12 +7,10 @@ import hdth.com.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@ControllerAdvice
 public class SupplierController {
 
 
@@ -20,8 +18,8 @@ public class SupplierController {
     private SupplierService supplierService;
 
     @GetMapping("/admin/supplier-list")
-    private String getSupplier(Model model) {
-        model.addAttribute("supplierList", this.supplierService.getSuppliers());
+    private String getSupplier() {
+        //model.addAttribute("supplierList", this.supplierService.getSuppliers());
         return "/admin/a-list-supplier";
     }
 
@@ -56,5 +54,10 @@ public class SupplierController {
             model.addAttribute("msg","Xoa bi loi roi. hay thu lai sau");
         }
         return "redirect:/admin/supplier-list";
+    }
+
+    @ModelAttribute
+    public void commonAtrr(Model model){
+        model.addAttribute("supplierList", this.supplierService.getSuppliers());
     }
 }

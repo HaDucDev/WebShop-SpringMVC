@@ -6,22 +6,20 @@ import hdth.com.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
 @Controller
+@ControllerAdvice
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
     @GetMapping("/admin/category-list")
-    private String getCategorys(Model model){
-        model.addAttribute("cateList",this.categoryService.getCategories());
+    private String getCategorys(){
+        //model.addAttribute("cateList",this.categoryService.getCategories());
         return "admin/a-list-category";
     }
 
@@ -65,6 +63,11 @@ public class CategoryController {
             model.addAttribute("msg","Xoa bi loi roi. hay thu lai sau");
         }
         return "redirect:/admin/category-list";
+    }
+
+    @ModelAttribute
+    public void commonAtrr(Model model){
+        model.addAttribute("cateList",this.categoryService.getCategories());
     }
 
 

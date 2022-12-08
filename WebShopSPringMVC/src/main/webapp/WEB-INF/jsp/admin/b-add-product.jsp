@@ -51,7 +51,7 @@
                                                enctype='multipart/form-data'>
 
                                         <div class="form-group">
-                                            <label for="logo">Logo nhà cung cấp</label>
+                                            <label for="logo">Ảnh sản phẩm:</label>
                                             <form:input type="file" path="productFile" class="form-control"
                                                         name="image" id="logo"/>
                                         </div>
@@ -95,7 +95,7 @@
                                             <label for="cate">Loại sản phẩm</label>
                                             <div class="checkbox">
                                                 <form:select path="category" name="detailCateId" id="cate">
-                                                    <c:forEach items="${categoryList}" var="c">
+                                                    <c:forEach items="${cateList}" var="c">
                                                         <option value="${c.id}">${c.name}</option>
                                                     </c:forEach>
                                                 </form:select>
@@ -118,7 +118,14 @@
                                             <div class="checkbox">
                                                 <form:select path="productstatus" name="productStatust" id="su1">
                                                     <c:forEach items="${productStatusList}" var="ps">
-                                                            <option value="${ps.id}">${ps.name}</option>
+                                                        <c:if test = "${product.productstatus.id != ps.id}">
+                                                            <c:if test = "${ps.id == 1}">
+                                                                <option value="${ps.id}">Còn hàng</option>
+                                                            </c:if>
+                                                            <c:if test = "${ps.id == 2}">
+                                                                <option value="${ps.id}">Hết hàng</option>
+                                                            </c:if>
+                                                        </c:if>
                                                     </c:forEach>
                                                 </form:select>
                                             </div>
