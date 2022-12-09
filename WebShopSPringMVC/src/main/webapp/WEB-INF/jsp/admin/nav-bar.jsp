@@ -13,7 +13,6 @@
 	<div
 		style="color: #ffffff; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
 		Chào ${user.fullname} &nbsp;
-		<a href="${pageContext.request.contextPath }/logout?type=logout"
-			class="btn btn-danger square-btn-adjust">Đăng xuất</a>
+		<a href="${pageContext.request.contextPath }/logout?type=logout" class="btn btn-danger square-btn-adjust">Đăng xuất</a>
 	</div>
 </nav>
