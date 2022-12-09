@@ -15,7 +15,16 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(){
-        return "admin/index";
+        return "user/index";
+    }
+
+    @RequestMapping("/salespolicy")
+    public String salespolicy(){
+        return "user/salespolicy";
+    }
+    @RequestMapping("/map")
+    public String map(){//trang lien he
+        return "user/map";
     }
 
 //    @RequestMapping("/category")

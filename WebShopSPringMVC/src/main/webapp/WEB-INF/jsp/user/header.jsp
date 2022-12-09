@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/views/web/static" var="url"> </c:url>
-<c:url value="/views/web" var="Pathurl"> </c:url>
+<c:url value="/user" var="url"> </c:url>
+<%--<c:url value="/views/web" var="Pathurl"> </c:url>--%>
 <%--<c:url value="/home" var="HomeUrl"> </c:url>--%>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,8 +67,8 @@
                 </c:forEach>
             </ul>
         </li>
-        <li><a href="${Pathurl}/salespolicy.jsp">Chính sách bán hàng</a></li>
-        <li><a href="${Pathurl}/map.jsp">Liên hệ</a></li>
+        <li><a href="<c:url value="/salespolicy"/>">Chính sách bán hàng</a></li>
+        <li><a href="<c:url value="/map"/>">Liên hệ</a></li>
         <div class="search-container">
             <form action="${pageContext.request.contextPath }/client-product-list">
                 <input name="keyword" type="text" placeholder="Tìm kiếm.." >
