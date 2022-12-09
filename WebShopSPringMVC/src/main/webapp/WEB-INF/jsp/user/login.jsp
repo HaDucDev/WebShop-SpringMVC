@@ -24,8 +24,9 @@
                 <div class="col-1"></div>
                 <div class="col-4">
                     <h4>Đăng nhập</h4>
+                    <c:url var="action" value="/login"/>
                     <div class="login-form">
-                        <form action="" method="post" id="login-form">
+                        <form action="${action}" method="post" id="login-form">
                             <div class="form-group">
                                 <h5>Tên đăng nhập</h5>
                                 <input id="username" name="username" type="text" class="form-control" placeholder="Tên đăng nhập">
@@ -40,6 +41,12 @@
                             <button type="submit" class="btn btn-success btn-primary" style="margin-top: 10px; color: white; background-color: #696763; border: none;">Đăng nhập</button>
                             <input type="hidden" name="action" value="login">
                         </form>
+                        <c:if test="${param.error != null}">
+                            <div class="alert alert-danger">
+                                Ten dang nhap hoac mat khau khong dung
+
+                            </div>
+                        </c:if>
                         <form action="${pageContext.request.contextPath }/register?type=register" method="get ">
                             <button type="submit" class="btn btn-link">Đăng kí</button>
                             <input type="hidden" name="type" value="register">

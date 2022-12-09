@@ -13,7 +13,7 @@ public class HomeController {
 //    }
 
 
-    @RequestMapping("/")
+    @RequestMapping("/login")
     public String index(){
         return "user/login";
     }
@@ -25,6 +25,18 @@ public class HomeController {
     @RequestMapping("/map")
     public String map(){//trang lien he
         return "user/map";
+    }
+
+    @RequestMapping("/")
+    public String index99(){
+        return "user/login";
+    }
+
+
+
+    @RequestMapping("/admin")
+    public String admin(){
+        return "admin/index";
     }
 
 //    @RequestMapping("/category")

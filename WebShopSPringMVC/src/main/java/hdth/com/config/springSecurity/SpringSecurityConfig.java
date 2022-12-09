@@ -1,20 +1,23 @@
 package hdth.com.config.springSecurity;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 
 
 @Configuration
-@EnableWebMvc
+@EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
         "hdth.com.service",
@@ -22,14 +25,16 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 })
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return super.userDetailsService();
+//    }
+
+
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return super.userDetailsService();
-    }
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -40,9 +45,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
+
+        http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
+
+        http.csrf().disable();
     }
 }

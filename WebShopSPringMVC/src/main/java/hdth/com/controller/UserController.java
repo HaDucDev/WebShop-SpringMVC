@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-
-    @GetMapping("/admin/user-list")
-    private String getSupplier(Model model) {
-        model.addAttribute("userList", this.userService.getUsers());
-        return "/admin/a-list-user";
-    }
+//    @Autowired
+//    private UserService userService;
+//
+//    @GetMapping("/admin/user-list")
+//    private String getSupplier(Model model) {
+//        model.addAttribute("userList", this.userService.getUsers());
+//        return "/admin/a-list-user";
+//    }
 }
