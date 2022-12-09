@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserRepository {
     List<User> getUsers();
+    List<User> getUsersByUsername(String username);
 }

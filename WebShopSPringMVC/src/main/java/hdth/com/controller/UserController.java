@@ -1,6 +1,6 @@
 package hdth.com.controller;
 
-import hdth.com.service.impl.UserService;
+import hdth.com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
