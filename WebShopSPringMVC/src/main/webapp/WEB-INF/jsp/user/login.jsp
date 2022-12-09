@@ -1,12 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/views/web" var="login"></c:url>
-<c:url value="/validationlogin" var="loginApi"></c:url>
-<c:url value="/trang-chu" var="APIurl"></c:url>
-<%--<c:url value="/trang-chu" var="HomeUrl"> </c:url>--%>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <style>
@@ -29,7 +25,7 @@
                 <div class="col-4">
                     <h4>Đăng nhập</h4>
                     <div class="login-form">
-                        <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form">
+                        <form action="" method="post" id="login-form">
                             <div class="form-group">
                                 <h5>Tên đăng nhập</h5>
                                 <input id="username" name="username" type="text" class="form-control" placeholder="Tên đăng nhập">
@@ -56,7 +52,7 @@
                 <div class="col-5" >
                     <div class="col-8">
                         <h4>Quên mật khẩu</h4>
-                        <form action="${pageContext.request.contextPath }/trang-chu" method="post" id="register-form">
+                        <form action="" method="post" id="register-form">
                             <div class="form-group">
                                 <h5>Tên tài khoản</h5>
                                 <input id="username2" name="userName" type="text" class="form-control" value="${username}" placeholder="Nhập tên tài khoản">
@@ -95,66 +91,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-<script src='${pageContext.request.contextPath }/Validation.js'></script>
-<script>
-    Validator({
-        form: '#login-form',
-        formGroupSelector: '.form-group',
-        errorSelector : '.form-message',
-        rules: [
-            Validator.isRequired('#username', 'Vui lòng nhập đầy đủ tên tài khoản của bạn'),
-            Validator.minLength('#password', '6')
-        ]
-    });
-    Validator({
-        form: '#register-form',
-        formGroupSelector: '.form-group',
-        errorSelector : '.form-message',
-        rules: [
-            Validator.isRequired('#username2', 'Vui lòng nhập đầy đủ tên tài khoản của bạn'),
-            Validator.isEmail('#email')
-        ]
-    });
-
-    function resetPassword(){
-
-        var username= $('#username2').val();
-        var password= $('#newpassword').val();
-        var email= $('#email').val();
-        var code =$('#code').val();
-        var data={
-            "username":username,
-            "passWord":password,
-            "email":email,
-        }
-        var notify= document.querySelector('#notification')
-        if (username =='' || password =='' ||email=='' ||code=='') {
-            notify.innerHTML="<label style=\"color: red\">Vui lòng nhập thông tin đầy đủ</label>";
-            return ;
-        }
-        if (password.length < 6) {
-            notify.innerHTML="<label style=\"color: red\">Vui lòng nhập ít nhất 6 ký tự</label>";
-            return ;
-        }
-        $.ajax({
-            url: '${APIurl}'+'?code='+code,
-            type: 'PUT',
-            enctype: 'multipart/form-data',
-            processData:false,
-            contentType: 'application/json',
-            data:JSON.stringify(data),
-            dataType: 'json',
-            success: function (result){
-                console.log("Success");
-                notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";
-                <%--window.location.href = "${PCurl}?type=list&message=insert_success";--%>
-            },
-            error: function (error){
-                console.log("Error");
-                notify.innerHTML="<label style=\"color: red\">Đổi mật khẩu thất bại</label>";
-            }
-        })
-    }
-</script>
 </body>
 </html>

@@ -15,7 +15,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(){
-        return "user/index";
+        return "user/login";
     }
 
     @RequestMapping("/salespolicy")
