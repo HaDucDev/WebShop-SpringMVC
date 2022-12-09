@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <c:url value="/admin" var="url"></c:url>
-<c:url value="/api-admin-user" var="APIurl"></c:url>
 <c:url value="/admin-user-list" var="ACurl"></c:url>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +27,7 @@
 <body>
 <div id="wrapper">
 
-	<jsp:include page="/admin-view/nav-bar.jsp"></jsp:include>
-
+	<jsp:include page="nav-bar.jsp"></jsp:include>
 
 	<jsp:include page="slide-bar.jsp"></jsp:include>
 
@@ -36,7 +35,7 @@
 		<div id="page-inner">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Danh sách sản phẩm</h2>
+					<h2>Danh sách tài khoản</h2>
 				</div>
 			</div>
 			<!-- /. ROW  -->
@@ -44,7 +43,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div>
-						<button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin-user-list?type=add"/>' style="color: white">Thêm người dùng</a></button>
+						<button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value=""/>' style="color: white">Thêm người dùng</a></button>
 					</div>
 					<!-- Advanced Tables -->
 					<div class="panel panel-default">
@@ -55,46 +54,58 @@
 									   id="dataTables-example">
 									<thead>
 									<tr>
-										<th>ID</th>
+										<th>Mã người dùng</th>
+										<th>Ảnh đại diện</th>
+										<th>Họ và tên</th>
 										<th>Email</th>
-										<th>Tên người dùng</th>
-										<th>Địa chỉ</th>
+										<th>Địa chỉ mặc định</th>
+										<th>Số điện thoại</th>
 										<th>Tên đăng nhập</th>
-										<th>Mật khẩu</th>
-										<th>Trạng thái</th>
+<%--										<th>Mật khẩu</th>--%>
 										<th>Chức vụ</th>
 										<th></th>
 									</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${lstUser }" var="user">
+									<c:forEach items="${userList}" var="user">
 										<tr class="odd gradeX">
 											<td>${user.id}</td>
-											<td>${user.email }</td>
-											<td>${user.fullname }</td>
-											<td>${user.address }</td>
-											<td>${user.username }</td>
-											<td>${user.passWord }</td>
-											<td class="center">Active</td>
-											<td class="center"><c:choose>
-												<c:when test="${user.role ==1 }">
-													Admin
-												</c:when>
-                                                <c:when test="${user.role ==2 }">
-                                                    Shipper
-                                                </c:when>
-												<c:when test="${user.role ==3 }">
-													Employee
-												</c:when>
-												<c:otherwise>Client</c:otherwise>
-											</c:choose></td>
+											<td>
+												<c:choose>
+													<c:when test="${user.avatar != null}">
+														<img style="width: 50px;height: 50px;object-fit: cover"
+															 src="<c:url value="${user.avatar}"/>"
+															 alt="${user.fullName}">
+													</c:when>
+													<c:otherwise>
+														<img style="width:50px;height:50px;object-fit: cover"
+															 src="<c:url value="/images/Rayquaza.png"/>"
+															 alt="${user.fullName}">
+													</c:otherwise>
+												</c:choose>
+
+											</td>
+											<td>${user.fullName}</td>
+											<td>${user.email}</td>
+											<td>${user.addressDefault}</td>
+											<td>${user.phone}</td>
+											<td>${user.username}</td>
+<%--											<td>${user.password}</td>--%>
+											<td class="center">
+												<c:if test="${user.role.id == 1}">
+												Quản trị viên</c:if>
+												<c:if test="${user.role.id == 2}">
+												Khách hàng</c:if>
+												<c:if test="${user.role.id == 3}">
+													Nhân viên giao hàng</c:if>
+											</td>
 											<td>
 												<button style="width: 70px;">
-													<a href="<c:url value="/admin-user-list?type=edit&id=${user.id }"/>"
+													<a href="<c:url value=""/>"
 													   class="center">Xem/Sửa</a>
 												</button>
 												|
-												<button id="btnDelete" type ="button" onclick = "deleteUser(${user.id})"
+												<button id="btnDelete" type ="button" onclick = ""
 														class="center">Xóa
 												</button>
 											</td>
@@ -134,28 +145,6 @@
 	});
 </script>
 
-<%--DeleteUser--%>
-<%--<script>--%>
-
-<%--	function deleteUser(data){--%>
-<%--		console.log(typeof (data.id))--%>
-<%--		$.ajax({--%>
-<%--			url: '${APIurl}',--%>
-<%--			type: 'DELETE',--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				window.location.href = "${ACurl}?type=list";--%>
-<%--			},--%>
-<%--			errMode: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	}--%>
-<%--</script>--%>
-<!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
 
 </body>

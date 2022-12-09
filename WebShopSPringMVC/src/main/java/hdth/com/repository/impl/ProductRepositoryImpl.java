@@ -2,7 +2,6 @@ package hdth.com.repository.impl;
 
 
 import hdth.com.model.Product;
-import hdth.com.model.Supplier;
 import hdth.com.repository.ProductRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
