@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         if(user.getAvatar() == null || (user.getAvatar().isEmpty())){
             user.setAvatar(avatar);
         }
-        Role role=this.roleService.findByName(ERole.ROLE_ADMIN);
+        Role role=this.roleService.findByName(ERole.ROLE_USER);
         user.setRole(role);
         return this.userRepository.addOrUpdateUsers(user);
     }
@@ -60,10 +60,13 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users= this.getUsersByUsername(username);
         if(users.isEmpty()){
+            System.out.println("vo list trong day");
             throw new UsernameNotFoundException("Không tồn tại username");
         }
+        System.out.println(users.get(0).getRole().getName().toString());
         User user=users.get(0);
         Set<GrantedAuthority> auth=new HashSet<>();
+        System.out.println(user.getRole().getName().toString());
         auth.add(new SimpleGrantedAuthority(user.getRole().getName().toString()));
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),auth);

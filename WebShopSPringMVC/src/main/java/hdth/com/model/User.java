@@ -45,7 +45,7 @@ public class User implements Serializable {
     private String resetPasswordCode;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")// id la ten ben bang cua user
     private Role role;
 

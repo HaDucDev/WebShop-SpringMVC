@@ -31,7 +31,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index99(){
-        return "user/test";
+        return "user/login";
     }
 
 

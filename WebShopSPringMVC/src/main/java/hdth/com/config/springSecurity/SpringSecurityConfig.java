@@ -47,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
         http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
-        http.authorizeRequests().antMatchers("/login").permitAll();
+
         http.csrf().disable();
     }
 
