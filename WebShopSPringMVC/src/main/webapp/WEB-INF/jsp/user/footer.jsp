@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/views/web/static" var="url"> </c:url>
+<c:url value="/user" var="url"> </c:url>
 <!DOCTYPE html>
 <html lang="en">
 <header>
@@ -32,12 +32,11 @@
 			<div class="row">
 				<div class="col-sm-7">
 					<div class="single-widget">
-						<h2>Thông tin nhóm</h2>
+						<h2>Thông tin ****</h2>
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="#">Bùi Văn Nghĩa</a></li>
-							<li><a href="#">Từ Hữu Hà Đức</a></li>
-							<li><a href="#">Hoàng Dương Hùng</a></li>
-							<li><a href="#">Đoàn Quốc Huy</a></li>
+							<li><a href="#">****</a></li>
+							<li><a href="#">****</a></li>
+
 						</ul>
 					</div>
 				</div>
