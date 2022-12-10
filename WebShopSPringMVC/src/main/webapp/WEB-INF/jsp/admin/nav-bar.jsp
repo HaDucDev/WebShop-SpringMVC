@@ -12,7 +12,7 @@
 <%--		<a class="navbar-brand" href="${pageContext.request.contextPath }/admin-product-list?type=list">Dashboard</a>--%>
 	</div>
 	<div style="color: #ffffff; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
-		Chào ${user.fullname} &nbsp;
+		Chào ${pageContext.request.userPrincipal.user} &nbsp;
 		<a href="<c:url value="/logout"/>" class="btn btn-danger square-btn-adjust">Đăng xuất</a>
 	</div>
 </nav>
