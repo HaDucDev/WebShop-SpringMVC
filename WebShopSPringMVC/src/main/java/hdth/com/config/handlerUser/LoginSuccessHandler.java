@@ -2,6 +2,7 @@ package hdth.com.config.handlerUser;
 
 import hdth.com.model.User;
 import hdth.com.service.UserService;
+import hdth.com.utils.enums.ERole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -26,6 +27,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         HttpSession session=httpServletRequest.getSession();
         session.setAttribute("currentUser",user);
-        httpServletResponse.sendRedirect("/WebShopSPringMVC_war/admin");
+        if(user.getRole().getName().equals(ERole.ROLE_ADMIN)){
+            httpServletResponse.sendRedirect("/WebShopSPringMVC_war/admin");
+        }
+        if(user.getRole().getName().equals(ERole.ROLE_USER)){
+            httpServletResponse.sendRedirect("/WebShopSPringMVC_war");
+        }
     }
 }
