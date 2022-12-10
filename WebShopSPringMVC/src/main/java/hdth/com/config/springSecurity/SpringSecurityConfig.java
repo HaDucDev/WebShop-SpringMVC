@@ -48,6 +48,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
         http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
 
+        //phan biet quyen dc phep truy cap hay ko. neu khong dc tro ve trang login va bao loi
+        http.exceptionHandling().accessDeniedPage("/login?accessDenied");
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+
+
 
         http.logout().logoutSuccessUrl("/");
 

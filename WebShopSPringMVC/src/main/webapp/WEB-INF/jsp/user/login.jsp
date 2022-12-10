@@ -49,6 +49,11 @@
                                Chúc mừng bạn đăng kí tài khoản thành công
                             </div>
                         </c:if>
+                        <c:if test="${param.accessDenied != null}">
+                            <div class="alert alert-danger">
+                                Ban khong co quyen lam dieu nay
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
