@@ -9,4 +9,8 @@ public interface UserService extends UserDetailsService {
     List<User> getUsers();
 
     List<User> getUsersByUsername(String username);
+
+
+    // dang ki, them , sua user
+    boolean addOrUpdateUsers(User user);
 }

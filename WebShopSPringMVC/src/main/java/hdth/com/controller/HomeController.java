@@ -18,6 +18,8 @@ public class HomeController {
         return "user/login";
     }
 
+
+
     @RequestMapping("/salespolicy")
     public String salespolicy(){
         return "user/salespolicy";

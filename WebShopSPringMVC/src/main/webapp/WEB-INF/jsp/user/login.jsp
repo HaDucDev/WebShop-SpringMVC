@@ -44,13 +44,16 @@
                         <c:if test="${param.error != null}">
                             <div class="alert alert-danger">
                                 Ten dang nhap hoac mat khau khong dung
-
                             </div>
                         </c:if>
-                        <form action="${pageContext.request.contextPath }/register?type=register" method="get ">
+                        <c:if test="${successregister != null}">
+                            <div class="alert alert-danger">
+                               Chúc mừng bạn đăng kí tài khoản thành công
+                            </div>
+                        </c:if>
+                        <c:url var="register" value="/register"/>
+                        <form action="${register}" method="get ">
                             <button type="submit" class="btn btn-link">Đăng kí</button>
-                            <input type="hidden" name="type" value="register">
-                            <%--                <button type="button" class="btn btn-link" style="padding-left: 180px">Quên mật khẩu?</button>--%>
                         </form>
                     </div>
                 </div>

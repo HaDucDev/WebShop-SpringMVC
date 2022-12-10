@@ -2,6 +2,7 @@ package hdth.com.repository.impl;
 
 import hdth.com.model.User;
 import hdth.com.repository.UserRepository;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,20 @@ public class UserRepositoryImpl implements UserRepository {
 
         javax.persistence.Query q= session.createQuery(criteriaQuery);// thuc thi truy van
         return q.getResultList();// tra ve list
+    }
+
+    @Override
+    public boolean addOrUpdateUsers(User user) {
+        Session session= this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(user);
+            return true;
+        }
+        catch (HibernateException ex){
+            System.err.println(ex.getMessage());
+
+        }
+        return false;
     }
 
 
