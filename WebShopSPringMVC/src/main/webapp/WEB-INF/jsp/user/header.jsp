@@ -36,7 +36,7 @@
                                 <li><a href="#"><i class="fa fa-user"></i>Chào <c:out value="${sessionScope.currentUser.fullName}"></c:out></a></li>
                                 <li><a href="<c:url value="/logout"/>">Đăng xuất</a></li>
                             </c:if>
-                            <c:if test="${empty user}">
+                            <c:if test="${empty sessionScope.currentUser.fullName}">
                                 <li><a href="<c:url value="/login"/>"><i class="fa fa-lock"></i>Đăng nhập / Đăng kí </a></li>
                             </c:if>
 
