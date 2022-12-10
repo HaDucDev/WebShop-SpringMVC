@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-//    @RequestMapping("/")
-//    public String index(){
-//        return "index";
-//    }
 
 
     @GetMapping("/login")
@@ -31,7 +27,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index99(){
-        return "user/login";
+        return "user/index";
     }
 
 

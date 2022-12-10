@@ -34,10 +34,10 @@
                             <li><a href="${pageContext.request.contextPath}/client-cart-list"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                             <c:if test="${not empty user}">
                                 <li><a href="#"><i class="fa fa-user"></i>Chào <c:out value="${user.fullname}"></c:out></a></li>
-                                <li><a href="${pageContext.request.contextPath }/logout?type=logout">Đăng xuất</a></li>
+                                <li><a href="<c:url value="/logout"/>">Đăng xuất</a></li>
                             </c:if>
                             <c:if test="${empty user}">
-                                <li><a href="${Pathurl}/login.jsp"><i class="fa fa-lock"></i>Đăng nhập / Đăng kí </a></li>
+                                <li><a href="<c:url value="/login"/>"><i class="fa fa-lock"></i>Đăng nhập / Đăng kí </a></li>
                             </c:if>
 
                         </ul>

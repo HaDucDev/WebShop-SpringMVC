@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-default navbar-cls-top " role="navigation"
 	style="margin-bottom: 0">
 	<div class="navbar-header">
@@ -10,9 +11,8 @@
 		</button>
 <%--		<a class="navbar-brand" href="${pageContext.request.contextPath }/admin-product-list?type=list">Dashboard</a>--%>
 	</div>
-	<div
-		style="color: #ffffff; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+	<div style="color: #ffffff; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
 		Chào ${user.fullname} &nbsp;
-		<a href="${pageContext.request.contextPath }/logout?type=logout" class="btn btn-danger square-btn-adjust">Đăng xuất</a>
+		<a href="<c:url value="/logout"/>" class="btn btn-danger square-btn-adjust">Đăng xuất</a>
 	</div>
 </nav>
