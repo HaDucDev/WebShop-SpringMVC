@@ -1,5 +1,6 @@
 package hdth.com.config.springSecurity;
 
+import hdth.com.config.handlerUser.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
@@ -25,18 +27,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return super.userDetailsService();
-//    }
-
-
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationSuccessHandler loginSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler loginSuccessHandler(){
+        return new LoginSuccessHandler();
     }
 
     @Override
@@ -46,7 +50,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
+
+
+
         http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
+        http.formLogin().successHandler(this.loginSuccessHandler);
+
+
+
 
         //phan biet quyen dc phep truy cap hay ko. neu khong dc tro ve trang login va bao loi
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
