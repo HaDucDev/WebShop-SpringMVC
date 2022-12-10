@@ -32,7 +32,7 @@ public class UserController {
         {
             String mess="Chúc mừng bạn đã đăng kí thành công";
             model.addAttribute("successregister",mess);
-            return "forward:/login";
+            return "user/login";
         }
         else  error="da co loi";
         model.addAttribute("errorregister",error);

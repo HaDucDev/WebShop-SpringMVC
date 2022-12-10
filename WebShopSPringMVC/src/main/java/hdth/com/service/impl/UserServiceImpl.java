@@ -63,12 +63,9 @@ public class UserServiceImpl implements UserService {
             System.out.println("vo list trong day");
             throw new UsernameNotFoundException("Không tồn tại username");
         }
-        System.out.println(users.get(0).getRole().getName().toString());
         User user=users.get(0);
         Set<GrantedAuthority> auth=new HashSet<>();
-        System.out.println(user.getRole().getName().toString());
         auth.add(new SimpleGrantedAuthority(user.getRole().getName().toString()));
-
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),auth);
     }
 }
