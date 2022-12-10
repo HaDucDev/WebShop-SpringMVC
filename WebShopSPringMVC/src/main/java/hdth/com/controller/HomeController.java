@@ -2,6 +2,7 @@ package hdth.com.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,11 +14,10 @@ public class HomeController {
 //    }
 
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String index(){
         return "user/login";
     }
-
 
 
     @RequestMapping("/salespolicy")
@@ -31,9 +31,8 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index99(){
-        return "user/login";
+        return "user/test";
     }
-
 
 
     @RequestMapping("/admin")
@@ -41,8 +40,5 @@ public class HomeController {
         return "admin/index";
     }
 
-//    @RequestMapping("/category")
-//    public String testCategory(){
-//        return "/admin/view/list-category";
-//    }
+
 }

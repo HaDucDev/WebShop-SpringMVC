@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -20,9 +19,8 @@ public class UserController {
     //========================> Common
     //register
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String indexregister(Model model){
-
         model.addAttribute("user", new User());
         return "user/register";
     }
@@ -34,7 +32,7 @@ public class UserController {
         {
             String mess="Chúc mừng bạn đã đăng kí thành công";
             model.addAttribute("successregister",mess);
-            return "forward:/login";
+            return "user/login";//forward:/login
         }
         else  error="da co loi";
         model.addAttribute("errorregister",error);

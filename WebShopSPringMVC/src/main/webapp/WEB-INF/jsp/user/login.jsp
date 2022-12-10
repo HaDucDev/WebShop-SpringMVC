@@ -63,33 +63,33 @@
                     <div class="col-8">
                         <h4>Quên mật khẩu</h4>
                         <form action="" method="post" id="register-form">
-                            <div class="form-group">
-                                <h5>Tên tài khoản</h5>
-                                <input id="username2" name="userName" type="text" class="form-control" value="${username}" placeholder="Nhập tên tài khoản">
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <h5>Nhập email</h5>
-                                <input id="email" name="emailReset" type="text" value="${email}" class="form-control" placeholder="Nhập email">
-                                <span class="form-message"></span>
-                            </div>
+<%--                            <div class="form-group">--%>
+<%--                                <h5>Tên tài khoản</h5>--%>
+<%--                                <input id="username2" name="userName" type="text" class="form-control" value="${username}" placeholder="Nhập tên tài khoản">--%>
+<%--                                <span class="form-message"></span>--%>
+<%--                            </div>--%>
+<%--                            <div class="form-group">--%>
+<%--                                <h5>Nhập email</h5>--%>
+<%--                                <input id="email" name="emailReset" type="text" value="${email}" class="form-control" placeholder="Nhập email">--%>
+<%--                                <span class="form-message"></span>--%>
+<%--                            </div>--%>
 
-                            <label style="color: green">${msg}</label><br>
-                            <button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Lấy mã xác thực </button>
-                            <div class="form-group">
-                                <h5>Nhập mật khẩu mới</h5>
-                                <input id="newpassword" type="password" value="" class="form-control" placeholder="Nhập mật khẩu mới">
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <h5>Nhập mã xác thực</h5>
-                                <input id="code" type="text" value="" class="form-control" placeholder="Nhập mã xác thực">
-                                <span class="form-message"></span>
-                            </div>
-                            <button type="button" class="btn btn-success btn-primary " onclick="resetPassword()" style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Reset mật khẩu </button>
-                            <input type="hidden" name="action" value="login">
-                            <div id="notification"></div>
-                            <span class="form-message"></span>
+<%--                            <label style="color: green">${msg}</label><br>--%>
+<%--                            <button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Lấy mã xác thực </button>--%>
+<%--                            <div class="form-group">--%>
+<%--                                <h5>Nhập mật khẩu mới</h5>--%>
+<%--                                <input id="newpassword" type="password" value="" class="form-control" placeholder="Nhập mật khẩu mới">--%>
+<%--                                <span class="form-message"></span>--%>
+<%--                            </div>--%>
+<%--                            <div class="form-group">--%>
+<%--                                <h5>Nhập mã xác thực</h5>--%>
+<%--                                <input id="code" type="text" value="" class="form-control" placeholder="Nhập mã xác thực">--%>
+<%--                                <span class="form-message"></span>--%>
+<%--                            </div>--%>
+<%--                            <button type="button" class="btn btn-success btn-primary " onclick="resetPassword()" style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Reset mật khẩu </button>--%>
+<%--                            <input type="hidden" name="action" value="login">--%>
+<%--                            <div id="notification"></div>--%>
+<%--                            <span class="form-message"></span>--%>
 
                         </form>
                     </div>

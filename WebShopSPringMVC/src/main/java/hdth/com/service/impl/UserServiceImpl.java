@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         if(user.getAvatar() == null || (user.getAvatar().isEmpty())){
             user.setAvatar(avatar);
         }
-        Role role=this.roleService.findByName(ERole.ROLE_USER);
+        Role role=this.roleService.findByName(ERole.ROLE_ADMIN);
         user.setRole(role);
         return this.userRepository.addOrUpdateUsers(user);
     }

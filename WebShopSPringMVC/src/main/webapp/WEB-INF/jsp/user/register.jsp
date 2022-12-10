@@ -27,7 +27,7 @@
 
             </div>
         </c:if>
-        <form:form class="panel-body" id="register-form" modelAttribute="user" action="${action}" method="post">
+        <form:form method="post" class="panel-body" id="register-form" modelAttribute="user" action="${action}" >
             <div class="panel-heading">
                 <h2 class="text-center">Đăng ký tài khoản</h2>
             </div>
