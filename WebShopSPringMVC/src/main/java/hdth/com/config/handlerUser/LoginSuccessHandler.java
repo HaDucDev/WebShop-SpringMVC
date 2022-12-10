@@ -28,8 +28,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session=httpServletRequest.getSession();
         session.setAttribute("currentUser",user);
         if(user.getRole().getName().equals(ERole.ROLE_ADMIN)){
-            //httpServletResponse.sendRedirect("/WebShopSPringMVC_war/admin");
-            httpServletRequest.getRequestDispatcher("/admin").forward(httpServletRequest,httpServletResponse);
+            httpServletResponse.sendRedirect("/WebShopSPringMVC_war/admin");
+            //httpServletRequest.getRequestDispatcher("/admin").forward(httpServletRequest,httpServletResponse);
         }
         if(user.getRole().getName().equals(ERole.ROLE_USER)){
             httpServletResponse.sendRedirect("/WebShopSPringMVC_war");
