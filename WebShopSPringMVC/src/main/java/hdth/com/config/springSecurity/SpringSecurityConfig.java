@@ -1,6 +1,7 @@
 package hdth.com.config.springSecurity;
 
 import hdth.com.config.handlerUser.LoginSuccessHandler;
+import hdth.com.config.handlerUser.LogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
@@ -33,6 +35,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationSuccessHandler loginSuccessHandler;
 
+    @Autowired
+    private LogoutSuccessHandler logoutHandler;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -41,6 +46,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationSuccessHandler loginSuccessHandler(){
         return new LoginSuccessHandler();
+    }
+
+
+
+    @Bean
+    public LogoutSuccessHandler logoutHandler(){
+        return new LogoutHandler();
     }
 
     @Override
@@ -53,11 +65,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-        http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
+       // http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
+        http.formLogin().failureUrl("/login?error");
         http.formLogin().successHandler(this.loginSuccessHandler);
-
-
-
 
         //phan biet quyen dc phep truy cap hay ko. neu khong dc tro ve trang login va bao loi
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
@@ -66,7 +76,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().antMatchers("/").permitAll()
 //                .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')");
 
-        http.logout().logoutSuccessUrl("/");
+        //http.logout().logoutSuccessUrl("/");
+        http.logout().logoutSuccessHandler(this.logoutHandler);
 
         http.csrf().disable();
     }
