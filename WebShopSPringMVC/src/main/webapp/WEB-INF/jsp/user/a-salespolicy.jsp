@@ -12,7 +12,7 @@
     <link href="${url}/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="a-header.jsp"></jsp:include>
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -119,6 +119,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="a-footer.jsp"></jsp:include>
 </body>
 </html>
