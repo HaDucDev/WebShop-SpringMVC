@@ -25,7 +25,7 @@
 </head>
 
 <body onload="checkReply()">
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="a-header.jsp"></jsp:include>
 <section>
 	<div class="container">
 		<div class="row">
@@ -131,7 +131,7 @@
 		</div>
 	</div><!--/category-tab-->
 </section>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="a-footer.jsp"></jsp:include>
 <script>
 	function addToCart(data){
 		JSalert();

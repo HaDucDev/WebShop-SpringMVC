@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="a-header.jsp"></jsp:include>
 <section id="cart_items">
 	<div class="container">
 		<div class="step-one">
@@ -168,7 +168,7 @@
 		</c:forEach>
 	</div>
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="a-footer.jsp"></jsp:include>
 </section> <!--/#cart_items-->
 <script src="${url}/js/jquery.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>

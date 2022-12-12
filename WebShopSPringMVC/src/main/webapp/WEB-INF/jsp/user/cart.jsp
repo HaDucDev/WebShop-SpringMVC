@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="a-header.jsp"></jsp:include>
 <section id="cart_items">
 	<div class="container">
 		<div class="table-responsive cart_info">
@@ -127,7 +127,7 @@
 </section>
 
 <br>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="a-footer.jsp"></jsp:include>
 <script src="${url}/js/jquery.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>
 <script src="${url}/js/jquery.scrollUp.min.js"></script>

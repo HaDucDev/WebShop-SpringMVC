@@ -29,7 +29,7 @@ public class ProductController {
 
 
     @GetMapping("/admin/product-list")
-    private String getSupplier(Model model) {
+    private String getProducts(Model model) {
         model.addAttribute("productList", this.productService.getProducts());
         System.out.println(this.productService.getProducts().get(3).getProductstatus().getName());
         return "/admin/a-list-product";
@@ -66,8 +66,9 @@ public class ProductController {
     }
 
     @ModelAttribute
-    public void commonAtrr(Model model){
+    public void commonAtrr(Model model){// dung chung cho admin thoi
         model.addAttribute("productStatusList",this.productStatusService.getProductStatuses());
     }
+
 
 }
