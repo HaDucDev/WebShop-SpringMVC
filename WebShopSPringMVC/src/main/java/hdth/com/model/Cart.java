@@ -31,4 +31,5 @@ public class Cart  implements Serializable {
     @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", insertable = false,
             updatable = false)
     private Product product;
+
 }

@@ -65,5 +65,12 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public User getUserById(Integer id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        User s = session.get(User.class, id);
+        return s;
+    }
+
 
 }

@@ -21,7 +21,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean addOrUpdateCartbyId(Cart cart) {
-        return this.cartRepository.addOrupdateCartById(cart);
+    public boolean addOrUpdateCartbyId(Integer productId, Integer userId) {
+        return this.cartRepository.addOrupdateCartById(productId,userId);
     }
 }

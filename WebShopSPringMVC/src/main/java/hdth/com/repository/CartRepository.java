@@ -8,8 +8,8 @@ public interface CartRepository {
 
     List<Cart> getCartByUserId(Integer userid);
 
-    boolean addOrupdateCartById(Cart cart);
+    boolean addOrupdateCartById(Integer productId, Integer userid);
 
-    Cart getCartByProducIdAndUserId(Cart cart);
+    //Cart getCartByProducIdAndUserId(Integer productId);// kiem tra san pham co trong gio hang nguoi dung chua
 
 }

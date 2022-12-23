@@ -13,4 +13,7 @@ public interface UserService extends UserDetailsService {
 
     // dang ki, them , sua user
     boolean addOrUpdateUsers(User user);
+
+
+    User getUserById(Integer id);
 }
