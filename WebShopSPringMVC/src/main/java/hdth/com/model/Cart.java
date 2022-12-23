@@ -23,13 +23,11 @@ public class Cart  implements Serializable {
     private Integer quantity;// so luong san pham dat mua
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", insertable = false, updatable =
-            false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", insertable = false,
-            updatable = false)
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id")
     private Product product;
 
 
