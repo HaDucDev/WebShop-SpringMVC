@@ -96,7 +96,7 @@
 <%--												<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /> VNĐ</h2>--%>
 <%--												<h2>${i.getPrice()}VNĐ</h2>&ndash;%&gt;--%>
 												<p>${i.getProName()}</p>
-												<a  <%--href="${APIurl}?id=${i.getId()}"--%> onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+<%--												<a  &lt;%&ndash;href="${APIurl}?id=${i.getId()}"&ndash;%&gt; onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>--%>
 											</div>
 										</div>
 									</div>
@@ -209,29 +209,29 @@
 	<script src="${url}/js/brand.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
-	<script>
-		function addToCart(data){
-			JSalert();
-			$.ajax({
-				url: '${APIaurl}',
-				type: 'POST',
-				enctype: 'multipart/form-data',
-				processData:false,
-				contentType: 'application/json',
-				data:JSON.stringify(data),
-				dataType: 'json',
+<%--	<script>--%>
+<%--		function addToCart(data){--%>
+<%--			JSalert();--%>
+<%--			$.ajax({--%>
+<%--				url: '${APIaurl}',--%>
+<%--				type: 'POST',--%>
+<%--				enctype: 'multipart/form-data',--%>
+<%--				processData:false,--%>
+<%--				contentType: 'application/json',--%>
+<%--				data:JSON.stringify(data),--%>
+<%--				dataType: 'json',--%>
 
-				success: function (result){
-					console.log("Success");
-					console.log(data);
-					<%--window.location.href = "${PCurl}?type=list&message=insert_success";--%>
-				},
-				errMode: function (error){
-					console.log("Error");
-				}
-			})
-		};
-	</script>
+<%--				success: function (result){--%>
+<%--					console.log("Success");--%>
+<%--					console.log(data);--%>
+<%--					&lt;%&ndash;window.location.href = "${PCurl}?type=list&message=insert_success";&ndash;%&gt;--%>
+<%--				},--%>
+<%--				errMode: function (error){--%>
+<%--					console.log("Error");--%>
+<%--				}--%>
+<%--			})--%>
+<%--		};--%>
+<%--	</script>--%>
 
 	<script type="text/javascript">
 		function JSalert(){

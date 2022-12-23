@@ -1,6 +1,7 @@
 package hdth.com.repository.impl;
 
 import hdth.com.model.Cart;
+import hdth.com.model.Product;
 import hdth.com.model.User;
 import hdth.com.repository.CartRepository;
 import hdth.com.service.ProductService;
@@ -42,22 +43,23 @@ public class CartRepositoryImpl implements CartRepository {
     public boolean addOrupdateCartById(Integer productId, Integer userId) {
 
         Session session=this.sessionFactory.getObject().getCurrentSession();
-
+        System.out.println("HD2");
+        System.out.println(productId + " ----fffff----  "+ userId);
         if(productId != null && userId != null){
-            Cart cart1=this.getCartByProducIdAndUserId(productId,userId);
-            if(cart1 == null)
+            List<Cart> cart1=this.getCartByProducIdAndUserId(productId,userId);
+           // System.out.println(cart1.getQuantity());
+            if(cart1.isEmpty())
             {
+                System.out.println("999999999999999999999999999999999999999999999999999999999999");
                 Cart cartnew = new Cart();
                 cartnew.setQuantity(1);
                 cartnew.setProduct(this.productService.getProductById(productId));
                 cartnew.setUser(this.userDetailsService.getUserById(userId));
                 session.save(cartnew);
                 return true;
-
             }
 
-
-        }
+        //}
 //        if(cart.getId() != null){
 //            // nut o trang home
 //            Cart cart1=this.getCartByProducIdAndUserId(cart);
@@ -65,22 +67,19 @@ public class CartRepositoryImpl implements CartRepository {
 //                cart1.setQuantity(cart1.getQuantity()+cart.getQuantity());
 //                session.save(cart1);
 //                return true;
-//            }
-//        }
+            }
+        //}
         return false;
     }
 
 
-    public Cart getCartByProducIdAndUserId(Integer productId, Integer userId) {// kiem tra xem cart nay da co chua
+    public List<Cart> getCartByProducIdAndUserId(Integer productId, Integer userId) {// kiem tra xem cart nay da co chua
         Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van
 
         Query q = session.createQuery("FROM Cart c WHERE c.user.id=:x AND c.product.id=:y ");
         q.setParameter("x",userId);
         q.setParameter("y",productId);
         List<Cart> list=q.getResultList();
-        if (!list.isEmpty()){// chi co 1 phan tu trong list nay thoi
-                return list.get(0);
-        }
-        return null;
+        return list;
     }
 }

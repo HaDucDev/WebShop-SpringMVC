@@ -1,7 +1,6 @@
 package hdth.com.config;
 
 
-import hdth.com.utils.formatter.CartFomatter;
 import hdth.com.utils.formatter.CategoryFomatter;
 import hdth.com.utils.formatter.ProducStatusFormatter;
 import hdth.com.utils.formatter.SupplierFormatter;
@@ -40,7 +39,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new CategoryFomatter());
         registry.addFormatter(new SupplierFormatter());
         registry.addFormatter(new ProducStatusFormatter());
-        registry.addFormatter(new CartFomatter());
     }
 
     @Override

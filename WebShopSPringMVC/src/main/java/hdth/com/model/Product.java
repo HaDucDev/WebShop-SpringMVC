@@ -2,6 +2,7 @@
 package hdth.com.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,13 +54,15 @@ public class Product implements Serializable {
     @JoinColumn(name = "supplier_id",referencedColumnName = "id")
     private Supplier supplier;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Cart> cart;
 
-    @OneToMany( fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonIgnore
     private Set<OrderDetail> orderDetails;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonIgnore
     private Set<Reviews> reviews;
 
     @ManyToOne(cascade = CascadeType.MERGE)
