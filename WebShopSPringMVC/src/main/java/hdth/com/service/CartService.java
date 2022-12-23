@@ -7,6 +7,6 @@ import java.util.List;
 public interface CartService {
     List<Cart> getCartByUserId(Integer userId);
 
-    boolean addOrUpdateCartbyId(Integer productId,Integer userId);
+    boolean addCartbyId(Integer productId,Integer userId);
 
 }

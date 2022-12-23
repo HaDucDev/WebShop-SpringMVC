@@ -40,17 +40,14 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public boolean addOrupdateCartById(Integer productId, Integer userId) {
+    public boolean addCartById(Integer productId, Integer userId) {
 
         Session session=this.sessionFactory.getObject().getCurrentSession();
         System.out.println("HD2");
         System.out.println(productId + " ----fffff----  "+ userId);
-        if(productId != null && userId != null){
-            List<Cart> cart1=this.getCartByProducIdAndUserId(productId,userId);
-           // System.out.println(cart1.getQuantity());
-            if(cart1.isEmpty())
-            {
-                System.out.println("999999999999999999999999999999999999999999999999999999999999");
+        if(productId != null && userId != null) {
+            List<Cart> listCart = this.getCartByProducIdAndUserId(productId, userId);
+            if (listCart.isEmpty()) {
                 Cart cartnew = new Cart();
                 cartnew.setQuantity(1);
                 cartnew.setProduct(this.productService.getProductById(productId));
@@ -58,17 +55,15 @@ public class CartRepositoryImpl implements CartRepository {
                 session.save(cartnew);
                 return true;
             }
-
-        //}
-//        if(cart.getId() != null){
-//            // nut o trang home
-//            Cart cart1=this.getCartByProducIdAndUserId(cart);
-//            if ( cart1!= null){
-//                cart1.setQuantity(cart1.getQuantity()+cart.getQuantity());
-//                session.save(cart1);
-//                return true;
+           else {
+                Cart cart1 = listCart.get(0);
+                if (cart1 != null) {
+                    cart1.setQuantity(cart1.getQuantity() + 1);
+                    session.save(cart1);
+                    return true;
+                }
             }
-        //}
+        }
         return false;
     }
 

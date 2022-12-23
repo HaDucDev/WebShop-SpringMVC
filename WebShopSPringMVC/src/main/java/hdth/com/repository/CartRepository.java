@@ -8,7 +8,7 @@ public interface CartRepository {
 
     List<Cart> getCartByUserId(Integer userid);
 
-    boolean addOrupdateCartById(Integer productId, Integer userid);
+    boolean addCartById(Integer productId, Integer userid);
 
     //Cart getCartByProducIdAndUserId(Integer productId);// kiem tra san pham co trong gio hang nguoi dung chua
 
