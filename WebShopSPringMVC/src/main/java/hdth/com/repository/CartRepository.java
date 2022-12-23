@@ -8,4 +8,8 @@ public interface CartRepository {
 
     List<Cart> getCartByUserId(Integer userid);
 
+    boolean addOrupdateCartById(Cart cart);
+
+    Cart getCartByProducIdAndUserId(Cart cart);
+
 }

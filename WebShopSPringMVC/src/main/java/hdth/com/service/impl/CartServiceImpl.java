@@ -19,4 +19,9 @@ public class CartServiceImpl implements CartService {
 
         return this.cartRepository.getCartByUserId(userId);
     }
+
+    @Override
+    public boolean addOrUpdateCartbyId(Cart cart) {
+        return this.cartRepository.addOrupdateCartById(cart);
+    }
 }
