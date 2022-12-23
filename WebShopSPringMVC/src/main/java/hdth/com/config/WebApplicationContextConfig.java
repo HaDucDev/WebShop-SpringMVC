@@ -1,18 +1,15 @@
 package hdth.com.config;
 
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
+import hdth.com.utils.formatter.CartFomatter;
 import hdth.com.utils.formatter.CategoryFomatter;
 import hdth.com.utils.formatter.ProducStatusFormatter;
 import hdth.com.utils.formatter.SupplierFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -43,6 +40,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new CategoryFomatter());
         registry.addFormatter(new SupplierFormatter());
         registry.addFormatter(new ProducStatusFormatter());
+        registry.addFormatter(new CartFomatter());
     }
 
     @Override
