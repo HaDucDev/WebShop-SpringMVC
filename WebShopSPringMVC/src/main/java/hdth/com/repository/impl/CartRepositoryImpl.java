@@ -67,6 +67,18 @@ public class CartRepositoryImpl implements CartRepository {
         return false;
     }
 
+    @Override
+    public Integer countProductCartbyUser(Integer userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van
+        Query q = session.createQuery("SELECT count(c.product.id), max(c.quantity) FROM Cart c WHERE c.user.id=:x ");
+        q.setParameter("x",userId);
+        List<Object[]> list= q .getResultList();// phai co 2 cot tro len ms duoc khong thi no se loi
+        System.out.println(list.get(0)[0]+"ghjjkjjujhhjh"+list.get(0)[1]);
+        System.out.println(list.get(0)[0]);
+        Integer m=Integer.valueOf(list.get(0)[0].toString());// khi minh in ra thi no la Long. minh chuyen Long thanh chuoi sau do chuoi thanh Integer
+        return m;
+    }
+
 
     public List<Cart> getCartByProducIdAndUserId(Integer productId, Integer userId) {// kiem tra xem cart nay da co chua
         Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van

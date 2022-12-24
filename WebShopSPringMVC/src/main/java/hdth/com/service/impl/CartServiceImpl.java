@@ -25,4 +25,9 @@ public class CartServiceImpl implements CartService {
         System.out.println("HD1");
         return this.cartRepository.addCartById(productId,userId);
     }
+
+    @Override
+    public Integer countProductCartbyUser(Integer userId) {
+        return this.cartRepository.countProductCartbyUser(userId);
+    }
 }
