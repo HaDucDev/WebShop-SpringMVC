@@ -24,28 +24,31 @@
 
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
+<br>
+<br>
+<br>
+<h1 class="text-center">Giỏ hàng của bạn</h1>
 <section id="cart_items">
     <div class="container">
-        <div class="table-responsive cart_info">
-            <table class="table table-condensed">
+        <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-hover table-fixed table-bordered table-striped mb-0">
                 <thead>
                 <tr class="cart_menu">
-                    <td class="id">Mã sản phẩm</td>
-                    <td class="image">Ảnh sản phẩm</td>
-                    <td class="name">Tên sản phẩm</td>
-                    <td class="price">Giá</td>
-                    <td class="quantity">Số lượng</td>
-                    <td class="total">Tổng cộng</td>
-                    <td></td>
+                    <th class="id" scope="col">Mã sản phẩm</th>
+                    <th class="image" scope="col">Ảnh sản phẩm</th>
+                    <th class="name" scope="col">Tên sản phẩm</th>
+                    <th class="price" scope="col">Giá</th>
+                    <th class="quantity" scope="col">Số lượng</th>
+                    <th class="total" scope="col">Tổng cộng</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${cartList}" var="cart">
-                    <tr class="odd gradeX">
-                        <td class="cart_product">
+                    <tr class="table-info">
+                        <th scope="row">
                             <h4><a href="">${cart.product.id}</a></h4>
-                        </td>
-                        <td class="cart_product">
+                        </th>
+                        <td>
                             <c:choose>
                                 <c:when test="${cart.product.productImage != null}">
                                     <img style="width: 100px;height: 100px;object-fit: cover"
@@ -59,14 +62,14 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td class="cart_description" style="padding-left: 50px;">
-                            <h4><a href="">${cart.product.productName}</a></h4>
+                        <td>
+                            <p><a href="">${cart.product.productName}</a></p>
                         </td>
-                        <td class="cart_price">
-                            <h2 value="${cart.product.unitPrice}"> VNĐ</h2>
-                            <h2 value="${(cart.product.unitPrice)}"> giam gia VNĐ</h2>
+                        <td>
+                            <p>${cart.product.unitPrice} VNĐ</p>
+                            <p>${(cart.product.unitPrice)} giam gia VNĐ</p>
                         </td>
-                        <td class="cart_quantity" style="width: 150px">
+                        <td>
                             <div class="cart_quantity_button">
                                 <a class="cart_quantity_up" onclick="updateCart(${i.getProductEntity().getId()},'add')"
                                    href=""> + </a>
@@ -76,9 +79,8 @@
                                    onclick="updateCart(${i.getProductEntity().getId()},'sub')" href=""> - </a>
                             </div>
                         </td>
-                        <td class="cart_total">
-                            <h2><fmt:formatNumber type="number"
-                                                  value="${cart.product.unitPrice*cart.quantity}"/> VNĐ</h2>
+                        <td>
+                            <p><fmt:formatNumber type="number" value="${cart.product.unitPrice*cart.quantity}"/> VNĐ</p>
                         </td>
                         <td class="cart_delete">
                             <a class="cart_quantity_delete" onclick="updateCart(${i.getProductEntity().getId()},'del')"
@@ -86,7 +88,6 @@
                         </td>
                     </tr>
                 </c:forEach>
-
                 </tbody>
             </table>
         </div>
