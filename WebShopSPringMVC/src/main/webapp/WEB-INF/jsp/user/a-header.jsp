@@ -50,7 +50,7 @@
 
 <nav>
     <ul>
-        <li><a href="${pageContext.request.contextPath }/home">Trang chủ</a></li>
+        <li><a href="${pageContext.request.contextPath }/">Trang chủ</a></li>
 
 
         <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Danh mục sản phẩm</a>

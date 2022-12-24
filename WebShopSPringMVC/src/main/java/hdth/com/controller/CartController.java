@@ -20,8 +20,14 @@ public class CartController {
     public String indexCart(Model model, HttpSession session){
 
         User user= (User) session.getAttribute("currentUser");
-        Integer userId= user.getId();
-        model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
-        return "user/cart";
+        if(user != null){
+            Integer userId= user.getId();
+            model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
+            return "user/cart";
+        }
+        String mess="Bạn phải đăng nhập mới có thể mua hàng";
+        model.addAttribute("usernotnull",mess);
+        return "user/login";
+
     }
 }
