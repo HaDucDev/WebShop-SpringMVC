@@ -28,6 +28,19 @@ public class CartController {
         String mess="Bạn phải đăng nhập mới có thể mua hàng";
         model.addAttribute("usernotnull",mess);
         return "user/login";
-
     }
+
+    @GetMapping("/user/order-confirmation")
+    public String indexOrderConfirmation(Model model, HttpSession session){
+
+        User user= (User) session.getAttribute("currentUser");
+        if(user != null){
+            Integer userId= user.getId();
+            model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
+            return "user/order-confirmation";
+        }
+        return "user/login";
+    }
+
+
 }

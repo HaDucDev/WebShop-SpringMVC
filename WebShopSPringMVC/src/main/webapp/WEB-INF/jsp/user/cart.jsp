@@ -28,7 +28,7 @@
 <h1 class="text-center">Giỏ hàng của bạn</h1>
 <section id="cart_items">
     <div class="container">
-        <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+        <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar" >
             <table class="table table-hover table-fixed table-bordered table-striped mb-0">
                 <thead>
                 <tr class="cart_menu">
@@ -89,6 +89,7 @@
                 </tbody>
             </table>
         </div>
+        <div style="float:right"><a href="<c:url value="/user/order-confirmation"/>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Xác nhận</a></div>
     </div>
 </section> <!--/#cart_items-->
 
