@@ -25,8 +25,6 @@
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
 <br>
-<br>
-<br>
 <h1 class="text-center">Giỏ hàng của bạn</h1>
 <section id="cart_items">
     <div class="container">
@@ -71,16 +69,16 @@
                         </td>
                         <td>
                             <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" onclick="updateCart(${i.getProductEntity().getId()},'add')"
+                                <a class="cart_quantity_up" onclick="updateCartAdd(${cart.product.id})"
                                    href=""> + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity"
-                                       value="${cart.quantity}" autocomplete="off" size="2" readonly>
+                                <input class="cart_quantity_input" type="number" name="quantity" id="cart_quantity_input"
+                                       value="${cart.quantity}" autocomplete="off" size="2" min="1" style="width: 60px">
                                 <a class="cart_quantity_down"
-                                   onclick="updateCart(${i.getProductEntity().getId()},'sub')" href=""> - </a>
+                                   onclick="updateCartSub(${cart.product.id})" href=""> - </a>
                             </div>
                         </td>
                         <td>
-                            <p><fmt:formatNumber type="number" value="${cart.product.unitPrice*cart.quantity}"/> VNĐ</p>
+                            <p id="total"><fmt:formatNumber type="number" value="${cart.product.unitPrice*cart.quantity}"/> VNĐ</p>
                         </td>
                         <td class="cart_delete">
                             <a class="cart_quantity_delete" onclick="updateCart(${i.getProductEntity().getId()},'del')"
@@ -149,6 +147,49 @@
 <script src="${url}/js/jquery.scrollUp.min.js"></script>
 <script src="${url}/js/jquery.prettyPhoto.js"></script>
 <script src="${url}/js/main.js"></script>
+<c:url value="/user/cart" var="APIurl"> </c:url>
+<script>
+    function updateCartAdd(productId){
+        fetch("/WebShopSPringMVC_war/api/cart",{
+            method:'post',
+            body: JSON.stringify({
+                "productId":productId,
+            }),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(function (res){
+            return res.json(); // do mminh lam tra ve so nguyen nen can path sang json
+        }).then(function (data){
+            console.log("9999999");
+            <%--window.location.href = "${APIurl}";--%>
+            //location.reload();
+            document.getElementById("cart_quantity_input").contentWindow.location.reload(true);
+            document.getElementById("total").contentWindow.location.reload(true);
+        })
+    }
+
+
+    function updateCartSub(productId){
+        fetch("/WebShopSPringMVC_war/api/cart/sub",{
+            method:'post',
+            body: JSON.stringify({
+                "productId":productId,
+            }),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(function (res){
+            return res.json(); // do mminh lam tra ve so nguyen nen can path sang json
+        }).then(function (data){
+            console.log("9999999");
+            <%--window.location.href = "${APIurl}";--%>
+            // location.reload();
+            document.getElementById("cart_quantity_input").contentWindow.location.reload(true);
+            document.getElementById("total").contentWindow.location.reload(true);
+        })
+    }
+</script>
 <%--<script>--%>
 
 <%--	function updateCart(productId,type){--%>

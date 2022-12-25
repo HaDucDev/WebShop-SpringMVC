@@ -35,17 +35,17 @@ public class CartRepositoryImpl implements CartRepository {
     public List<Cart> getCartByUserId(Integer userId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Cart c WHERE c.user.id=:x");
-        q.setParameter("x",userId);
+        q.setParameter("x", userId);
         return q.getResultList();// day ms bat dau chay truy van
     }
 
     @Override
     public boolean addCartById(Integer productId, Integer userId) {
 
-        Session session=this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         System.out.println("HD2");
-        System.out.println(productId + " ----fffff----  "+ userId);
-        if(productId != null && userId != null) {
+        System.out.println(productId + " ----fffff----  " + userId);
+        if (productId != null && userId != null) {
             List<Cart> listCart = this.getCartByProducIdAndUserId(productId, userId);
             if (listCart.isEmpty()) {
                 Cart cartnew = new Cart();
@@ -54,8 +54,7 @@ public class CartRepositoryImpl implements CartRepository {
                 cartnew.setUser(this.userDetailsService.getUserById(userId));
                 session.save(cartnew);
                 return true;
-            }
-           else {
+            } else {
                 Cart cart1 = listCart.get(0);
                 if (cart1 != null) {
                     cart1.setQuantity(cart1.getQuantity() + 1);
@@ -68,14 +67,30 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
+    public boolean addCartbyIdSub(Integer productId, Integer userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        if (productId != null && userId != null) {
+            List<Cart> listCart = this.getCartByProducIdAndUserId(productId, userId);
+
+            Cart cart1 = listCart.get(0);
+            if (cart1 != null) {
+                cart1.setQuantity(cart1.getQuantity() - 1);
+                session.save(cart1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public Integer countProductCartbyUser(Integer userId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van
         Query q = session.createQuery("SELECT count(c.product.id), max(c.quantity) FROM Cart c WHERE c.user.id=:x ");
-        q.setParameter("x",userId);
-        List<Object[]> list= q .getResultList();// phai co 2 cot tro len ms duoc khong thi no se loi
-        System.out.println(list.get(0)[0]+"ghjjkjjujhhjh"+list.get(0)[1]);
+        q.setParameter("x", userId);
+        List<Object[]> list = q.getResultList();// phai co 2 cot tro len ms duoc khong thi no se loi
+        System.out.println(list.get(0)[0] + "ghjjkjjujhhjh" + list.get(0)[1]);
         System.out.println(list.get(0)[0]);
-        Integer m=Integer.valueOf(list.get(0)[0].toString());// khi minh in ra thi no la Long. minh chuyen Long thanh chuoi sau do chuoi thanh Integer
+        Integer m = Integer.valueOf(list.get(0)[0].toString());// khi minh in ra thi no la Long. minh chuyen Long thanh chuoi sau do chuoi thanh Integer
         return m;
     }
 
@@ -84,9 +99,9 @@ public class CartRepositoryImpl implements CartRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van
 
         Query q = session.createQuery("FROM Cart c WHERE c.user.id=:x AND c.product.id=:y ");
-        q.setParameter("x",userId);
-        q.setParameter("y",productId);
-        List<Cart> list=q.getResultList();
+        q.setParameter("x", userId);
+        q.setParameter("y", productId);
+        List<Cart> list = q.getResultList();
         return list;
     }
 }

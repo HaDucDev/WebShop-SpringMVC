@@ -27,6 +27,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public boolean addCartbyIdSub(Integer productId, Integer userId) {
+        System.out.println("HD2");
+        return this.cartRepository.addCartbyIdSub(productId,userId);
+    }
+
+    @Override
     public Integer countProductCartbyUser(Integer userId) {
         return this.cartRepository.countProductCartbyUser(userId);
     }

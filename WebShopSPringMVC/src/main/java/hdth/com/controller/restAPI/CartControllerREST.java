@@ -31,4 +31,15 @@ public class CartControllerREST {
         }
         return  0;
     }
+
+    @PostMapping(path = "/api/cart/sub")
+    public Integer addProductoCartSub(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
+        HttpSession httpSession= request.getSession();
+        User user = (User) httpSession.getAttribute("currentUser");
+        if(this.cartService.addCartbyIdSub(cart.getProductId(),user.getId())==true)
+        {
+            return this.cartService.countProductCartbyUser(user.getId());
+        }
+        return  0;
+    }
 }

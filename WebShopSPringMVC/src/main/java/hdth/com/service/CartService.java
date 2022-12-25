@@ -9,6 +9,8 @@ public interface CartService {
 
     boolean addCartbyId(Integer productId,Integer userId);
 
+    boolean addCartbyIdSub(Integer productId,Integer userId);
+
     Integer countProductCartbyUser(Integer userId);
 
 }

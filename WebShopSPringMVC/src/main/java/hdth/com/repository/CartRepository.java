@@ -12,6 +12,6 @@ public interface CartRepository {
 
     //Cart getCartByProducIdAndUserId(Integer productId);// kiem tra san pham co trong gio hang nguoi dung chua
 
-
+    boolean addCartbyIdSub(Integer productId, Integer userId);
     Integer countProductCartbyUser(Integer userId);
 }
