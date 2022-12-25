@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.addOrUpdateUsers(user);
     }
 
+    @Override
+    public User getUserById(Integer id) {
+        return this.userRepository.getUserById(id);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

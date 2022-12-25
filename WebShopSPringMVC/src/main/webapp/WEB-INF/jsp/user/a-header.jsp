@@ -31,7 +31,7 @@
                     <div class="shop-menu pull-right">
                         <ul class=" nav nav-pills nav-stacked ">
                             <li><a href="${pageContext.request.contextPath}/account-manager"><i class="fa fa-book" aria-hidden="true"></i>Tài khoản</a></li>
-                            <li><a href="${pageContext.request.contextPath}/client-cart-list"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng<span class="badge badge-danger" id="cart-counter">${cartCounter}</span></a></li>
                             <c:if test="${not empty sessionScope.currentUser.fullName}">
                                 <li><a href="#"><i class="fa fa-user"></i>Chào <c:out value="${sessionScope.currentUser.fullName}"></c:out></a></li>
                                 <li><a href="<c:url value="/logout"/>">Đăng xuất</a></li>
@@ -50,7 +50,7 @@
 
 <nav>
     <ul>
-        <li><a href="${pageContext.request.contextPath }/home">Trang chủ</a></li>
+        <li><a href="${pageContext.request.contextPath }/">Trang chủ</a></li>
 
 
         <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Danh mục sản phẩm</a>

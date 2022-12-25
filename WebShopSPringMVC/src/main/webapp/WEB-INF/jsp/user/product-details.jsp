@@ -63,7 +63,7 @@
 <%--									<span>${productEntity.getPrice()} ₫</span>--%>
 									<h2><fmt:formatNumber type="number" value="${productEntity.getPrice()}" /> VNĐ</h2>
 									<br>
-									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCart(${productEntity.getId()})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+<%--									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCart(${productEntity.getId()})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>--%>
 								</span>
 							<p><b>Mô tả sản phẩm:</b></p>
 							<p>Ngày nay, khi người dùng lựa chọn cho mình một chiếc laptop để sử dụng luôn quan tâm đến nhu cầu sử dụng vừa để làm việc vừa để giải trí chơi game. Vì vậy lựa chọn cho mình một chiếc laptop gaming là một giải pháp phù hợp cho mọi nhu cầu sử dụng của bạn. Acer Nitro 5 là chiếc laptop đến từ thương hiệu Acer sẽ mang đến một cách nhìn hoàn toàn mới về các nhu cầu sử dụng trên dòng laptop gaming có thể mang lại cho người dùng.</p>
@@ -132,30 +132,30 @@
 	</div><!--/category-tab-->
 </section>
 <jsp:include page="a-footer.jsp"></jsp:include>
-<script>
-	function addToCart(data){
-		JSalert();
-		$.ajax({
-			url: '${APIaurl}',
-			type: 'POST',
-			enctype: 'multipart/form-data',
-			processData:false,
-			contentType: 'application/json',
-			data:JSON.stringify(data),
-			dataType: 'json',
+<%--<script>--%>
+<%--	function addToCart(data){--%>
+<%--		JSalert();--%>
+<%--		$.ajax({--%>
+<%--			url: '${APIaurl}',--%>
+<%--			type: 'POST',--%>
+<%--			enctype: 'multipart/form-data',--%>
+<%--			processData:false,--%>
+<%--			contentType: 'application/json',--%>
+<%--			data:JSON.stringify(data),--%>
+<%--			dataType: 'json',--%>
 
-			success: function (result){
-				console.log("Success");
-				console.log(data);
+<%--			success: function (result){--%>
+<%--				console.log("Success");--%>
+<%--				console.log(data);--%>
 
-				<%--window.location.href = "${PCurl}?type=list&message=insert_success";--%>
-			},
-			errMode: function (error){
-				console.log("Error");
-			}
-		})
-	};
-</script>
+<%--				&lt;%&ndash;window.location.href = "${PCurl}?type=list&message=insert_success";&ndash;%&gt;--%>
+<%--			},--%>
+<%--			errMode: function (error){--%>
+<%--				console.log("Error");--%>
+<%--			}--%>
+<%--		})--%>
+<%--	};--%>
+<%--</script>--%>
 
 <script>
 	function changeQuantity(action){
