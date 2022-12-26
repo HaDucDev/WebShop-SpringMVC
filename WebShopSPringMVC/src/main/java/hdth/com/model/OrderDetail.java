@@ -28,10 +28,10 @@ public class OrderDetail implements Serializable {
     //private String isReview;// trạng thái đánh giá sản phẩm được mua. tuc la nguoi dung danh gia san pham nay tai don hang nay ntn
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
     private Order order;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id")
     private Product product;
 }
