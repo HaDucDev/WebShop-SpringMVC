@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url value="/user" var="url"> </c:url>
 
 <!DOCTYPE html>
@@ -52,94 +53,97 @@
 
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
+<c:url var="createorder" value="/user/create-order"/>
 <h3 style="text-align: center">Xác nhận đơn hàng</h3>
 <div class="container" style="margin-top: 0; padding-top: 0; border: 1px solid #6a9ed1; ">
-    <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Order summary</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive" style="width:100%; height:225px; overflow:auto; margin: auto">
-                            <table class="table table-condensed">
-                                <thead>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="width:100%; height:225px; overflow:auto; margin: auto">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <td><strong>Mã sản phẩm</strong></td>
+                                <td class="text-center"><strong>Ảnh sản phẩm</strong></td>
+                                <td class="text-center"><strong>Tên sản phẩm</strong></td>
+                                <td class="text-center"><strong>Giá</strong></td>
+                                <td class="text-center"><strong>Số lượng</strong></td>
+                                <td class="text-right"><strong>Tổng cộng</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${cartList}" var="cart">
                                 <tr>
-                                    <td><strong>Mã sản phẩm</strong></td>
-                                    <td class="text-center"><strong>Ảnh sản phẩm</strong></td>
-                                    <td class="text-center"><strong>Tên sản phẩm</strong></td>
-                                    <td class="text-center"><strong>Giá</strong></td>
-                                    <td class="text-center"><strong>Số lượng</strong></td>
-                                    <td class="text-right"><strong>Tổng cộng</strong></td>
+                                    <th>
+                                        <a href="">${cart.product.id}</a>
+                                    </th>
+                                    <td class="text-center">
+                                        <c:choose>
+                                            <c:when test="${cart.product.productImage != null}">
+                                                <img style="width: 50px;height: 50px;object-fit: cover"
+                                                     src="<c:url value="${cart.product.productImage}"/>"
+                                                     alt="${cart.product.productName}">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img style="width: 100px;height: 100px;object-fit: cover"
+                                                     src="<c:url value="/images/Rayquaza.png"/>"
+                                                     alt="${cart.product.productName}">
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td class="text-center">
+                                        <p><a href="">${cart.product.productName}</a></p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>${cart.product.unitPrice} VNĐ</p>
+                                        <p>${(cart.product.unitPrice)} giam gia VNĐ</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="cart_quantity_button">
+                                            <input class="cart_quantity_input" readonly value="${cart.quantity}"
+                                                   autocomplete="off" style="width: 60px">
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <p id="total"><fmt:formatNumber type="number"
+                                                                        value="${cart.product.unitPrice*cart.quantity}"/>
+                                            VNĐ</p>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${cartList}" var="cart">
-                                    <tr>
-                                        <th>
-                                            <a href="">${cart.product.id}</a>
-                                        </th>
-                                        <td class="text-center">
-                                            <c:choose>
-                                                <c:when test="${cart.product.productImage != null}">
-                                                    <img style="width: 50px;height: 50px;object-fit: cover"
-                                                         src="<c:url value="${cart.product.productImage}"/>"
-                                                         alt="${cart.product.productName}">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img style="width: 100px;height: 100px;object-fit: cover"
-                                                         src="<c:url value="/images/Rayquaza.png"/>"
-                                                         alt="${cart.product.productName}">
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                        <td class="text-center">
-                                            <p><a href="">${cart.product.productName}</a></p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p>${cart.product.unitPrice} VNĐ</p>
-                                            <p>${(cart.product.unitPrice)} giam gia VNĐ</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="cart_quantity_button">
-                                                <input class="cart_quantity_input" readonly value="${cart.quantity}"
-                                                       autocomplete="off" style="width: 60px">
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <p id="total"><fmt:formatNumber type="number"
-                                                                            value="${cart.product.unitPrice*cart.quantity}"/>
-                                                VNĐ</p>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <tr>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line text-center"><strong>Shipping</strong></td>
-                                    <td class="no-line text-right">$15</td>
-                                </tr>
-                                <tr>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line text-center"><strong>Total</strong></td>
-                                    <td class="no-line text-right">$685.99</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </c:forEach>
+                            <tr>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line text-center"><strong>Shipping</strong></td>
+                                <td class="no-line text-right">$15</td>
+                            </tr>
+                            <tr>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line text-center"><strong>Total</strong></td>
+                                <td class="no-line text-right">$685.99</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="row">
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <form:form action="${createorder}" method="post" id="login-form" modelAttribute="order">
                     <div class="col-1"></div>
                     <div class="col-4">
+
                         <div class="login-form">
 
                             <div class="form-group">
@@ -167,25 +171,26 @@
                     <div class="col-5">
                         <div class="col-8">
                             <h4>Chọn phương thức thanh toán</h4>
-                                <div class="form-group">
+                            <div class="form-group">
 
-                                    <input type="radio" id="html" name="fav_language" value="HTML">
-                                    <label for="html">Nhận hàng trả tiền</label><br>
-                                    <input type="radio" id="css" name="fav_language" value="CSS">
-                                    <label for="css">Thanh toán online với MoMo</label>
-                                </div>
-                                <label style="color: green">${msg}</label><br>
-                                <button type="submit" class="btn btn-success btn-primary "
-                                        style="margin-top: 1px; color: white; background-color: #696763; border: none;">
-                                    Xác nhận đặt đơn hàng
-                                </button>
+                                <input type="radio" id="html" name="fav_language" value="HTML">
+                                <label for="html">Nhận hàng trả tiền</label><br>
+                                <input type="radio" id="css" name="fav_language" value="CSS">
+                                <label for="css">Thanh toán online với MoMo</label>
+                            </div>
+                            <label style="color: green">${msg}</label><br>
+                            <input type="submit" class="btn btn-success btn-primary "
+                                   style="margin-top: 1px; color: white; background-color: #696763; border: none;">
+                            Xác nhận đặt đơn hàng
+                            </input>
                         </div>
                     </div>
-                </div>
+                </form:form>
             </div>
-
         </div>
-    </form>
+
+    </div>
+
 </div>
 
 <br>

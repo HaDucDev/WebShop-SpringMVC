@@ -8,14 +8,17 @@ import hdth.com.model.OrderDetail;
 import hdth.com.model.User;
 import hdth.com.repository.CartRepository;
 import hdth.com.repository.OrderRepository;
+import hdth.com.repository.ProductRepository;
 import hdth.com.repository.UserRepository;
 import hdth.com.utils.common.ConstValueWeb;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -39,11 +42,15 @@ public class OrderRepositoryImpl implements OrderRepository {
     private UserRepository userRepository;
 
 
+    @Autowired
+    private ProductRepository productRepository;
+
+
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)// luu cha (order) xong thi dung cha luu cho con(orderdetail). luu nhieu thao tac
     public boolean createOrder(Order order) {
 
         Session session = this.sessionFactory.getObject().getCurrentSession();
-//        if(category.getId() == null){
         try {
             Order ordernew= new Order();
             ordernew.setDeliveryAddress(order.getDeliveryAddress());
@@ -65,7 +72,18 @@ public class OrderRepositoryImpl implements OrderRepository {
                 ordernew.setUser(user);
                 session.save(ordernew);
 
-                
+                // luu chi tiet hoa don
+                List<Cart> carts=this.cartRepository.getCartByUserId(user.getId());
+                for ( Cart c: carts){
+                    OrderDetail orderDetail=new OrderDetail();
+                    orderDetail.setOrder(ordernew);// khi dat gia tri thi da co doi tuong roi. luu thoi
+                    orderDetail.setProduct(c.getProduct());
+                    orderDetail.setQuantity(c.getQuantity());
+                    orderDetail.setAmount(Long.valueOf(c.getQuantity()*c.getProduct().getUnitPrice()));
+                    session.save(orderDetail);
+                }
+
+
                 return true;
             }
 
@@ -73,10 +91,10 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 
         } catch (Exception ex) {
-            System.out.println("loi add category" + ex);
+            System.out.println("loi save order - orderdetail" + ex);
             ex.printStackTrace();// in ra cac buoc den dau bi loi
         }
-//        }
+
 //        else {
 //            System.out.println("ok roi nha");
 //            Category c=this.getCategoryById(category.getId());

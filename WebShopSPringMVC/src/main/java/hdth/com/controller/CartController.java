@@ -1,6 +1,7 @@
 package hdth.com.controller;
 
 import hdth.com.model.Cart;
+import hdth.com.model.Order;
 import hdth.com.model.User;
 import hdth.com.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,14 @@ public class CartController {
         User user= (User) session.getAttribute("currentUser");
         if(user != null){
             Integer userId= user.getId();
-            model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
-            return "user/order-confirmation";
+            if(!this.cartService.getCartByUserId(userId).isEmpty()){
+                model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
+                model.addAttribute("order",new Order());
+                return "user/order-confirmation";
+            }
+            else {
+                return "user/cart";
+            }
         }
         return "user/login";
     }
