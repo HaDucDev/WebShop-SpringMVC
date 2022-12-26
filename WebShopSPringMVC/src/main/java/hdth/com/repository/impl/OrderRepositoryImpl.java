@@ -4,6 +4,7 @@ package hdth.com.repository.impl;
 import com.sun.security.auth.UserPrincipal;
 import hdth.com.model.Cart;
 import hdth.com.model.Order;
+import hdth.com.model.OrderDetail;
 import hdth.com.model.User;
 import hdth.com.repository.CartRepository;
 import hdth.com.repository.OrderRepository;
@@ -57,24 +58,18 @@ public class OrderRepositoryImpl implements OrderRepository {
                 ordernew.setStatusOrder(ConstValueWeb.DANG_CHO);
 
                 UserPrincipal principal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-
                 User user=this.userRepository.getUsersByUsername(principal.getName()).get(0);
-                List<Cart> carts=this.cartRepository.getCartByUserId(user.getId());
-
-                int tong=0;
-                for ( Cart c: carts){
-                    tong=tong+c.getQuantity()*c.getProduct().getUnitPrice();
-                }
 
                 //ordernew.setTotalAmount(Long.parseLong(String.valueOf(tong)));
-                ordernew.setTotalAmount(Long.valueOf(tong));// convert int to long
+                ordernew.setTotalAmount(totalMoneyOrder(user.getId()));
                 ordernew.setUser(user);
                 session.save(ordernew);
+
+                
                 return true;
             }
 
-            
+
 
 
         } catch (Exception ex) {
@@ -93,4 +88,17 @@ public class OrderRepositoryImpl implements OrderRepository {
 
         return false;
     }
+
+    public Long totalMoneyOrder(Integer userId){// tong tien hoa don
+        List<Cart> carts=this.cartRepository.getCartByUserId(userId);
+        int tong=0;
+        for ( Cart c: carts){
+            tong=tong+c.getQuantity()*c.getProduct().getUnitPrice();
+        }
+        Long x=Long.valueOf(tong);// convert int to long
+        return x;
+    }
+
+
+
 }
