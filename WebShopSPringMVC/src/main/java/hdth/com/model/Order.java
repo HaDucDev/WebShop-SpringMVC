@@ -45,6 +45,10 @@ public class Order implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;// ngay tao don hang
 
+
+    @Column(name = "receipt_user")
+    private String receiptUser;// ten nguoi nhan don hang
+
     @Column(name = "receipt_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date receiptDate;// ngay tao don hang
