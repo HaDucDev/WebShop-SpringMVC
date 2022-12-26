@@ -81,6 +81,8 @@ public class OrderRepositoryImpl implements OrderRepository {
                     orderDetail.setQuantity(c.getQuantity());
                     orderDetail.setAmount(Long.valueOf(c.getQuantity()*c.getProduct().getUnitPrice()));
                     session.save(orderDetail);
+
+                    session.delete(c);
                 }
 
 

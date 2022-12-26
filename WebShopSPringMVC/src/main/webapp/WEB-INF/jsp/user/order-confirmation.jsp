@@ -153,13 +153,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Địa chỉ nhận</label>
-                                <form:input id="address" name="deliveryAddress" type="password" class="form-control" path="deliveryAddress"
+                                <form:input id="address" name="deliveryAddress" type="text" class="form-control" path="deliveryAddress"
                                        placeholder="Đía chỉ nhận hàng"/>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="sdt">Số điện thoại</label>
-                                <form:input id="sdt" name="phoneNumber" type="password" class="form-control" path="phoneNumber"
+                                <form:input id="sdt" name="phoneNumber" type="number" class="form-control" path="phoneNumber"
                                        placeholder="Số điện thoại"/>
                                 <span class="form-message"></span>
                             </div>
@@ -171,7 +171,7 @@
                         <div class="col-8">
                             <h4>Chọn phương thức thanh toán</h4>
                                 <div class="form-group">
-                                    <form:radiobutton  id="html" name="fav_language" value="0" path="methodPayment"/>
+                                    <form:radiobutton  id="html" name="fav_language" value="0" path="methodPayment" checked="checked"/>
                                     <label for="html">Nhận hàng trả tiền</label><br>
                                     <form:radiobutton  id="css" name="fav_language" value="1" path="methodPayment"/>
                                     <label for="css">Thanh toán online với MoMo</label>
