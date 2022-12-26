@@ -53,10 +53,8 @@
 
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
-<c:url var="createorder" value="/user/create-order"/>
 <h3 style="text-align: center">Xác nhận đơn hàng</h3>
 <div class="container" style="margin-top: 0; padding-top: 0; border: 1px solid #6a9ed1; ">
-
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -138,30 +136,31 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="row">
-                <form:form action="${createorder}" method="post" id="login-form" modelAttribute="order">
+    </div>
+    <c:url var="createorder" value="/user/create-order"/>
+    <form:form action="${createorder}" method="POST" id="login-form" modelAttribute="order" role="form">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
                     <div class="col-1"></div>
                     <div class="col-4">
-
                         <div class="login-form">
-
                             <div class="form-group">
                                 <label for="name">Tên người nhận</label>
-                                <input id="name" name="name" type="text" class="form-control"
-                                       placeholder="Tên người nhận">
+                                <form:input id="name" name="receiptUser" type="text" class="form-control" path="receiptUser"
+                                       placeholder="Tên người nhận"/>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="address">Địa chỉ nhận</label>
-                                <input id="address" name="address" type="password" class="form-control"
-                                       placeholder="Đía chỉ nhận hàng">
+                                <form:input id="address" name="deliveryAddress" type="password" class="form-control" path="deliveryAddress"
+                                       placeholder="Đía chỉ nhận hàng"/>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="sdt">Số điện thoại</label>
-                                <input id="sdt" name="address" type="password" class="form-control"
-                                       placeholder="Số điện thoại">
+                                <form:input id="sdt" name="phoneNumber" type="password" class="form-control" path="phoneNumber"
+                                       placeholder="Số điện thoại"/>
                                 <span class="form-message"></span>
                             </div>
                         </div>
@@ -171,26 +170,20 @@
                     <div class="col-5">
                         <div class="col-8">
                             <h4>Chọn phương thức thanh toán</h4>
-                            <div class="form-group">
-
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">Nhận hàng trả tiền</label><br>
-                                <input type="radio" id="css" name="fav_language" value="CSS">
-                                <label for="css">Thanh toán online với MoMo</label>
-                            </div>
-                            <label style="color: green">${msg}</label><br>
-                            <input type="submit" class="btn btn-success btn-primary "
-                                   style="margin-top: 1px; color: white; background-color: #696763; border: none;">
-                            Xác nhận đặt đơn hàng
-                            </input>
+                                <div class="form-group">
+                                    <form:radiobutton  id="html" name="fav_language" value="0" path="methodPayment"/>
+                                    <label for="html">Nhận hàng trả tiền</label><br>
+                                    <form:radiobutton  id="css" name="fav_language" value="1" path="methodPayment"/>
+                                    <label for="css">Thanh toán online với MoMo</label>
+                                </div>
+                                <label style="color: green">${msg}</label><br>
+                                <input type="submit" class="btn btn-success btn-primary " value="Xác nhận đặt đơn hàng" style="margin-top: 1px; color: white; background-color: #696763; border: none;"/>
                         </div>
                     </div>
-                </form:form>
+                </div>
             </div>
         </div>
-
-    </div>
-
+    </form:form>
 </div>
 
 <br>

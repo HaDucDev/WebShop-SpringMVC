@@ -15,6 +15,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -42,12 +44,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     private UserRepository userRepository;
 
 
-    @Autowired
-    private ProductRepository productRepository;
-
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)// luu cha (order) xong thi dung cha luu cho con(orderdetail). luu nhieu thao tac
     public boolean createOrder(Order order) {
 
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -57,15 +55,17 @@ public class OrderRepositoryImpl implements OrderRepository {
             ordernew.setPhoneNumber(order.getPhoneNumber());
             ordernew.setReceiptUser(order.getReceiptUser());
 
-            Date date = new Date(System.currentTimeMillis());
-            ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date.toString()));
-           // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(LocalDateTime.now().toString()));// parse bien chuoi thanh date.
+            //Date date = new Date(System.currentTimeMillis());
+           // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date.toString()));
+          // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(LocalDateTime.now().toString()));// parse bien chuoi thanh date.
+            ordernew.setCreatedDate(new Date(System.currentTimeMillis()));;
             if (order.getMethodPayment() ==0){
                 ordernew.setPaymentStatus(ConstValueWeb.CHUA_THANH_TOAN);
                 ordernew.setStatusOrder(ConstValueWeb.DANG_CHO);
 
-                UserPrincipal principal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                User user=this.userRepository.getUsersByUsername(principal.getName()).get(0);
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                String name = auth.getName(); //get logged in username
+                User user=this.userRepository.getUsersByUsername(name).get(0);
 
                 //ordernew.setTotalAmount(Long.parseLong(String.valueOf(tong)));
                 ordernew.setTotalAmount(totalMoneyOrder(user.getId()));

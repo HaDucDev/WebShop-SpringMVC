@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,6 +43,7 @@ public class Order implements Serializable {
 
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
+   // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdDate;// ngay tao don hang
 
 
