@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 
@@ -37,6 +34,8 @@ public class Order implements Serializable {
     @Column(name = "payment_status")
     private String paymentStatus;// trang thai thanh toan
 
+
+    @Column(name = "status_order")
     private String statusOrder;// trạng thai don hang. chua duyet, da duyet, dang giao , da gioa hang
 
     //private Integer shipperId;
@@ -49,6 +48,10 @@ public class Order implements Serializable {
     @Column(name = "receipt_user")
     private String receiptUser;// ten nguoi nhan don hang
 
+
+    @Transient
+    private Integer methodPayment;// 0 la Cod. con 1 laf MoMo
+
     @Column(name = "receipt_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date receiptDate;// ngay tao don hang
@@ -57,8 +60,9 @@ public class Order implements Serializable {
     private Set<OrderDetail> orderDetails;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id",nullable = false,referencedColumnName = "id",insertable = false,updatable = false)
+    @JoinColumn(name = "user_id",nullable = false,referencedColumnName = "id")
     private User user;
+
 
 
 }
