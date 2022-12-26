@@ -42,14 +42,14 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${cartList}" var="cart">
-                    <tr class="table-info">
+                    <tr class="table-info ">
                         <th scope="row">
                             <h4><a href="">${cart.product.id}</a></h4>
                         </th>
                         <td>
                             <c:choose>
                                 <c:when test="${cart.product.productImage != null}">
-                                    <img style="width: 100px;height: 100px;object-fit: cover"
+                                    <img style="width: 60px;height: 60px;object-fit: cover"
                                          src="<c:url value="${cart.product.productImage}"/>"
                                          alt="${cart.product.productName}">
                                 </c:when>

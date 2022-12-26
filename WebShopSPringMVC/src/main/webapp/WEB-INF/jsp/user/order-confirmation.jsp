@@ -52,71 +52,17 @@
 
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
-<br>
-<div class="container">
+<h3 style="text-align: center">Xác nhận đơn hàng</h3>
+<div class="container" style="margin-top: 0; padding-top: 0; border: 1px solid #6a9ed1; ">
     <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form">
-        <div class="row" style=" min-height: 100vh;">
-            <div class="col-12">
-                <div class="row" style=" margin-top: 100px;">
-                    <div class="col-1"></div>
-                    <div class="col-4">
-                        <div class="login-form">
-
-                            <div class="form-group">
-                                <label for="name">Tên người nhận</label>
-                                <input id="name" name="name" type="text" class="form-control"
-                                       placeholder="Tên người nhận">
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Địa chỉ nhận</label>
-                                <input id="address" name="address" type="password" class="form-control"
-                                       placeholder="Đía chỉ nhận hàng">
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="sdt">Số điện thoại</label>
-                                <input id="sdt" name="address" type="password" class="form-control"
-                                       placeholder="Số điện thoại">
-                                <span class="form-message"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                    <div class="col-1" style="border-left: solid 1px #333 "></div>
-                    <div class="col-5">
-                        <div class="col-8">
-                            <h4>Chọn phương thức thanh toán</h4>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input form-control" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Nhận hàng trả tiền
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input form-control" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Thanh toán online với MoMo
-                                        </label>
-                                    </div>
-                                </div>
-                                <label style="color: green">${msg}</label><br>
-                                <button type="submit" class="btn btn-success btn-primary "
-                                        style="margin-top: 1px; color: white; background-color: #696763; border: none;">
-                                    Xác nhận đặt đơn hàng
-                                </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Order summary</strong></h3>
                     </div>
                     <div class="panel-body">
-                        <div class="table-responsive" style="width:100%; height:350px; overflow:auto; margin: auto">
+                        <div class="table-responsive" style="width:100%; height:225px; overflow:auto; margin: auto">
                             <table class="table table-condensed">
                                 <thead>
                                 <tr>
@@ -190,6 +136,54 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-4">
+                        <div class="login-form">
+
+                            <div class="form-group">
+                                <label for="name">Tên người nhận</label>
+                                <input id="name" name="name" type="text" class="form-control"
+                                       placeholder="Tên người nhận">
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ nhận</label>
+                                <input id="address" name="address" type="password" class="form-control"
+                                       placeholder="Đía chỉ nhận hàng">
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="sdt">Số điện thoại</label>
+                                <input id="sdt" name="address" type="password" class="form-control"
+                                       placeholder="Số điện thoại">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-1" style="border-left: solid 1px #333 "></div>
+                    <div class="col-5">
+                        <div class="col-8">
+                            <h4>Chọn phương thức thanh toán</h4>
+                                <div class="form-group">
+
+                                    <input type="radio" id="html" name="fav_language" value="HTML">
+                                    <label for="html">Nhận hàng trả tiền</label><br>
+                                    <input type="radio" id="css" name="fav_language" value="CSS">
+                                    <label for="css">Thanh toán online với MoMo</label>
+                                </div>
+                                <label style="color: green">${msg}</label><br>
+                                <button type="submit" class="btn btn-success btn-primary "
+                                        style="margin-top: 1px; color: white; background-color: #696763; border: none;">
+                                    Xác nhận đặt đơn hàng
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </form>
 </div>
