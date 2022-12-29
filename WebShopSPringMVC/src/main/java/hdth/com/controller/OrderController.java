@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class OrderController {
 
@@ -18,7 +21,7 @@ public class OrderController {
 
 
     @PostMapping("/user/create-order")
-    private String addOrUpdateCategories(@ModelAttribute Order order, Model model){
+    private String addOrders(@ModelAttribute Order order, HttpServletRequest request){
         if (order.getMethodPayment() ==0){
             if(this.orderService.createOrder(order)==true){
                 return "user/a-map";// test
@@ -28,10 +31,18 @@ public class OrderController {
 //            if(this.orderService.createOrder(order)==true){
 //                return "user/a-map";// test
 //            }
+            HttpSession session= request.getSession();
+            session.setAttribute("user_recipt",order.getReceiptUser());
+            session.setAttribute("user_sdt",order.getPhoneNumber());
+            session.setAttribute("user_address",order.getDeliveryAddress());
+            //return "redirect:/user/paymentmomo/api";// ket qua tra ve o day la link khi giao dich thanh cong payUrl
         }
 
         return "redirect:/user/order-confirmation/api";// test
     }
+
+
+
 
 
 
