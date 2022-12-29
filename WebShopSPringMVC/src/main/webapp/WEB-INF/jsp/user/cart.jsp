@@ -89,7 +89,7 @@
                 </tbody>
             </table>
         </div>
-        <div style="float:right"><a href="<c:url value="/user/order-confirmation"/>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Xác nhận</a></div>
+        <div style="float:right"><a href="<c:url value="/user/order-confirmation/api"/>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Xác nhận</a></div>
     </div>
 </section> <!--/#cart_items-->
 

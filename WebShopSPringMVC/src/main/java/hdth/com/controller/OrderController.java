@@ -19,10 +19,18 @@ public class OrderController {
 
     @PostMapping("/user/create-order")
     private String addOrUpdateCategories(@ModelAttribute Order order, Model model){
-        if(this.orderService.createOrder(order)==true){
-            return "user/a-map";// test
+        if (order.getMethodPayment() ==0){
+            if(this.orderService.createOrder(order)==true){
+                return "user/a-map";// test
+            }
         }
-        return "user/a-salespolicy";// test
+        if (order.getMethodPayment() ==1){
+//            if(this.orderService.createOrder(order)==true){
+//                return "user/a-map";// test
+//            }
+        }
+
+        return "redirect:/user/order-confirmation/api";// test
     }
 
 

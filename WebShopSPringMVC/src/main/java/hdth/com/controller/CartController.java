@@ -31,7 +31,7 @@ public class CartController {
         return "user/login";
     }
 
-    @GetMapping("/user/order-confirmation")
+    @GetMapping("/user/order-confirmation/api")
     public String indexOrderConfirmation(Model model, HttpSession session){
 
         User user= (User) session.getAttribute("currentUser");

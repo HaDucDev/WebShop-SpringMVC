@@ -44,53 +44,52 @@ public class OrderRepositoryImpl implements OrderRepository {
     private UserRepository userRepository;
 
 
-
     @Override
     public boolean createOrder(Order order) {
 
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            Order ordernew= new Order();
+            Order ordernew = new Order();
             ordernew.setDeliveryAddress(order.getDeliveryAddress());
             ordernew.setPhoneNumber(order.getPhoneNumber());
             ordernew.setReceiptUser(order.getReceiptUser());
 
             //Date date = new Date(System.currentTimeMillis());
-           // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date.toString()));
-          // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(LocalDateTime.now().toString()));// parse bien chuoi thanh date.
-            ordernew.setCreatedDate(new Date(System.currentTimeMillis()));;
-            if (order.getMethodPayment() ==0){
+            // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date.toString()));
+            // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(LocalDateTime.now().toString()));// parse bien chuoi thanh date.
+            ordernew.setCreatedDate(new Date(System.currentTimeMillis()));
+            ;
+            if (order.getMethodPayment() == 0) {
                 ordernew.setPaymentStatus(ConstValueWeb.CHUA_THANH_TOAN);
-                ordernew.setStatusOrder(ConstValueWeb.DANG_CHO);
-
-                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-                String name = auth.getName(); //get logged in username
-                User user=this.userRepository.getUsersByUsername(name).get(0);
-
-                //ordernew.setTotalAmount(Long.parseLong(String.valueOf(tong)));
-                ordernew.setTotalAmount(totalMoneyOrder(user.getId()));
-                ordernew.setUser(user);
-                session.save(ordernew);
-
-                // luu chi tiet hoa don
-                List<Cart> carts=this.cartRepository.getCartByUserId(user.getId());
-                for ( Cart c: carts){
-                    OrderDetail orderDetail=new OrderDetail();
-                    orderDetail.setOrder(ordernew);// khi dat gia tri thi da co doi tuong roi. luu thoi
-                    orderDetail.setProduct(c.getProduct());
-                    orderDetail.setQuantity(c.getQuantity());
-                    orderDetail.setAmount(Long.valueOf(c.getQuantity()*c.getProduct().getUnitPrice()));
-                    session.save(orderDetail);
-
-                    session.delete(c);
-                }
-
-
-                return true;
+            }
+            if (order.getMethodPayment() == 1) {
+                ordernew.setPaymentStatus(ConstValueWeb.DA_THANH_TOAN_MOMO);
             }
 
+            ordernew.setStatusOrder(ConstValueWeb.DANG_CHO);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName(); //get logged in username
+            User user = this.userRepository.getUsersByUsername(name).get(0);
 
+            //ordernew.setTotalAmount(Long.parseLong(String.valueOf(tong)));
+            ordernew.setTotalAmount(totalMoneyOrder(user.getId()));
+            ordernew.setUser(user);
+            session.save(ordernew);
 
+            // luu chi tiet hoa don
+            List<Cart> carts = this.cartRepository.getCartByUserId(user.getId());
+            for (Cart c : carts) {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setOrder(ordernew);// khi dat gia tri thi da co doi tuong roi. luu thoi
+                orderDetail.setProduct(c.getProduct());
+                orderDetail.setQuantity(c.getQuantity());
+                orderDetail.setAmount(Long.valueOf(c.getQuantity() * c.getProduct().getUnitPrice()));
+                session.save(orderDetail);
+
+                session.delete(c);
+            }
+
+            return true;
 
         } catch (Exception ex) {
             System.out.println("loi save order - orderdetail" + ex);
@@ -109,16 +108,15 @@ public class OrderRepositoryImpl implements OrderRepository {
         return false;
     }
 
-    public Long totalMoneyOrder(Integer userId){// tong tien hoa don
-        List<Cart> carts=this.cartRepository.getCartByUserId(userId);
-        int tong=0;
-        for ( Cart c: carts){
-            tong=tong+c.getQuantity()*c.getProduct().getUnitPrice();
+    public Long totalMoneyOrder(Integer userId) {// tong tien hoa don
+        List<Cart> carts = this.cartRepository.getCartByUserId(userId);
+        int tong = 0;
+        for (Cart c : carts) {
+            tong = tong + c.getQuantity() * c.getProduct().getUnitPrice();
         }
-        Long x=Long.valueOf(tong);// convert int to long
+        Long x = Long.valueOf(tong);// convert int to long
         return x;
     }
-
 
 
 }
