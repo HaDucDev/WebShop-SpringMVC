@@ -1,12 +1,17 @@
 package hdth.com.controller;
 
 
+import com.mservice.allinone.models.CaptureMoMoResponse;
+import hdth.com.config.paymentMoMo.MomoConfig;
+import hdth.com.controller.dtotestmomo.MoMoHungDuLieu;
+import hdth.com.controller.dtotestmomo.MoMoObject;
 import hdth.com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,6 +51,30 @@ public class HomeController {
     public String admin(HttpSession session, Model model){
         model.addAttribute("currentUser",session.getAttribute("currentUser"));
         return "admin/index";
+    }
+
+
+    @Autowired
+    private MomoConfig momoConfig;
+    @PostMapping("/test/api/momo")
+    @ResponseBody
+    public ResponseEntity<CaptureMoMoResponse> testMomo(@RequestBody MoMoObject moMoObject) throws Exception {
+        return
+        ResponseEntity.ok(this.momoConfig.process(moMoObject.getA(), moMoObject.getB(),
+                moMoObject.getC(), moMoObject.getD(),
+                moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
+    }
+
+
+    @GetMapping("/test/api/momo")
+    public String testMomo1() throws Exception {
+        return "/user/a-map";
+    }
+
+
+    @PostMapping(value = "/test/api/momo/api", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public void testMomo2(MoMoHungDuLieu moMoObject) throws Exception {
+        System.out.println(moMoObject.getMessage());
     }
 
 
