@@ -55,16 +55,6 @@ public class MomoConfig {
             CaptureMoMoResponse captureMoMoResponse = getGson().fromJson(response.getData(), CaptureMoMoResponse.class);
             errorMoMoProcess(captureMoMoResponse.getErrorCode());// trang thai ko co loi la 0
 
-            String responserawData = Parameter.REQUEST_ID + "=" + captureMoMoResponse.getRequestId() +
-                    "&" + Parameter.ORDER_ID + "=" + captureMoMoResponse.getOrderId() +
-                    "&" + Parameter.MESSAGE + "=" + captureMoMoResponse.getMessage() +
-                    "&" + Parameter.LOCAL_MESSAGE + "=" + captureMoMoResponse.getLocalMessage() +
-                    "&" + Parameter.PAY_URL + "=" + captureMoMoResponse.getPayUrl() +
-                    "&" + Parameter.ERROR_CODE + "=" + captureMoMoResponse.getErrorCode() +
-                    "&" + Parameter.REQUEST_TYPE + "=" + "captureWallet";// chuoi momo tra ve khi giao dich thanh cong. PayUrl - link sang QR thanh toan
-
-            // chu ki dien tu
-            String signResponse = Encoder.signHmacSHA256(responserawData, "3ByWLLOo708Ptyc5Q5CoWnngNSM4vMEy");
             return captureMoMoResponse;
         } catch (Exception exception) {
             throw new IllegalArgumentException("Invalid params capture MoMo Request");
@@ -87,7 +77,7 @@ public class MomoConfig {
                     .append(Parameter.RETURN_URL).append("=").append(returnUrl).append("&")
                     .append(Parameter.NOTIFY_URL).append("=").append(notifyUrl).append("&")
                     .append(Parameter.EXTRA_DATA).append("=").append(extraData)
-                    .toString();
+                    .toString();;// chuoi momo tra ve khi giao dich thanh cong. PayUrl - link sang QR thanh toan
 
             String signRequest = Encoder.signHmacSHA256(requestRawData, "3ByWLLOo708Ptyc5Q5CoWnngNSM4vMEy");// secretKey
 

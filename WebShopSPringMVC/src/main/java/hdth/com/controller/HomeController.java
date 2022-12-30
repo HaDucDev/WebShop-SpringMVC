@@ -2,21 +2,22 @@ package hdth.com.controller;
 
 
 import com.mservice.allinone.models.CaptureMoMoResponse;
-import com.mservice.shared.sharedmodels.Environment;
 import hdth.com.config.paymentMoMo.MomoConfig;
-import hdth.com.config.paymentMoMo.PaymentResult;
-import hdth.com.controller.dtotestmomo.MoMoHungDuLieu1;
 import hdth.com.controller.dtotestmomo.MoMoObject;
+import hdth.com.model.Order;
+import hdth.com.repository.OrderRepository;
+import hdth.com.service.OrderService;
+import hdth.com.service.PaymentMomoService;
 import hdth.com.service.ProductService;
-import hdth.com.utils.dto.PayGateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -68,19 +69,29 @@ public class HomeController {
                 moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
     }
 
+    @Autowired
+    private PaymentMomoService paymentMomoService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/test/api/momo")
-    public String testMomo1() throws Exception {
-        return "/user/a-map";
+    public String testMomo1(Model model, @RequestParam Map<String, String> params, HttpServletRequest request) {
+
+        HttpSession session= request.getSession();
+        if (session.getAttribute("currentUser") != null){
+            Order ordernew = new Order();
+            ordernew.setReceiptUser(session.getAttribute("user_recipt").toString());
+            ordernew.setPhoneNumber(session.getAttribute("user_sdt").toString());
+            ordernew.setDeliveryAddress(session.getAttribute("user_address").toString());
+            ordernew.setMethodPayment(1);
+            if(this.orderService.createOrder(ordernew)==true){
+                if( params.isEmpty()==false && (this.paymentMomoService.signature(params)==true)){// thanh toan that bai khong tao don hang
+                    return "user/a-map";// test
+                }
+            }
+        }
+        return "/user/a-salespolicy";
     }
-
-
-    @PostMapping(value = "/will/api/momo/api", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public void testMomo2(PayGateResponse payGateResponse) throws Exception {
-        Environment environment = Environment.selectEnv("dev", Environment.ProcessType.PAY_GATE);
-        payGateResponse = PaymentResult.process(environment,new PayGateResponse());
-        System.out.println(payGateResponse.getMessage());
-    }
-
 
 }
