@@ -1,6 +1,7 @@
 package hdth.com.controller;
 
 import hdth.com.model.Cart;
+import hdth.com.model.Order;
 import hdth.com.model.User;
 import hdth.com.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,25 @@ public class CartController {
         String mess="Bạn phải đăng nhập mới có thể mua hàng";
         model.addAttribute("usernotnull",mess);
         return "user/login";
-
     }
+
+    @GetMapping("/user/order-confirmation/api")
+    public String indexOrderConfirmation(Model model, HttpSession session){
+
+        User user= (User) session.getAttribute("currentUser");
+        if(user != null){
+            Integer userId= user.getId();
+            if(!this.cartService.getCartByUserId(userId).isEmpty()){
+                model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
+                model.addAttribute("order",new Order());
+                return "user/order-confirmation";
+            }
+            else {
+                return "user/cart";
+            }
+        }
+        return "user/login";
+    }
+
+
 }

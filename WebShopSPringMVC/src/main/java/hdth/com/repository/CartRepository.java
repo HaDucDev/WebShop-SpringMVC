@@ -14,4 +14,6 @@ public interface CartRepository {
 
     boolean addCartbyIdSub(Integer productId, Integer userId);
     Integer countProductCartbyUser(Integer userId);
+    Long totalMoneyCartbyUser(Integer userId);
+
 }

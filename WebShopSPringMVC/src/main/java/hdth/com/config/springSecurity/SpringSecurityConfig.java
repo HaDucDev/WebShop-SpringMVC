@@ -38,6 +38,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LogoutSuccessHandler logoutHandler;
 
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -54,6 +55,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public LogoutSuccessHandler logoutHandler(){
         return new LogoutHandler();
     }
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

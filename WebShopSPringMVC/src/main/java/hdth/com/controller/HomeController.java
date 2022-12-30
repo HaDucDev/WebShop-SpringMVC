@@ -1,14 +1,18 @@
 package hdth.com.controller;
 
 
+import hdth.com.model.Order;
+import hdth.com.service.OrderService;
+import hdth.com.service.PaymentMomoService;
 import hdth.com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -47,6 +51,19 @@ public class HomeController {
         model.addAttribute("currentUser",session.getAttribute("currentUser"));
         return "admin/index";
     }
+
+
+//    @Autowired
+//    private MomoConfig momoConfig;
+//    @PostMapping("/test/api/momo")
+//    @ResponseBody
+//    public ResponseEntity<CaptureMoMoResponse> testMomo(@RequestBody MoMoObject moMoObject) throws Exception {
+//        return
+//        ResponseEntity.ok(this.momoConfig.process(moMoObject.getA(), moMoObject.getB(),
+//                moMoObject.getC(), moMoObject.getD(),
+//                moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
+//    }
+
 
 
 }
