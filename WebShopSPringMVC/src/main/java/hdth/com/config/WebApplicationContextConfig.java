@@ -1,6 +1,7 @@
 package hdth.com.config;
 
 
+import hdth.com.config.paymentMoMo.MomoConfig;
 import hdth.com.utils.formatter.CategoryFomatter;
 import hdth.com.utils.formatter.ProducStatusFormatter;
 import hdth.com.utils.formatter.SupplierFormatter;
@@ -48,6 +49,11 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
         registry.addResourceHandler("/admin/**").addResourceLocations("/resources/admin/");
         registry.addResourceHandler("/user/**").addResourceLocations("/resources/user/");
+    }
+
+    @Bean
+    public MomoConfig momoConfig(){
+        return new MomoConfig();
     }
 
     @Bean

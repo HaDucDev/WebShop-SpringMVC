@@ -65,9 +65,4 @@ public class PaymentMomoServiceImpl implements PaymentMomoService {
         //  }
     }
 
-    @Override
-    public String successfulTransaction(Order order) {
-
-        return null;
-    }
 }

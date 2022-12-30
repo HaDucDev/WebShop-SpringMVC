@@ -2,7 +2,6 @@ package hdth.com.config.springSecurity;
 
 import hdth.com.config.handlerUser.LoginSuccessHandler;
 import hdth.com.config.handlerUser.LogoutHandler;
-import hdth.com.config.paymentMoMo.MomoConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -57,11 +56,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new LogoutHandler();
     }
 
-
-    @Bean
-    public MomoConfig momoConfig(){
-        return new MomoConfig();
-    }
 
 
     @Override

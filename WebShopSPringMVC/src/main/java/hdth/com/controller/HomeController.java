@@ -64,28 +64,6 @@ public class HomeController {
 //                moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
 //    }
 
-    @Autowired
-    private PaymentMomoService paymentMomoService;
 
-    @Autowired
-    private OrderService orderService;
-
-    @GetMapping("/test/api/momo")
-    public String testMomo1(@RequestParam Map<String, String> params, HttpServletRequest request){
-        HttpSession session= request.getSession();
-        if (session.getAttribute("currentUser") != null){
-            Order ordernew = new Order();
-            ordernew.setReceiptUser(session.getAttribute("user_recipt").toString());
-            ordernew.setPhoneNumber(session.getAttribute("user_sdt").toString());
-            ordernew.setDeliveryAddress(session.getAttribute("user_address").toString());
-            ordernew.setMethodPayment(1);
-            if(this.orderService.createOrder(ordernew)==true){
-                if( params.isEmpty()==false && (this.paymentMomoService.signature(params)==true)){// thanh toan that bai khong tao don hang
-                    return "redirect:/user/a-map";// test
-                }
-            }
-        }
-        return "/user/a-salespolicy";
-    }
 
 }

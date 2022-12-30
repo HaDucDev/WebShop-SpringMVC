@@ -1,23 +1,26 @@
 package hdth.com.controller;
 
 
-
 import com.mservice.allinone.models.CaptureMoMoResponse;
 import hdth.com.config.paymentMoMo.MomoConfig;
 import hdth.com.model.Order;
 import hdth.com.model.User;
 import hdth.com.service.OrderService;
+import hdth.com.service.PaymentMomoService;
 import hdth.com.utils.common.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class OrderController {
@@ -29,30 +32,30 @@ public class OrderController {
     private MomoConfig momoConfig;
 
 
-    @PostMapping("/user/create-order")
+    @PostMapping("/user/create-order")// tao don hang o trang thanh toan
     private ModelAndView addOrders(@ModelAttribute Order order, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (order.getMethodPayment() ==0){
-            if(this.orderService.createOrder(order)==true){
-                String projectUrl="user/a-map";
+        if (order.getMethodPayment() == 0) {
+            if (this.orderService.createOrder(order) == true) {
+                String projectUrl = "user/a-map";
                 return new ModelAndView(projectUrl);
             }
         }
-        if (order.getMethodPayment() ==1){
-            HttpSession session= request.getSession();
-            session.setAttribute("user_recipt",order.getReceiptUser());
-            session.setAttribute("user_sdt",order.getPhoneNumber());
-            session.setAttribute("user_address",order.getDeliveryAddress());
+        if (order.getMethodPayment() == 1) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user_recipt", order.getReceiptUser());
+            session.setAttribute("user_sdt", order.getPhoneNumber());
+            session.setAttribute("user_address", order.getDeliveryAddress());
             User user = (User) session.getAttribute("currentUser");
-            if(user != null){
-                String orderId= Utils.getRandomNumber(5) + user.getUsername() + System.currentTimeMillis();
-                String requestId=Utils.getRandomNumber(4) + user.getId().toString() + System.currentTimeMillis();
-                String total=this.orderService.totalMoneyCartbyUser(user.getId()).toString();
-                String orderInfo="Thanh toán đơn hàng";
-                String returnURL="http://localhost:8080/WebShopSPringMVC_war/test/api/momo";
-                String notifyURL="http://localhost:8080/WebShopSPringMVC_war/test/api/momo";
-                String extraData="6";
+            if (user != null) {
+                String orderId = Utils.getRandomNumber(5) + user.getUsername() + System.currentTimeMillis();
+                String requestId = Utils.getRandomNumber(4) + user.getId().toString() + System.currentTimeMillis();
+                String total = this.orderService.totalMoneyCartbyUser(user.getId()).toString();
+                String orderInfo = "Thanh toán đơn hàng";
+                String returnURL = "http://localhost:8080/WebShopSPringMVC_war/test/api/momo";
+                String notifyURL = "http://localhost:8080/WebShopSPringMVC_war/test/api/momo";
+                String extraData = "6";
                 CaptureMoMoResponse captureMoMoResponse = this.momoConfig.process(orderId, requestId, total, orderInfo, returnURL, notifyURL, extraData);
-                String url= captureMoMoResponse.getPayUrl();
+                String url = captureMoMoResponse.getPayUrl();
                 return new ModelAndView("redirect:" + url);
             }
 
@@ -61,8 +64,26 @@ public class OrderController {
     }
 
 
+    @Autowired
+    private PaymentMomoService paymentMomoService;
 
-
+    @GetMapping("/test/api/momo")// thanh toan momo thanh cong chuyen ve day
+    public String testMomo1(@RequestParam Map<String, String> params, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("currentUser") != null) {
+            Order ordernew = new Order();
+            ordernew.setReceiptUser(session.getAttribute("user_recipt").toString());
+            ordernew.setPhoneNumber(session.getAttribute("user_sdt").toString());
+            ordernew.setDeliveryAddress(session.getAttribute("user_address").toString());
+            ordernew.setMethodPayment(1);
+            if (params.isEmpty() == false && (this.paymentMomoService.signature(params) == true)) {// thanh toan that bai khong tao don hang
+                if (this.orderService.createOrder(ordernew) == true) {
+                    return "redirect:/user/a-map";// test
+                }
+            }
+        }
+        return "/user/a-salespolicy";
+    }
 
 
 }

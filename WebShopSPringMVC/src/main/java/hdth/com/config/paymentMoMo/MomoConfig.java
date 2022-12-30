@@ -15,7 +15,6 @@ import static com.mservice.shared.sharedmodels.AbstractProcess.getGson;
 
 public class MomoConfig {
 
-
     public CaptureMoMoResponse process(String orderId, String requestId, String amount, String orderInfo, String returnURL, String notifyURL, String extraData) throws Exception {
         try {
 

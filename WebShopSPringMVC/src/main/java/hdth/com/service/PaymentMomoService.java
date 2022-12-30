@@ -7,6 +7,5 @@ import java.util.Map;
 public interface PaymentMomoService {
 
     boolean signature(Map<String, String> params);
-    String successfulTransaction(Order order);
 
 }
