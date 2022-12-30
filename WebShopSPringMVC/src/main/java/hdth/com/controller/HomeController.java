@@ -1,16 +1,11 @@
 package hdth.com.controller;
 
 
-import com.mservice.allinone.models.CaptureMoMoResponse;
-import hdth.com.config.paymentMoMo.MomoConfig;
-import hdth.com.controller.dtotestmomo.MoMoObject;
 import hdth.com.model.Order;
-import hdth.com.repository.OrderRepository;
 import hdth.com.service.OrderService;
 import hdth.com.service.PaymentMomoService;
 import hdth.com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,16 +53,16 @@ public class HomeController {
     }
 
 
-    @Autowired
-    private MomoConfig momoConfig;
-    @PostMapping("/test/api/momo")
-    @ResponseBody
-    public ResponseEntity<CaptureMoMoResponse> testMomo(@RequestBody MoMoObject moMoObject) throws Exception {
-        return
-        ResponseEntity.ok(this.momoConfig.process(moMoObject.getA(), moMoObject.getB(),
-                moMoObject.getC(), moMoObject.getD(),
-                moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
-    }
+//    @Autowired
+//    private MomoConfig momoConfig;
+//    @PostMapping("/test/api/momo")
+//    @ResponseBody
+//    public ResponseEntity<CaptureMoMoResponse> testMomo(@RequestBody MoMoObject moMoObject) throws Exception {
+//        return
+//        ResponseEntity.ok(this.momoConfig.process(moMoObject.getA(), moMoObject.getB(),
+//                moMoObject.getC(), moMoObject.getD(),
+//                moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
+//    }
 
     @Autowired
     private PaymentMomoService paymentMomoService;
@@ -76,8 +71,7 @@ public class HomeController {
     private OrderService orderService;
 
     @GetMapping("/test/api/momo")
-    public String testMomo1(Model model, @RequestParam Map<String, String> params, HttpServletRequest request) {
-
+    public String testMomo1(@RequestParam Map<String, String> params, HttpServletRequest request){
         HttpSession session= request.getSession();
         if (session.getAttribute("currentUser") != null){
             Order ordernew = new Order();
@@ -87,7 +81,7 @@ public class HomeController {
             ordernew.setMethodPayment(1);
             if(this.orderService.createOrder(ordernew)==true){
                 if( params.isEmpty()==false && (this.paymentMomoService.signature(params)==true)){// thanh toan that bai khong tao don hang
-                    return "user/a-map";// test
+                    return "redirect:/user/a-map";// test
                 }
             }
         }

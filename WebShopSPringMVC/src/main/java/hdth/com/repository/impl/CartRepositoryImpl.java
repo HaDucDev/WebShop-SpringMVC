@@ -1,6 +1,7 @@
 package hdth.com.repository.impl;
 
 import hdth.com.model.Cart;
+import hdth.com.model.OrderDetail;
 import hdth.com.model.Product;
 import hdth.com.model.User;
 import hdth.com.repository.CartRepository;
@@ -94,6 +95,16 @@ public class CartRepositoryImpl implements CartRepository {
         return m;
     }
 
+    @Override
+    public Long totalMoneyCartbyUser(Integer userId) {
+        List<Cart> carts = this.getCartByUserId(userId);
+        int tong = 0;
+        for (Cart c : carts) {
+            tong = tong + c.getQuantity() * c.getProduct().getUnitPrice();
+        }
+        return Long.valueOf(tong);
+    }
+
 
     public List<Cart> getCartByProducIdAndUserId(Integer productId, Integer userId) {// kiem tra xem cart nay da co chua
         Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van
@@ -104,4 +115,5 @@ public class CartRepositoryImpl implements CartRepository {
         List<Cart> list = q.getResultList();
         return list;
     }
+
 }

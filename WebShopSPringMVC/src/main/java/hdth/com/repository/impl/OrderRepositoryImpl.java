@@ -78,32 +78,27 @@ public class OrderRepositoryImpl implements OrderRepository {
 
             // luu chi tiet hoa don
             List<Cart> carts = this.cartRepository.getCartByUserId(user.getId());
-            for (Cart c : carts) {
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setOrder(ordernew);// khi dat gia tri thi da co doi tuong roi. luu thoi
-                orderDetail.setProduct(c.getProduct());
-                orderDetail.setQuantity(c.getQuantity());
-                orderDetail.setAmount(Long.valueOf(c.getQuantity() * c.getProduct().getUnitPrice()));
-                session.save(orderDetail);
+            if (!carts.isEmpty()){
+                for (Cart c : carts) {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrder(ordernew);// khi dat gia tri thi da co doi tuong roi. luu thoi
+                    orderDetail.setProduct(c.getProduct());
+                    orderDetail.setQuantity(c.getQuantity());
+                    orderDetail.setAmount(Long.valueOf(c.getQuantity() * c.getProduct().getUnitPrice()));
+                    session.save(orderDetail);
 
-                session.delete(c);
+                    session.delete(c);
+                    if (carts.isEmpty()){
+                        break;
+                    }
+                }
+
+                return true;
             }
-
-            return true;
-
         } catch (Exception ex) {
             System.out.println("loi save order - orderdetail" + ex);
             ex.printStackTrace();// in ra cac buoc den dau bi loi
         }
-
-//        else {
-//            System.out.println("ok roi nha");
-//            Category c=this.getCategoryById(category.getId());
-//            c.setName(category.getName());
-//            session.save(c);
-//            return true;
-//        }
-
 
         return false;
     }
@@ -111,8 +106,10 @@ public class OrderRepositoryImpl implements OrderRepository {
     public Long totalMoneyOrder(Integer userId) {// tong tien hoa don
         List<Cart> carts = this.cartRepository.getCartByUserId(userId);
         int tong = 0;
-        for (Cart c : carts) {
-            tong = tong + c.getQuantity() * c.getProduct().getUnitPrice();
+        if (!carts.isEmpty()){
+            for (Cart c : carts) {
+                tong = tong + c.getQuantity() * c.getProduct().getUnitPrice();
+            }
         }
         Long x = Long.valueOf(tong);// convert int to long
         return x;

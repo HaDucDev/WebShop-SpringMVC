@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MoMoObject {
+public class MoMoObject1 {
     private  String a;
     private  String b;
     private  String c;
