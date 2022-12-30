@@ -2,10 +2,13 @@ package hdth.com.controller;
 
 
 import com.mservice.allinone.models.CaptureMoMoResponse;
+import com.mservice.shared.sharedmodels.Environment;
 import hdth.com.config.paymentMoMo.MomoConfig;
-import hdth.com.controller.dtotestmomo.MoMoHungDuLieu;
+import hdth.com.config.paymentMoMo.PaymentResult;
+import hdth.com.controller.dtotestmomo.MoMoHungDuLieu1;
 import hdth.com.controller.dtotestmomo.MoMoObject;
 import hdth.com.service.ProductService;
+import hdth.com.utils.dto.PayGateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -72,9 +75,11 @@ public class HomeController {
     }
 
 
-    @PostMapping(value = "/test/api/momo/api", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public void testMomo2(MoMoHungDuLieu moMoObject) throws Exception {
-        System.out.println(moMoObject.getMessage());
+    @PostMapping(value = "/will/api/momo/api", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public void testMomo2(PayGateResponse payGateResponse) throws Exception {
+        Environment environment = Environment.selectEnv("dev", Environment.ProcessType.PAY_GATE);
+        payGateResponse = PaymentResult.process(environment,new PayGateResponse());
+        System.out.println(payGateResponse.getMessage());
     }
 
 
