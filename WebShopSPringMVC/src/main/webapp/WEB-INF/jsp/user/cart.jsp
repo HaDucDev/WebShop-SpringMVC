@@ -151,7 +151,7 @@
 <c:url value="/user/cart" var="APIurl"> </c:url>
 <script>
     function updateCartAdd(productId){
-        fetch("/WebShopSPringMVC_war/api/cart",{
+        fetch("/WebShopSPringMVC_war/api/cart/add",{
             method:'post',
             body: JSON.stringify({
                 "productId":productId,
