@@ -27,4 +27,6 @@ public class MoMoHungDuLieu {
     private String responseTime;
     private String extraData;
     private String signature;
+    private String status;
+    private String resultCode;
 }

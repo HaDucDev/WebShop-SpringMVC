@@ -5,7 +5,7 @@ import com.mservice.allinone.models.CaptureMoMoResponse;
 import com.mservice.shared.sharedmodels.Environment;
 import hdth.com.config.paymentMoMo.MomoConfig;
 import hdth.com.config.paymentMoMo.PaymentResult;
-import hdth.com.controller.dtotestmomo.MoMoHungDuLieu1;
+import hdth.com.controller.dtotestmomo.MoMoHungDuLieu;
 import hdth.com.controller.dtotestmomo.MoMoObject;
 import hdth.com.service.ProductService;
 import hdth.com.utils.dto.PayGateResponse;
@@ -75,11 +75,11 @@ public class HomeController {
     }
 
 
-    @PostMapping(value = "/will/api/momo/api", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public void testMomo2(PayGateResponse payGateResponse) throws Exception {
-        Environment environment = Environment.selectEnv("dev", Environment.ProcessType.PAY_GATE);
-        payGateResponse = PaymentResult.process(environment,new PayGateResponse());
-        System.out.println(payGateResponse.getMessage());
+    @PostMapping(path= "/will/api/momo/api", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public void testMomo2(MoMoHungDuLieu moMoHungDuLieu) throws Exception {
+        System.out.println(moMoHungDuLieu.getAccessKey() + "TEST LAY POST THANH CONG" + moMoHungDuLieu.getMessage());
+        System.out.println(moMoHungDuLieu.getAccessKey() + "TEST LAY POST THANH CONG 1" + moMoHungDuLieu.getStatus());
+        System.out.println(moMoHungDuLieu.getAccessKey() + "TEST LAY POST THANH CONG 1" + moMoHungDuLieu.getResultCode());
     }
 
 
