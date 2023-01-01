@@ -152,7 +152,7 @@
 <script>
     function updateCartAdd(productId){
         fetch("/WebShopSPringMVC_war/api/cart/add",{
-            method:'post',
+            method:'put',
             body: JSON.stringify({
                 "productId":productId,
             }),
@@ -173,7 +173,7 @@
 
     function updateCartSub(productId){
         fetch("/WebShopSPringMVC_war/api/cart/sub",{
-            method:'post',
+            method:'put',
             body: JSON.stringify({
                 "productId":productId,
             }),
@@ -181,6 +181,7 @@
                 "Content-Type":"application/json"
             }
         }).then(function (res){
+            console.log(res)
             return res.json(); // do mminh lam tra ve so nguyen nen can path sang json
         }).then(function (data){
             console.log("9999999");

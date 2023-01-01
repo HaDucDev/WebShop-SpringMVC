@@ -6,9 +6,9 @@ import hdth.com.model.User;
 import hdth.com.service.CartService;
 import hdth.com.utils.common.ObjectCount;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,20 +22,17 @@ public class CartControllerREST {
 
 
     @PostMapping(path = "/api/cart")// index page
-    public ObjectCount addProductoCartHome(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
+    public ResponseEntity<Integer> addProductoCartHome(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
         HttpSession httpSession= request.getSession();
         User user = (User) httpSession.getAttribute("currentUser");
-        ObjectCount objectCount=new ObjectCount();
         if(user != null &&  this.cartService.addCartbyId(cart.getProductId(),user.getId())==true)
         {
-            objectCount.setCountCart(this.cartService.countProductCartbyUser(user.getId()));
-            return objectCount;
+            return new ResponseEntity<>(this.cartService.countProductCartbyUser(user.getId()), HttpStatus.OK) ;
         }
-        objectCount.setCountCart(0);
-        return objectCount;
+        return  new ResponseEntity<>(0, HttpStatus.CREATED) ;
     }
 
-    @PostMapping(path = "/api/cart/add")// cart page
+    @PutMapping (path = "/api/cart/add")// cart page
     public Integer addProductoCart(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
         HttpSession httpSession= request.getSession();
         User user = (User) httpSession.getAttribute("currentUser");
@@ -46,7 +43,7 @@ public class CartControllerREST {
         return  0;
     }
 
-    @PostMapping(path = "/api/cart/sub")
+    @PutMapping(path = "/api/cart/sub")
     public Integer addProductoCartSub(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
         HttpSession httpSession= request.getSession();
         User user = (User) httpSession.getAttribute("currentUser");
