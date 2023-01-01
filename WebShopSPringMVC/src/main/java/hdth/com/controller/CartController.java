@@ -1,6 +1,5 @@
 package hdth.com.controller;
 
-import hdth.com.model.Cart;
 import hdth.com.model.Order;
 import hdth.com.model.User;
 import hdth.com.service.CartService;

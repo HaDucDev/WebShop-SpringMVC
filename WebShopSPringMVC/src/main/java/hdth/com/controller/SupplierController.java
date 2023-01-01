@@ -1,7 +1,7 @@
 package hdth.com.controller;
 
 
-import hdth.com.model.Category;
+
 import hdth.com.model.Supplier;
 import hdth.com.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
