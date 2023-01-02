@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/user" var="url"> </c:url>
-<%--<c:url value="/api-user-change-password" var="APIurl"> </c:url>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,101 +72,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="review-payment">
-			<h2>Lịch sử mua hàng</h2>
-		</div>
-
-		<div class="table-responsive cart_info">
-			<table class="table table-condensed">
-				<thead>
-				<tr class="cart_menu">
-					<td class="image">ID đơn hàng</td>
-					<td class="description">Tình trạng</td>
-					<td class="price">Ngày mua</td>
-					<td class="quantity">Tổng thanh toán</td>
-					<td class="option_pay">Hình thức thanh toán</td>
-					<td class="total">Action</td>
-				</tr>
-				</thead>
-				<tbody>
-				<c:forEach var="cart" items="${lstCart}">
-					<tr>
-						<td class="cart_product">
-							<h4>#${cart.id}</h4>
-						</td>
-						<td class="cart_description">
-							<c:if test="${cart.status==1}"><h4>Chưa duyệt</h4></c:if>
-							<c:if test="${cart.status==2}"><h4>Đã duyệt</h4></c:if>
-							<c:if test="${cart.status==3}"><h4>Đang giao</h4></c:if>
-							<c:if test="${cart.status==4}"><h4>Đã hoàn thành</h4></c:if>
-						</td>
-						<td class="cart_description">
-							<h4>${cart.buyDate}</h4>
-						</td>
-						<td class="cart_description">
-<%--						<h4>${cart.totalPrice} VNĐ</h4>--%>
-						<h4><fmt:formatNumber type="number" value="${cart.totalPrice}" /> VNĐ</h4>
-
-						</td>
-						<td>
-							<c:if test="${cart.payments==0}">Trả tiền khi nhận hàng</c:if>
-							<c:if test="${cart.payments==1}">Thanh toán online</c:if>
-						</td>
-						<td class="cart_description">
-						<a class="center" data-toggle="modal"   data-target="#oderlist${cart.id}">Xem chi tiết</a>
-					</td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<c:forEach items="${lstCart}" var="cart">
-			<div class="modal fade" id="oderlist${cart.id}">
-				<div class="modal-dialog modal-dialog-centered modal-lg" style="width: 50%;">
-					<div class="modal-content" >
-						<div class="modal-header">
-							<h4 class="modal-title">Chi  tiết đơn hàng</h4>
-						</div>
-						<div class="modal-body">
-							<table class="table table-condensed">
-								<thead>
-								<tr class="cart_menu">
-									<td class="image">Ảnh</td>
-									<td class="description">Tên Sản Phẩm</td>
-									<td class="price">Giá</td>
-									<td class="quantity">Số Lượng</td>
-									<td class="total">Tổng Tiền</td>
-								</tr>
-								</thead>
-								<tbody>
-								<c:forEach items="${cart.getProductCartEntityList()}" var="item">
-									<tr>
-										<c:url value="/image/${item.getProductEntity().getImage()}" var="imgUrl"></c:url>
-										<td class="cart_product" style="margin: 0px;	">
-
-											<img width="50px" height="50px" src="${imgUrl}" alt="#">
-										</td>
-										<td class="description">${item.getProductEntity().getProName()}</td>
-<%--										<td class="price">${item.getUnitPrice()}<span>VNĐ</span></td>--%>
-										<td class="price"><fmt:formatNumber type="number" value="${item.getUnitPrice()}" /> VNĐ</td>
-
-										<td class="quantity">${item.getQuantity()}</td>
-<%--										<td class="total">${item.getUnitPrice()*item.getQuantity()}<span>VNĐ</span></td>--%>
-										<td class="total"><fmt:formatNumber type="number" value="${item.getUnitPrice()*item.getQuantity()}" /> VNĐ</td>
-									</tr>
-								</c:forEach>
-								</tbody>
-							</table>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-						</div>
-					</div>
-				</div>
-			</div> <!-- end modal -->
-		</c:forEach>
-	</div>
-
 	<jsp:include page="a-footer.jsp"></jsp:include>
 </section> <!--/#cart_items-->
 <script src="${url}/js/jquery.js"></script>

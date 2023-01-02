@@ -49,7 +49,7 @@ public class OrderController {
     //================================================================
 
 
-    // user
+    // USER
     @PostMapping("/user/create-order")// tao don hang o trang thanh toan
     private ModelAndView addOrders(@ModelAttribute Order order, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (order.getMethodPayment() == 0) {
@@ -102,6 +102,22 @@ public class OrderController {
         }
         return "/user/a-salespolicy";
     }
+
+
+    // quan ly don hang nguoi dung
+    @GetMapping("/user/order-manager")
+    private String getOrderByUser(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user= (User) session.getAttribute("currentUser");
+        if ( user != null) {
+            Integer userId= user.getId();
+            //model.addAttribute("userinfor", this.orderService.);
+        }
+        return "/user/inforOrderUser";
+    }
+
+
+
 
 
 }
