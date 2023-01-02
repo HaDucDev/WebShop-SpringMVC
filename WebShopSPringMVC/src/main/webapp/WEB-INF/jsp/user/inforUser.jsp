@@ -2,8 +2,8 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:url value="/views/web/static" var="url"> </c:url>
-<c:url value="/api-user-change-password" var="APIurl"> </c:url>
+<c:url value="/user" var="url"> </c:url>
+<%--<c:url value="/api-user-change-password" var="APIurl"> </c:url>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -175,72 +175,72 @@
 <script src="${url}/js/jquery.scrollUp.min.js"></script>
 <script src="${url}/js/jquery.prettyPhoto.js"></script>
 <script src="${url}/js/main.js"></script>
-<script>
-	function changePassword() {
-		var oldPassword =$('#oldPassword').val();
-		var newPassword =$('#newPassword').val();
-		var confirmPassword =$('#confirmPassword').val();
-		var notify= document.querySelector('#notification')
-		if (newPassword != confirmPassword) {
-			console.log("Notify")
-			notify.innerHTML="<label style=\"color: red\">Mật khẩu xác thực không chính xác</label>";
-			return ;
-		}
-		else if (newPassword.length < 1 || confirmPassword.length < 1) {
-			notify.innerHTML="<label style=\"color: red\">Mật khẩu mới không được để trống</label>";
-			return ;
-		}
-		else if (newPassword.length < 6 || confirmPassword.length < 6) {
-			notify.innerHTML="<label style=\"color: red\">Độ dài mật khẩu phải ít nhất 6 ký tự</label>";
-			return ;
-		} else if (oldPassword.length < 1) {
-			notify.innerHTML="<label style=\"color: red\">Vui lòng nhật mật khẩu</label>";
-			return ;
-		}
-		var data ={
-			oldPassword:oldPassword,
-			password:newPassword,
-		}
-		console.log(data)
-		$.ajax({
-			url: '${APIurl}',
-			type: 'PUT',
-			enctype: 'multipart/form-data',
-			processData:false,
-			contentType: 'application/json',
-			data:JSON.stringify(data),
-			dataType: 'json',
-			success: function (result){
-				notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";
-				console.log("Success");
-			},
-			error: function (error){
-				notify.innerHTML="<label style=\"color: red\">Mật khẩu không chính xác</label>";
-				console.log("Error");
-			}
+<%--<script>--%>
+<%--	function changePassword() {--%>
+<%--		var oldPassword =$('#oldPassword').val();--%>
+<%--		var newPassword =$('#newPassword').val();--%>
+<%--		var confirmPassword =$('#confirmPassword').val();--%>
+<%--		var notify= document.querySelector('#notification')--%>
+<%--		if (newPassword != confirmPassword) {--%>
+<%--			console.log("Notify")--%>
+<%--			notify.innerHTML="<label style=\"color: red\">Mật khẩu xác thực không chính xác</label>";--%>
+<%--			return ;--%>
+<%--		}--%>
+<%--		else if (newPassword.length < 1 || confirmPassword.length < 1) {--%>
+<%--			notify.innerHTML="<label style=\"color: red\">Mật khẩu mới không được để trống</label>";--%>
+<%--			return ;--%>
+<%--		}--%>
+<%--		else if (newPassword.length < 6 || confirmPassword.length < 6) {--%>
+<%--			notify.innerHTML="<label style=\"color: red\">Độ dài mật khẩu phải ít nhất 6 ký tự</label>";--%>
+<%--			return ;--%>
+<%--		} else if (oldPassword.length < 1) {--%>
+<%--			notify.innerHTML="<label style=\"color: red\">Vui lòng nhật mật khẩu</label>";--%>
+<%--			return ;--%>
+<%--		}--%>
+<%--		var data ={--%>
+<%--			oldPassword:oldPassword,--%>
+<%--			password:newPassword,--%>
+<%--		}--%>
+<%--		console.log(data)--%>
+<%--		$.ajax({--%>
+<%--			url: '${APIurl}',--%>
+<%--			type: 'PUT',--%>
+<%--			enctype: 'multipart/form-data',--%>
+<%--			processData:false,--%>
+<%--			contentType: 'application/json',--%>
+<%--			data:JSON.stringify(data),--%>
+<%--			dataType: 'json',--%>
+<%--			success: function (result){--%>
+<%--				notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";--%>
+<%--				console.log("Success");--%>
+<%--			},--%>
+<%--			error: function (error){--%>
+<%--				notify.innerHTML="<label style=\"color: red\">Mật khẩu không chính xác</label>";--%>
+<%--				console.log("Error");--%>
+<%--			}--%>
 
-		})
+<%--		})--%>
 
-	}
+<%--	}--%>
 
-</script>
+<%--</script>--%>
 
 
-<script src='${pageContext.request.contextPath }/Validation.js'></script>
-<script>
-	Validator({
-		form: '#info',
-		formGroupSelector: '.',
-		errorSelector : '.form-message',
-		rules: [
-			Validator.isRequired('#fullname'),
-			Validator.isRequired('#email'),
-			Validator.isRequired('#address'),
+<%--<script src='${pageContext.request.contextPath }/Validation.js'></script>--%>
+<%--<script>--%>
+<%--	Validator({--%>
+<%--		form: '#info',--%>
+<%--		formGroupSelector: '.',--%>
+<%--		errorSelector : '.form-message',--%>
+<%--		rules: [--%>
+<%--			Validator.isRequired('#fullname'),--%>
+<%--			Validator.isRequired('#email'),--%>
+<%--			Validator.isRequired('#address'),--%>
 
-		]
-	});
+<%--		]--%>
+<%--	});--%>
 
-</script>
+<%--</script>--%>
 
 </body>
 </html>

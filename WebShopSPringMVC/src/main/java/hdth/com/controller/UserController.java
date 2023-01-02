@@ -29,38 +29,34 @@ public class UserController {
     //register
 
     @GetMapping("/register")
-    public String indexregister(Model model){
+    public String indexregister(Model model) {
         model.addAttribute("user", new User());
         return "user/register";
     }
 
     @PostMapping("/register")
-    private String register(@ModelAttribute User user,Model model){
-        String error= "";
-        if(this.userDetailsService.addOrUpdateUsers(user)==true)
-        {
-            String mess="Chúc mừng bạn đã đăng kí thành công";
-            model.addAttribute("successregister",mess);
+    private String register(@ModelAttribute User user, Model model) {
+        String error = "";
+        if (this.userDetailsService.addOrUpdateUsers(user) == true) {
+            String mess = "Chúc mừng bạn đã đăng kí thành công";
+            model.addAttribute("successregister", mess);
             return "user/login";
-        }
-        else  error="da co loi";
-        model.addAttribute("errorregister",error);
+        } else error = "da co loi";
+        model.addAttribute("errorregister", error);
         return "user/register";
     }
 
     // so luong san pham co trong gio nguoi dung sau khi dang nhap
     @ModelAttribute
-    public void commonAtrr(Model model, HttpServletRequest request){
-        HttpSession httpSession= request.getSession();
+    public void commonAtrr(Model model, HttpServletRequest request) {
+        HttpSession httpSession = request.getSession();
         User user = (User) httpSession.getAttribute("currentUser");
-        if(user != null){
+        if (user != null) {
             System.out.println("00000000000000000000000000");
             model.addAttribute("cartCounter", this.cartService.countProductCartbyUser(user.getId()));
-            System.out.println( this.cartService.countProductCartbyUser(user.getId()));
-        }
-        else model.addAttribute("cartCounter",0);
+            System.out.println(this.cartService.countProductCartbyUser(user.getId()));
+        } else model.addAttribute("cartCounter", 0);
     }
-
 
 
     //========================> Admin
@@ -69,5 +65,18 @@ public class UserController {
     private String getSupplier(Model model) {
         model.addAttribute("userList", this.userDetailsService.getUsers());
         return "/admin/a-list-user";
+    }
+
+
+    //=========================> USER
+    @GetMapping("/user/account-manager")
+    private String getUserByUser(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user= (User) session.getAttribute("currentUser");
+        if ( user != null) {
+            Integer userId= user.getId();
+            model.addAttribute("userinfor", this.userDetailsService.getUserById(userId));
+        }
+        return "/user/inforUser";
     }
 }
