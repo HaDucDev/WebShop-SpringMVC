@@ -10,6 +10,7 @@ import hdth.com.service.PaymentMomoService;
 import hdth.com.utils.common.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,20 @@ public class OrderController {
     private MomoConfig momoConfig;
 
 
+
+    //=====> ADMIN
+    @GetMapping("/admin/order-list-all")
+    public String getOrderAllWeb(Model model) {
+        model.addAttribute("orderList", this.orderService.getAllOrdersWeb());
+        System.out.println(this.orderService.getAllOrdersWeb().get(3).getStatusOrder());
+        return "/admin/a-list-order";
+    }
+
+
+    //================================================================
+
+
+    // user
     @PostMapping("/user/create-order")// tao don hang o trang thanh toan
     private ModelAndView addOrders(@ModelAttribute Order order, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (order.getMethodPayment() == 0) {

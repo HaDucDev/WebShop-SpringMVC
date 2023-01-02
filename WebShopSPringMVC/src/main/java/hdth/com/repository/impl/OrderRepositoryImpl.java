@@ -13,6 +13,7 @@ import hdth.com.repository.UserRepository;
 import hdth.com.utils.common.ConstValueWeb;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.core.Authentication;
@@ -43,6 +44,19 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Autowired
     private UserRepository userRepository;
 
+
+
+    //================> admin
+
+
+    //================> user
+
+    @Override
+    public List<Order> getAllOrdersWeb() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Order ");
+        return q.getResultList();
+    }
 
     @Override
     public boolean createOrder(Order order) {
