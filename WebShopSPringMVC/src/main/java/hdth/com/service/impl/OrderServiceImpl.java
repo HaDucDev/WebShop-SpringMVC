@@ -8,6 +8,8 @@ import org.apache.http.auth.AUTH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -17,6 +19,20 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    //==========> ADMIN
+
+    @Override
+    public List<Order> getAllOrdersWeb() {
+        return this.orderRepository.getAllOrdersWeb();
+    }
+
+    @Override
+    public Order getDetailOrderByOrderId(Integer orderId) {
+        return this.orderRepository.getDetailOrderByOrderId(orderId);
+    }
+
+
+    //=============> USER
     @Override
     public boolean createOrder(Order order) {
         return this.orderRepository.createOrder(order);

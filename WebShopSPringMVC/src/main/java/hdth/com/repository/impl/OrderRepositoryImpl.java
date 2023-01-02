@@ -8,18 +8,15 @@ import hdth.com.model.OrderDetail;
 import hdth.com.model.User;
 import hdth.com.repository.CartRepository;
 import hdth.com.repository.OrderRepository;
-import hdth.com.repository.ProductRepository;
 import hdth.com.repository.UserRepository;
 import hdth.com.utils.common.ConstValueWeb;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -43,6 +40,28 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Autowired
     private UserRepository userRepository;
 
+
+
+    //================> admin
+
+    @Override
+    public List<Order> getAllOrdersWeb() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Order ");
+        return q.getResultList();
+    }
+
+    @Override
+    public Order getDetailOrderByOrderId(Integer orderId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Order o WHERE o.id=:x");
+        q.setParameter("x",orderId);
+        Order order= (Order) q.getResultList().get(0);
+        return order;
+    }
+
+
+    //================> user
 
     @Override
     public boolean createOrder(Order order) {

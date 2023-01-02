@@ -46,7 +46,7 @@ public class HomeController {
 
 
 
-    @RequestMapping("/admin")
+    @RequestMapping("/admin/index")
     public String admin(HttpSession session, Model model){
         model.addAttribute("currentUser",session.getAttribute("currentUser"));
         return "admin/index";
