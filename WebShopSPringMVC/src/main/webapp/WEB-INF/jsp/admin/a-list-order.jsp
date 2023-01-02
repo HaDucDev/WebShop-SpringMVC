@@ -54,12 +54,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Ngày tạo</th>
-                                        <th>Người nhận</th>
                                         <th>Tài khoản đặt hàng</th>
-                                        <th>Địa chỉ nhận</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Tình trạng thanh toán</th>
                                         <th>Tình trạng đơn hàng</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -67,20 +62,14 @@
                                     <tbody>
                                     <c:forEach items="${orderList}" var="order">
                                         <tr>
-                                            <td>#${order.id}</td>
+                                            <td>${order.id}</td>
                                             <td>${order.createdDate}</td>
-                                            <td>${order.receiptUser}</td>
                                             <td>${order.user.fullName}</td>
-                                            <td>${order.deliveryAddress}</td>
-                                            <td>${order.phoneNumber}</td>
-                                            <td>${order.totalAmount} VNĐ</td>
-                                            <td>${order.paymentStatus}</td>
                                             <td class="center">${order.statusOrder}</td>
                                             <td>
-                                                <a class="center" data-toggle="modal" data-target="#oderlist${order.id}">Chi
-                                                    tiết</a> |
+                                                <a class="center" href="<c:url value="/admin/order-detail/${order.id}"/>" >Chi tiết</a> |
                                                 <a id="btnDelete" onclick="deleteCart(${order.id })"
-                                                   class="center">Hủy đơn hàng</a> |
+                                                   class="center">Hủy đơn</a> |
                                                 <a class="center" onclick="updateCart(${order.id})">Chấp nhận đơn hàng</a>
                                             </td>
                                         </tr>

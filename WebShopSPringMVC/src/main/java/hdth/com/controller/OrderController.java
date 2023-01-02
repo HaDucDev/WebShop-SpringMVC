@@ -11,10 +11,7 @@ import hdth.com.utils.common.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +36,13 @@ public class OrderController {
         model.addAttribute("orderList", this.orderService.getAllOrdersWeb());
         System.out.println(this.orderService.getAllOrdersWeb().get(3).getStatusOrder());
         return "/admin/a-list-order";
+    }
+
+
+    @GetMapping("/admin/order-detail/{orderId}")
+    public String getDetailOrderByOrderId(Model model, @PathVariable(value = "orderId") Integer orderId) {
+        model.addAttribute("orderDetal", this.orderService.getDetailOrderByOrderId(orderId));// tra ve 1 order
+        return "/admin/a-list-order-detail";
     }
 
 

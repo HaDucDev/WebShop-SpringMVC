@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface OrderService {
 
-    //=============> ADMIn
+    //=============> ADMIN
     List<Order> getAllOrdersWeb();
+
+    Order getDetailOrderByOrderId(Integer orderId);
 
 
 
