@@ -20,7 +20,7 @@ public class UserControllerREST {
     private UserService userDetailsService;
 
 
-    @GetMapping("/user/account-user")
+    @GetMapping("/user/account-user")// thua tam thoi de do cha lam gi ca
     public ResponseEntity<?> getUserOK(Authentication authentication) {
         User user = this.userDetailsService.getUsersByUsername(authentication.getName()).get(0);
         System.out.println("123456");

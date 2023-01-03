@@ -32,28 +32,28 @@
 						<p>Thông tin tài khoản</p>
 						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get" id="info1" >
 
-							<input class="form-one"  id="fullname" type="text" placeholder="Tên" name="fullname"
-								   value="${user.getFullname()}">
-							<label style="color: red">${errFullName}</label>
-
-							<input style="" id="email" type="text" placeholder="Email" name="email"
-								   value="${user.getEmail()}">
-							<label style="color: red">${errEmail}</label>
-							<input id="address" type="text" placeholder="Địa chỉ" name="address"
-								   value="${user.getAddress()}">
-							<label style="color: red">${errAddress}</label>
-							<input id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0"
-								   value="${user.getPhone_number()}">
-							<span class="form-message"></span>
 							<div>
-								<label style="color: red">${errPhone}</label>
+								<img class="form-one" style="width: 50px;height: 50px;object-fit: cover; display: block; margin-left: auto;
+								 margin-right: 10px; margin-bottom: 20px"
+									 src="<c:url value="${userinfor.avatar}"/>" alt="${userinfor.fullName}">
+								<input class="form-one"  id="avatar" type="file" placeholder="Tên" name="avatar"/>
 							</div>
-
+							
+							<input class="form-one"  id="fullname" type="text" placeholder="Tên" name="fullname" value="${userinfor.fullName}" style="margin-bottom: 5px"/>
+							<label style="color: red; margin-bottom: 5px">${errFullName}</label>
+							<input id="email" type="text" placeholder="Email" name="email" value="${userinfor.email}" style="margin-bottom: 5px"/>
+							<label style="color: red;margin-bottom: 5px">${errEmail}</label>
+							<input id="address" type="text" placeholder="Địa chỉ" name="address" value="${userinfor.addressDefault}"style="margin-bottom: 5px"/>
+							<label style="color: red;margin-bottom: 5px">${errAddress}</label>
+							<input id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0" value="${userinfor.phone}"style="margin-bottom: 5px"/>
+							<div>
+								<label style="color: red;margin-bottom: 5px">${errPhone}</label>
+							</div>
 							<button type="submit" class="btn btn-primary">Thay đổi thông tin</button>
+							<span class="form-message"></span>
 							<div>
 								<label style="color: green">${success}</label>
 							</div>
-
 						</form>
 					</div>
 				</div>
@@ -165,6 +165,21 @@
 		}
 	}
 </script>
+
+<%--<c:url value="/user/account-user" var="APIu"> </c:url>--%>
+<%--<script>--%>
+
+<%--	$(document).ready(function() {--%>
+<%--		$.ajax({--%>
+<%--			url: '${APIu}'--%>
+<%--		}).then(function(data) {--%>
+<%--			$('#fullname').text(data.fullName);--%>
+<%--			$('#email').text(data.email);--%>
+<%--			$('#address').text(data.addressDefault);--%>
+<%--			$('#phonenumber').text(data.phone);--%>
+<%--		});--%>
+<%--	});--%>
+<%--</script>--%>
 
 
 <%--<script src='${pageContext.request.contextPath }/Validation.js'></script>--%>
