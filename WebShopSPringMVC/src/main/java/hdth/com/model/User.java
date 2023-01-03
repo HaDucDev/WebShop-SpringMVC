@@ -39,7 +39,12 @@ public class User implements Serializable {
     private String username;
     private String password;
     @Transient
-    private String confirmPassword;
+    private String confirmPassword;// dang ki
+
+    @Transient
+    private String oldPassword;// change pass
+    @Transient
+    private String newPassword;// change pass
 
 
     @Column(name = "reset_password_code")

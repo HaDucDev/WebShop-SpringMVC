@@ -79,55 +79,65 @@
 <script src="${url}/js/jquery.scrollUp.min.js"></script>
 <script src="${url}/js/jquery.prettyPhoto.js"></script>
 <script src="${url}/js/main.js"></script>
-<%--<script>--%>
-<%--	function changePassword() {--%>
-<%--		var oldPassword =$('#oldPassword').val();--%>
-<%--		var newPassword =$('#newPassword').val();--%>
-<%--		var confirmPassword =$('#confirmPassword').val();--%>
-<%--		var notify= document.querySelector('#notification')--%>
-<%--		if (newPassword != confirmPassword) {--%>
-<%--			console.log("Notify")--%>
-<%--			notify.innerHTML="<label style=\"color: red\">Mật khẩu xác thực không chính xác</label>";--%>
-<%--			return ;--%>
-<%--		}--%>
-<%--		else if (newPassword.length < 1 || confirmPassword.length < 1) {--%>
-<%--			notify.innerHTML="<label style=\"color: red\">Mật khẩu mới không được để trống</label>";--%>
-<%--			return ;--%>
-<%--		}--%>
-<%--		else if (newPassword.length < 6 || confirmPassword.length < 6) {--%>
-<%--			notify.innerHTML="<label style=\"color: red\">Độ dài mật khẩu phải ít nhất 6 ký tự</label>";--%>
-<%--			return ;--%>
-<%--		} else if (oldPassword.length < 1) {--%>
-<%--			notify.innerHTML="<label style=\"color: red\">Vui lòng nhật mật khẩu</label>";--%>
-<%--			return ;--%>
-<%--		}--%>
-<%--		var data ={--%>
-<%--			oldPassword:oldPassword,--%>
-<%--			password:newPassword,--%>
-<%--		}--%>
-<%--		console.log(data)--%>
-<%--		$.ajax({--%>
-<%--			url: '${APIurl}',--%>
-<%--			type: 'PUT',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-<%--			success: function (result){--%>
-<%--				notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";--%>
-<%--				console.log("Success");--%>
-<%--			},--%>
-<%--			error: function (error){--%>
-<%--				notify.innerHTML="<label style=\"color: red\">Mật khẩu không chính xác</label>";--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
 
-<%--		})--%>
 
-<%--	}--%>
+<c:url value="/user/account-manager-password" var="APIurl"> </c:url>
+<script>
+	function changePassword() {
+		var oldPassword =$('#oldPassword').val();
+		var newPassword =$('#newPassword').val();
+		var confirmPassword =$('#confirmPassword').val();
+		var notify= document.querySelector('#notification')
+		if (newPassword != confirmPassword) {
+			console.log("Notify")
+			notify.innerHTML="<label style=\"color: red\">Mật khẩu xác thực không chính xác</label>";
+			return ;
+		}
+		else if (newPassword.length < 1 || confirmPassword.length < 1) {
+			notify.innerHTML="<label style=\"color: red\">Mật khẩu mới không được để trống</label>";
+			return ;
+		}
+		else if (newPassword.length < 6 || confirmPassword.length < 6) {
+			notify.innerHTML="<label style=\"color: red\">Độ dài mật khẩu phải ít nhất 6 ký tự</label>";
+			return ;
+		} else if (oldPassword.length < 1) {
+			notify.innerHTML="<label style=\"color: red\">Vui lòng nhật mật khẩu</label>";
+			return ;
+		}
+		var data ={
+			oldPassword:oldPassword,
+			newPassword:newPassword,
+		}
+		console.log(data)
+		$.ajax({
+			url: '${APIurl}',
+			type: 'PUT',
+			enctype: 'multipart/form-data',
+			processData:false,
+			contentType: 'application/json',
+			data:JSON.stringify(data),
+			dataType: 'json',
+			success: function (result){
 
-<%--</script>--%>
+				if (result==1){
+					notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";
+					console.log("Success");
+				}
+				if (result==0){
+					notify.innerHTML="<label style=\"color: red\">Mật khẩu không chính xác</label>";
+					console.log("Error");
+				}
+			},
+			error: function (error){
+				notify.innerHTML="<label style=\"color: red\">Đã có lỗi xảy ra. ban vui lòng đổi lại sau</label>";
+				console.log("Error");
+			}
+
+		})
+
+	}
+
+</script>
 
 
 <%--<script src='${pageContext.request.contextPath }/Validation.js'></script>--%>

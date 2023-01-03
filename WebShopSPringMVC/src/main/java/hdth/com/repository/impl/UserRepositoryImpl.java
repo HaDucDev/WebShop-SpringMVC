@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,6 +72,26 @@ public class UserRepositoryImpl implements UserRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         User s = session.get(User.class, id);
         return s;
+    }
+
+
+    //===================>USER
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Override
+    public boolean changePassword(User changePasswordRequest) {
+        Session session= this.sessionFactory.getObject().getCurrentSession();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user= userRepository.getUsersByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get(0);
+        if (passwordEncoder.matches(changePasswordRequest.getOldPassword(),user.getPassword())) {// ham san kiem tra trung pass ko
+            System.out.println("pass success   99999999");
+            user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
+            session.save(user);
+            return true;
+        }
+        return false;
     }
 
 
