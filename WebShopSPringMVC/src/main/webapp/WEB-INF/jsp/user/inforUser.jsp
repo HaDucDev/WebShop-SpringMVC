@@ -65,8 +65,12 @@
 							<input id="newPassword" type="password" placeholder="Mật khẩu mới">
 							<input id="confirmPassword" type="password" placeholder="Xác nhận mật khẩu">
 						</form>
-						<button class="btn btn-primary" onclick="changePassword()" >Cập nhật thông tin</button>
-
+						<div id="showpassword">
+							<input type="checkbox" onclick="myFunction()">Hiển thị mật khẩu</input>
+						</div>
+						<div>
+							<button class="btn btn-primary" onclick="changePassword()" >Cập nhật mật khẩu</button>
+						</div>
 						<div id="notification"></div>
 					</div>
 				</div>
@@ -137,6 +141,29 @@
 
 	}
 
+</script>
+
+<script>
+	function myFunction() {
+		var x = document.getElementById("oldPassword");
+		var y = document.getElementById("newPassword");
+		var z = document.getElementById("confirmPassword");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+		if (y.type === "password") {
+			y.type = "text";
+		} else {
+			y.type = "password";
+		}
+		if (z.type === "password") {
+			z.type = "text";
+		} else {
+			z.type = "password";
+		}
+	}
 </script>
 
 
