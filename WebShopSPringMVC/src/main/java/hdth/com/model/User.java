@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,18 +40,26 @@ public class User implements Serializable {
     private String username;
     private String password;
     @Transient
-    private String confirmPassword;
+    private String confirmPassword;// dang ki
+
+    @Transient
+    private String oldPassword;// change pass
+    @Transient
+    private String newPassword;// change pass
 
 
     @Column(name = "reset_password_code")
     private String resetPasswordCode;
 
 
+    @Transient
+    private MultipartFile avatarImage;
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")// id la ten ben bang cua user
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private Set<Cart> cart;
 
 

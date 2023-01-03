@@ -9,9 +9,11 @@ import hdth.com.utils.enums.ERole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -72,5 +74,13 @@ public class UserServiceImpl implements UserService {
         Set<GrantedAuthority> auth=new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getRole().getName().toString()));
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),auth);
+    }
+
+
+    //================================> USER
+
+    @Override
+    public boolean changePassword(User changePasswordRequest) {
+        return this.userRepository.changePassword(changePasswordRequest);
     }
 }

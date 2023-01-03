@@ -10,4 +10,7 @@ public interface UserRepository {
     List<User> getUsersByUsername(String username);
     boolean addOrUpdateUsers(User user);// dang ki, them , sua
     User getUserById(Integer id);// lay nguoi dung theo id dung o phan them gio hang
+
+
+    boolean changePassword(User changePasswordRequest);
 }

@@ -12,6 +12,6 @@ public class LogoutHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletRequest.getSession().removeAttribute("currentUser");
-        httpServletResponse.sendRedirect("/WebShopSPringMVC_war/login");// phai nhu the hoac dan link truc tiep luon
+        httpServletResponse.sendRedirect("/WebShopSPringMVC_war/");// phai nhu the hoac dan link truc tiep luon
     }
 }

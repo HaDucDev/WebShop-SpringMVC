@@ -70,7 +70,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
        // http.formLogin().defaultSuccessUrl("/admin").failureUrl("/login?error");
         http.formLogin().failureUrl("/login?error");
-        http.formLogin().successHandler(this.loginSuccessHandler);
+        http.formLogin().successHandler(this.loginSuccessHandler);// dang nhap thanh cong
 
         //phan biet quyen dc phep truy cap hay ko. neu khong dc tro ve trang login va bao loi
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
@@ -79,11 +79,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().antMatchers("/").permitAll()
 //                .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')");
 
-        http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/user/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')");
+//        http.authorizeRequests().antMatchers("/").permitAll()
+//                .antMatchers("/user/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')");
 
         //http.logout().logoutSuccessUrl("/");
-        http.logout().logoutSuccessHandler(this.logoutHandler);
+        http.logout().logoutSuccessHandler(this.logoutHandler);// dang xuat thanh cong
 
         http.csrf().disable();
     }

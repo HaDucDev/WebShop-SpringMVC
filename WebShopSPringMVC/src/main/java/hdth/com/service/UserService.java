@@ -16,4 +16,6 @@ public interface UserService extends UserDetailsService {
 
 
     User getUserById(Integer id);
+
+    boolean changePassword(User changePasswordRequest);
 }
