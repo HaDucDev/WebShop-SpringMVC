@@ -82,4 +82,17 @@ public class UserController {
 
 
 
+    @PostMapping("/user/account-manager")
+    private String EditUserByUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User usercurrent= (User) session.getAttribute("currentUser");
+        if ( user != null && usercurrent !=null) {
+            //User x= this.userDetailsService.getUserById(usercurrent.getId());
+            model.addAttribute("userinfor", this.userDetailsService.getUserById(userId));
+        }
+        return "/user/inforUser";
+    }
+
+
+
 }

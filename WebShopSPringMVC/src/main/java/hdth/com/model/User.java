@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -51,6 +52,8 @@ public class User implements Serializable {
     private String resetPasswordCode;
 
 
+    @Transient
+    private MultipartFile avatarImage;
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")// id la ten ben bang cua user
     private Role role;

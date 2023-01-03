@@ -2,6 +2,7 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url value="/user" var="url"> </c:url>
 
 <!DOCTYPE html>
@@ -20,6 +21,7 @@
 
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
+<c:url value="/user/account-user" var="APIu"> </c:url>
 <section id="cart_items">
 	<div class="container">
 		<div class="step-one">
@@ -30,22 +32,22 @@
 				<div class="col-sm-6">
 					<div class="shopper-info">
 						<p>Thông tin tài khoản</p>
-						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get" id="info1" >
+						<form:form action="${APIu}" method="post" id="info1" modelAttribute="userinfor" enctype="multipart/form-data">
 
 							<div>
 								<img class="form-one" style="width: 50px;height: 50px;object-fit: cover; display: block; margin-left: auto;
 								 margin-right: 10px; margin-bottom: 20px"
 									 src="<c:url value="${userinfor.avatar}"/>" alt="${userinfor.fullName}">
-								<input class="form-one"  id="avatar" type="file" placeholder="Tên" name="avatar"/>
+								<form:input path="avatarImage" class="form-one"  id="avatar" type="file" placeholder="Tên" name="avatar"/>
 							</div>
-							
-							<input class="form-one"  id="fullname" type="text" placeholder="Tên" name="fullname" value="${userinfor.fullName}" style="margin-bottom: 5px"/>
+
+							<form:input path="fullName" class="form-one"  id="fullname" type="text" placeholder="Tên" name="fullname" value="${userinfor.fullName}" style="margin-bottom: 5px"/>
 							<label style="color: red; margin-bottom: 5px">${errFullName}</label>
-							<input id="email" type="text" placeholder="Email" name="email" value="${userinfor.email}" style="margin-bottom: 5px"/>
+							<form:input path="email" id="email" type="text" placeholder="Email" name="email" value="${userinfor.email}" style="margin-bottom: 5px"/>
 							<label style="color: red;margin-bottom: 5px">${errEmail}</label>
-							<input id="address" type="text" placeholder="Địa chỉ" name="address" value="${userinfor.addressDefault}"style="margin-bottom: 5px"/>
+							<form:input path="addressDefault" id="address" type="text" placeholder="Địa chỉ" name="address" value="${userinfor.addressDefault}"style="margin-bottom: 5px"/>
 							<label style="color: red;margin-bottom: 5px">${errAddress}</label>
-							<input id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0" value="${userinfor.phone}"style="margin-bottom: 5px"/>
+							<form:input path="phone" id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0" value="${userinfor.phone}"style="margin-bottom: 5px"/>
 							<div>
 								<label style="color: red;margin-bottom: 5px">${errPhone}</label>
 							</div>
@@ -54,7 +56,7 @@
 							<div>
 								<label style="color: green">${success}</label>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 				<div class="col-sm-6">
