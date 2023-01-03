@@ -88,7 +88,7 @@ public class UserController {
         User usercurrent= (User) session.getAttribute("currentUser");
         if ( user != null && usercurrent !=null) {
             //User x= this.userDetailsService.getUserById(usercurrent.getId());
-            model.addAttribute("userinfor", this.userDetailsService.getUserById(userId));
+            //model.addAttribute("userinfor", this.userDetailsService.getUserById(userId));
         }
         return "/user/inforUser";
     }
