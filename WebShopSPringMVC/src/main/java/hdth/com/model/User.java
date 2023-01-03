@@ -56,6 +56,7 @@ public class User implements Serializable {
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private Set<Cart> cart;
 
 

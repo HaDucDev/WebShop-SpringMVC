@@ -1,6 +1,7 @@
 package hdth.com.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hdth.com.utils.enums.ERole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,6 @@ public class Role implements Serializable {
     private ERole name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @JsonIgnore
     private Set<User> users;
 }
