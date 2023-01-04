@@ -122,9 +122,9 @@ public class OrderController {
         HttpSession session = request.getSession();
         User user= (User) session.getAttribute("currentUser");
         if ( user != null) {
-            model.addAttribute("orderDetal", this.orderService.getDetailOrderByOrderId(orderId));// tra ve 1 order
+            model.addAttribute("orderDetal", this.orderService.getDetailOrderByOrderIdAndUserId(orderId,user.getId()));// tra ve 1 order
         }
-        return "/user/a-list-order-detail";
+        return "/user/list-order-detail";
     }
 
 
