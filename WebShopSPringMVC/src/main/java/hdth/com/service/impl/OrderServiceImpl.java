@@ -42,4 +42,14 @@ public class OrderServiceImpl implements OrderService {
     public Long totalMoneyCartbyUser(Integer userId) {
         return this.cartRepository.totalMoneyCartbyUser(userId);
     }
+
+    @Override
+    public List<Order> getAllOrdersByUserId(Integer userId) {
+        return this.orderRepository.getAllOrdersByUserId(userId);
+    }
+
+    @Override
+    public Order getDetailOrderByOrderIdAndUserId(Integer orderId, Integer userId) {
+        return this.orderRepository.getDetailOrderByOrderIdAndUserId(orderId,userId);
+    }
 }

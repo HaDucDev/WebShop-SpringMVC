@@ -45,9 +45,9 @@
 							<label style="color: red; margin-bottom: 5px">${errFullName}</label>
 							<form:input path="email" id="email" type="text" placeholder="Email" name="email" value="${userinfor.email}" style="margin-bottom: 5px"/>
 							<label style="color: red;margin-bottom: 5px">${errEmail}</label>
-							<form:input path="addressDefault" id="address" type="text" placeholder="Địa chỉ" name="address" value="${userinfor.addressDefault}"style="margin-bottom: 5px"/>
+							<form:input path="addressDefault" id="address" type="text" placeholder="Địa chỉ" name="address" value="${userinfor.addressDefault}" style="margin-bottom: 5px"/>
 							<label style="color: red;margin-bottom: 5px">${errAddress}</label>
-							<form:input path="phone" id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0" value="${userinfor.phone}"style="margin-bottom: 5px"/>
+							<form:input path="phone" id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0" value="${userinfor.phone}" style="margin-bottom: 5px"/>
 							<div>
 								<label style="color: red;margin-bottom: 5px">${errPhone}</label>
 							</div>
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 		</div>
-	<jsp:include page="a-footer.jsp"></jsp:include>
+		<jsp:include page="a-footer.jsp"></jsp:include>
 </section> <!--/#cart_items-->
 <script src="${url}/js/jquery.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>

@@ -16,4 +16,8 @@ public interface OrderRepository {
 
     // USER
     boolean createOrder(Order order);
+
+    List<Order> getAllOrdersByUserId(Integer userId);
+
+    Order getDetailOrderByOrderIdAndUserId(Integer orderId,Integer userId);
 }
