@@ -148,7 +148,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Order o WHERE o.id=:x and o.user.id=:y");
         q.setParameter("x",orderId);
-        q.setParameter("x",userId);
+        q.setParameter("y",userId);
         Order order= (Order) q.getResultList().get(0);
         return order;
     }

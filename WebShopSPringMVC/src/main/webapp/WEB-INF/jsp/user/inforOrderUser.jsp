@@ -24,15 +24,6 @@
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
 <div >
-    <style>
-        .dataTables_wrapper   .dataTables_filter{
-            float: left
-        }
-
-        .dataTables_wrapper  .dataTables_length{
-            float: right
-        }
-    </style>
     <div class="col-md-12 text-center">
         <h2>Lịch sử đơn hàng</h2>
     </div>
