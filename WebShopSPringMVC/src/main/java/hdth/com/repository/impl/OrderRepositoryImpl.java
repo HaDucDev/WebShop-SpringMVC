@@ -135,4 +135,13 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
 
+    @Override
+    public List<Order> getAllOrdersByUserId(Integer userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Order o WHERE o.user.id=:x");
+        q.setParameter("x",userId);
+        return q.getResultList();
+    }
+
+
 }

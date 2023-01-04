@@ -18,4 +18,6 @@ public interface OrderService {
     boolean createOrder(Order order);
 
     Long totalMoneyCartbyUser(Integer userId);
+
+    List<Order> getAllOrdersByUserId(Integer userId);
 }

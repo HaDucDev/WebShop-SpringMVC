@@ -111,9 +111,20 @@ public class OrderController {
         User user= (User) session.getAttribute("currentUser");
         if ( user != null) {
             Integer userId= user.getId();
-            //model.addAttribute("userinfor", this.orderService.);
+            model.addAttribute("userOrderList", this.orderService.getAllOrdersByUserId(userId));
         }
         return "/user/inforOrderUser";
+    }
+
+
+    @GetMapping("/user/order-detail/{orderId}")// chi tiet don hang cua nguoi dung
+    public String getDetailOrderUserByOrderId(Model model, @PathVariable(value = "orderId") Integer orderId, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user= (User) session.getAttribute("currentUser");
+        if ( user != null) {
+            model.addAttribute("orderDetal", this.orderService.getDetailOrderByOrderId(orderId));// tra ve 1 order
+        }
+        return "/user/a-list-order-detail";
     }
 
 
