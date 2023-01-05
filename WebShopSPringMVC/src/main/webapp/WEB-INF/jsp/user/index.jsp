@@ -33,21 +33,22 @@
 				<div class="card col-md-4">
 					<div class="card-body">
 
-						<c:choose>
-							<c:when test="${p.productImage != null}">
-								<img class="img-fluid" src="<c:url value="${p.productImage}"/>" alt="{p.name}">
-							</c:when>
-							<c:otherwise>
-								<img class="img-fluid" src="<c:url value="images/logo.png"/>" alt="{p.name}">
-							</c:otherwise>
-						</c:choose>
-
+						<div style="width:100%;height:300px;object-fit: cover;">
+							<c:choose>
+								<c:when test="${p.productImage != null}">
+									<img class="img-fluid" src="<c:url value="${p.productImage}"/>" alt="{p.name}" style=" width:100%;height:100%;">
+								</c:when>
+								<c:otherwise>
+									<img class="img-fluid" src="<c:url value="images/logo.png"/>" alt="{p.name}" style=" width:100%;height:100%;">
+								</c:otherwise>
+							</c:choose>
+						</div>
 						<h3 class="card-title">${p.productName}</h3>
 						<p class="card-text">${p.unitPrice} VND</p>
 					</div>
 					<div class="card-footer">
-						<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})">Them vao gio</a>
-						<a href="#" class="btn-btn-infi">Mua Ngay</a>
+						<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})">Thêm vào giỏ</a>
+						<a href="<c:url value="/product/${p.id}"/>" class="btn-btn-infi">Chi tiết</a>
 					</div>
 				</div>
 			</c:forEach>

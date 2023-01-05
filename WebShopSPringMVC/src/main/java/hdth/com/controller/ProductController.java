@@ -65,10 +65,20 @@ public class ProductController {
         return "admin/c-edit-product";
     }
 
+    //================> common
     @ModelAttribute
     public void commonAtrr(Model model){// dung chung cho admin thoi
         model.addAttribute("productStatusList",this.productStatusService.getProductStatuses());
     }
+
+
+    //================>USER
+    @GetMapping(path = "/product/{id}")// khong dang nhap cung xem duoc san pham chi tiet
+    private String getProductDetail(@PathVariable(name = "id") Integer id, Model model){
+        model.addAttribute("productDetail",this.productService.getProductById(id));
+        return "user/product-details";
+    }
+
 
 
 }
