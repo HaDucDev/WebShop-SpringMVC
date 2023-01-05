@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/user" var="url"> </c:url>
+<c:url value="/js" var="urljsa"> </c:url>
 <%--<c:url value="/api-user-cart" var="APIaurl"></c:url>--%>
 <%--<c:url value="/api-user-product" var="ProductUrl"></c:url>--%>
 <%--<c:url value="/client-product-list" var ="PCUrl" ></c:url>--%>
@@ -21,6 +22,8 @@
 	<link href="${url}/css/main.css" rel="stylesheet">
 	<link href="${url}/css/responsive.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+	<script src="${urljsa}/moment.js"></script>
 
 </head>
 
@@ -95,11 +98,12 @@
 											<img style=" width:100%;height:100%;object-fit: contain;" src="${row_comment.user.avatar}"
 												 class="img img-responsive img-thumbnail">
 										</div>
-										<div class="col-md-10 panel-footer">
+										<div class="col-md-10 panel-footer my-date-1">
 											<p style="color:green;"> ${row_comment.user.fullName}</p>
 											<p> ${row_comment.comment}</p>
 											<fmt:formatDate  value = "${row_comment.createdComment}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />
 											<p style="color: green;"><c:out value = "${parsedMyDate}" /></p>
+											<p id="my-date-2" style="color: red;"><c:out value = "${parsedMyDate}" /></p>
 										</div>
 <%--										<div class="col-md-1 panel-footer" align="right">--%>
 <%--											<p>.</p>--%>
@@ -127,6 +131,19 @@
 
 </section>
 <jsp:include page="a-footer.jsp"></jsp:include>
+
+<script>
+	// khi trang load len het du lieu roi ms chay ham nay nhe
+	window.onload= function (){// ko can dung jquery cho lau
+		let d=document.querySelectorAll(".my-date-1 > #my-date-2");
+		for (let  i=0; i<d.length;i++){
+			let temp= d[i];
+			temp.innerText=moment(temp.innerText).fromNow()
+		}
+
+	}
+
+</script>
 <%--<script>--%>
 <%--	function addToCart(data){--%>
 <%--		JSalert();--%>
