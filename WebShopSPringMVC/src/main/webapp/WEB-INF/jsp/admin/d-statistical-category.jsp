@@ -34,7 +34,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Thống kê</h2>
+                    <h2>Thống kê sản phẩm theo danh mục</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -42,9 +42,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="btn-group" style="margin: auto;display: flex;justify-content: center; align-items: center;border: 1px solid green;">
-                            <button type="button" class="btn btn-primary" style="margin-right: 5px" onclick="window.location='<c:url value="/admin/statistical-cate"/> '">Thống kê sản phẩm theo danh mục</button>
-                            <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu theo từng sản phẩm</button>
-                            <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px" onclick="window.location='<c:url value="/admin/order-list-all"/> '">Thống kê sản phẩm theo danh mục</button>
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu theo từng sản phẩm</button>
+                        <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
                     </div>
 
                 </div>
