@@ -21,8 +21,23 @@
     <script src="${url}/js/bootstrap.min.js"></script>
     <!-- FONTAWESOME STYLES-->
     <link href="${url}/css/font-awesome.css" rel="stylesheet"/>
+    <link href="${url}/css/custom.css" rel="stylesheet"/>
+    <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans'
           rel='stylesheet' type='text/css'/>
+    <!-- TABLE STYLES-->
+    <link href="${url}/js/dataTables/dataTables.bootstrap.css"
+          rel="stylesheet"/>
+    <script src="${url}/js/jquery-1.10.2.js"></script>
+    <script src="${url}/js/jquery-3.3.1.min.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <!-- METISMENU SCRIPTS -->
+    <script src="${url}/js/jquery.metisMenu.js"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="${url}/js/dataTables/jquery.dataTables.js"></script>
+    <script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="${url}/js/custom.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -46,7 +61,34 @@
                         <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu theo từng sản phẩm</button>
                         <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover"
+                                       id="dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th>Mã danh mục</th>
+                                        <th>Tên danh mục </th>
+                                        <th>Số lượng sản phẩm</th>
 
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${cateStats}" var="c">
+                                        <tr>
+                                            <td>${c[0]}</td>
+                                            <td>${c[1]}</td>
+                                            <td>${c[2]}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -57,6 +99,11 @@
 </div>
 <!-- /. PAGE WRAPPER  -->
 <!-- /. WRAPPER  -->
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').dataTable();
+    });
+</script>
 
 </body>
 </html>

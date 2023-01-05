@@ -57,11 +57,6 @@ public class HomeController {
         return "admin/d-statistical";
     }
 
-    @RequestMapping("/admin/statistical-cate")
-    public String adminstatisticaCate(){
-        return "admin/d-statistical-category";
-    }
-
 
 //    @Autowired
 //    private MomoConfig momoConfig;

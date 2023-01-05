@@ -21,6 +21,8 @@
     <script src="${url}/js/bootstrap.min.js"></script>
     <!-- FONTAWESOME STYLES-->
     <link href="${url}/css/font-awesome.css" rel="stylesheet"/>
+    <link href="${url}/css/custom.css" rel="stylesheet"/>
+    <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans'
           rel='stylesheet' type='text/css'/>
 </head>
