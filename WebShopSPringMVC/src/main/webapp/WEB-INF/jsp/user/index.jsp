@@ -47,7 +47,7 @@
 					</div>
 					<div class="card-footer">
 						<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})">Them vao gio</a>
-						<a href="#" class="btn-btn-infi">Mua Ngay</a>
+						<a href="<c:url value="/product/${p.id}"/>" class="btn-btn-infi">Mua Ngay</a>
 					</div>
 				</div>
 			</c:forEach>
