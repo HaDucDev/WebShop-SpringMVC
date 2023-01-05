@@ -7,8 +7,6 @@
 <%--<c:url value="/api-user-cart" var="APIaurl"></c:url>--%>
 <%--<c:url value="/api-user-product" var="ProductUrl"></c:url>--%>
 <%--<c:url value="/client-product-list" var ="PCUrl" ></c:url>--%>
-<%--<c:url value="/api-user-comment" var ="APIcomment" ></c:url>--%>
-<%--<c:url var="imgPerson" value="/image/person.png"></c:url>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script src="${urljsa}/moment.js"></script>
+    <script src="${urljsa}/main.js"></script>
 
 </head>
 
@@ -35,7 +34,7 @@
             <div class="col-sm-12 padding-right">
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
-                        <input type="hidden" id="id" value="${productDetail.id}">
+                        <input type="hidden" id="idproduct" value="${productDetail.id}">
                         <div class="view-product">
                             <c:url var="imgUrl" value="${productDetail.productImage}"></c:url>
                             <img height="250" width="200" src="${imgUrl}" alt=""/>
@@ -96,13 +95,13 @@
                                     <p><b>Write Your Review</b></p>
                                     <textarea id="content" name="" placeholder="Để lại bình luận ở đây"></textarea>
                                         <%--						<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />--%>
-                                    <button id="btnSubmit" type="button" class="btn btn-default" onclick="sendComment()">
+                                    <button id="btnSubmit" type="button" class="btn btn-default" onclick="sendComment(${productDetail.id})">
                                         Submit
                                     </button>
                                 </div>
                                 <br>
                             </c:if>
-                            <div class="comment">
+                            <div class="comment" id="commentlist">
                                 <c:forEach var="row_comment" items="${productDetail.reviews}">
                                     <div class="row style_comment">
                                         <div class="col-md-1" style="height: 80px; width: 15%">
@@ -151,6 +150,8 @@
     }
 
 </script>
+
+
 <%--<script>--%>
 <%--	function addToCart(data){--%>
 <%--		JSalert();--%>
@@ -207,72 +208,6 @@
 
 <%--</script>--%>
 
-<%--<script>--%>
-<%--	// document.getElementById('btnSubmit').addEventListener('click', sendComment);--%>
-<%--	function sendComment(){--%>
-
-<%--		var content =$('#content').val();--%>
-<%--		if (content.charAt(0) != '@') {--%>
-<%--			document.getElementById("parent").value = 0;--%>
-<%--		}--%>
-<%--		var id = parseInt($('#id').val());--%>
-<%--		var parent_id = $('#parent').val();--%>
-
-<%--		var data ={--%>
-<%--			"productEntity": {--%>
-<%--				"id":id--%>
-<%--			},--%>
-<%--			"commentEntity": {--%>
-<%--				"id":parent_id--%>
-<%--			},--%>
-<%--			"content":content--%>
-<%--		};--%>
-<%--		let date = new Date().toLocaleString();--%>
-
-
-<%--		$.ajax({--%>
-<%--			url: '${APIcomment}',--%>
-<%--			type: 'POST',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-
-<%--			success: function (result){--%>
-<%--				// console.log(result.toString())--%>
-<%--				var new_comment = document.querySelector('.comment');--%>
-<%--				var fullname =result;--%>
-<%--				new_comment.innerHTML=new_comment.innerHTML+'<div class="row style_comment">\n' +--%>
-<%--						'\t\t\t\t\t\t\t<div class="col-md-1">\n' +--%>
-<%--						'\t\t\t\t\t\t\t\t<img width="100%" src="${imgPerson}"\n' +--%>
-<%--						'\t\t\t\t\t\t\t\t\t class="img img-responsive img-thumbnail">\n' +--%>
-<%--						'\t\t\t\t\t\t\t</div>\n' +--%>
-<%--						'\t\t\t\t\t\t\t<div class="col-md-10 panel-footer">\n' +--%>
-<%--						'\t\t\t\t\t\t\t\t<p style="color:green;"> '+result +'</p>\n' +--%>
-<%--						'\t\t\t\t\t\t\t\t<fmt:formatDate  value = "${row_comment.getWriteDate()}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />\n' +--%>
-<%--						'<p style="color: #000;">'+date+'</p>' +--%>
-<%--						'\t\t\t\t\t\t\t\t<p>'+content+'</p>\n'+--%>
-<%--						'\t\t\t\t\t\t\t</div>\n' +--%>
-<%--						'\t\t\t\t\t\t\t<div class="col-md-1 panel-footer" align="right">\n' +--%>
-<%--						'\t\t\t\t\t\t\t\t<p>.</p>\n' +--%>
-<%--						'\t\t\t\t\t\t\t\t<button type="button" class="btn btn-default reply" onclick="replyClicked(\''+ fullname + '\' ,'+parent_id+')" >Reply</button>\n' +--%>
-<%--						'\t\t\t\t\t\t\t</div>\n' +--%>
-<%--						'\t\t\t\t\t\t</div>'--%>
-
-<%--				console.log("Success");--%>
-
-<%--				document.getElementById("content").value = "";--%>
-<%--				contenValue.setAttribute()--%>
-<%--				// window.location.href="/client-product-list?type=detail_product";--%>
-<%--			},--%>
-<%--			error: function (error){--%>
-<%--				alert("Vui lòng đăng nhập để bình luạn")--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	};--%>
-<%--</script>--%>
 
 <%--<script>--%>
 
