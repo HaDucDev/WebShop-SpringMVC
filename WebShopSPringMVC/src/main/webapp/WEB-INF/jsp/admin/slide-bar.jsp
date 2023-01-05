@@ -21,10 +21,7 @@
 
             <li><a href='<c:url value=""/>'><i class="fa fa-desktop fa-3x"></i>Quản lí bình luận</a></li>
 
-            <li><a href=""><i class="fa fa-qrcode fa-3x"></i>Quản lí thống kế</a></li>
-
-            <li><a href="${pageContext.request.contextPath }/views/admin/view/statistical.jsp"><i
-                    class="fa fa-bar-chart-o fa-3x"></i>Thống kê</a></li>
+            <li><a href="<c:url value="/admin/statistical"/>"><i class="fa fa-qrcode fa-3x"></i>Quản lí thống kê</a></li>
         </ul>
     </div>
 </nav>

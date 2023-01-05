@@ -52,6 +52,11 @@ public class HomeController {
         return "admin/index";
     }
 
+    @RequestMapping("/admin/statistical")
+    public String adminstatistical(){
+        return "admin/d-statistical";
+    }
+
 
 //    @Autowired
 //    private MomoConfig momoConfig;
