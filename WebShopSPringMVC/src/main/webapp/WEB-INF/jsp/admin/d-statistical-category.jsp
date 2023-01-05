@@ -9,6 +9,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <c:url value="/admin" var="url"></c:url>
+<c:url value="/js" var="urljs"></c:url>
 <%--<c:url value="/admin-product-list" var="PCurl"></c:url>--%>
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,11 @@
     <script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="${url}/js/custom.js"></script>
+
+
+    <%--  CHARTJS  --%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="${urljs}/stats.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -45,7 +51,7 @@
     <!-- /. NAV TOP  -->
     <jsp:include page="slide-bar.jsp"></jsp:include>
     <!-- /. NAV SIDE  -->
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="overflow-y: scroll; height:400px;">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -56,9 +62,14 @@
             <hr/>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="btn-group" style="margin: auto;display: flex;justify-content: center; align-items: center;border: 1px solid green;">
-                        <button type="button" class="btn btn-primary" style="margin-right: 5px" onclick="window.location='<c:url value="/admin/order-list-all"/> '">Thống kê sản phẩm theo danh mục</button>
-                        <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu theo từng sản phẩm</button>
+                    <div class="btn-group"
+                         style="margin: auto;display: flex;justify-content: center; align-items: center;border: 1px solid green;">
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px"
+                                onclick="window.location='<c:url value="/admin/order-list-all"/>' ">Thống kê sản phẩm theo danh mục
+                        </button>
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu theo
+                            từng sản phẩm
+                        </button>
                         <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
                     </div>
                 </div>
@@ -71,7 +82,7 @@
                                     <thead>
                                     <tr>
                                         <th>Mã danh mục</th>
-                                        <th>Tên danh mục </th>
+                                        <th>Tên danh mục</th>
                                         <th>Số lượng sản phẩm</th>
 
                                     </tr>
@@ -90,6 +101,11 @@
                         </div>
                     </div>
                 </div>
+
+                <%--CHARTJS --%>
+                <div>
+                    <canvas id="myChartCatestats"></canvas>
+                </div>
             </div>
 
         </div>
@@ -103,6 +119,12 @@
     $(document).ready(function () {
         $('#dataTables-example').dataTable();
     });
+</script>
+
+<script>
+        window.onload=function (){
+            cateChart("myChartCatestats")
+        }
 </script>
 
 </body>

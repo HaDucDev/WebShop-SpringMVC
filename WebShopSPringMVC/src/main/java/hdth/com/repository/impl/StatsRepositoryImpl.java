@@ -33,10 +33,8 @@ public class StatsRepositoryImpl implements StatsRepository {
         Root rootP=q.from(Product.class);
         Root rootC = q.from(Category.class);
          // dieu kien de join 2 table. khoa ngoai va khoa chinh trung nhau. o product thi khoa ngoai la doi tuong category day
-        // luu y la ten cua doi tuong truy van chu ko phai ten cua cot o csdl
         q.where(a.equal(rootP.get("category"),rootC.get("id")));
         q.multiselect(rootC.get("id"),rootC.get("name"),a.count(rootP.get("id")));
-        // lay nhieu nen can mutil. id thu 2 la cua product khi da gom thanh 1 bang ms
         q.groupBy(rootC.get("id"));// gom nhom theo id cua cate
 
         // tao cau truy van
