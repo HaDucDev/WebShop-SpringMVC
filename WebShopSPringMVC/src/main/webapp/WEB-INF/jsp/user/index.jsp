@@ -46,8 +46,8 @@
 						<p class="card-text">${p.unitPrice} VND</p>
 					</div>
 					<div class="card-footer">
-						<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})">Them vao gio</a>
-						<a href="<c:url value="/product/${p.id}"/>" class="btn-btn-infi">Mua Ngay</a>
+						<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})">Thêm vào giỏ</a>
+						<a href="<c:url value="/product/${p.id}"/>" class="btn-btn-infi">Chi tiết</a>
 					</div>
 				</div>
 			</c:forEach>
