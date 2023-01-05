@@ -1,18 +1,29 @@
+//ham random color
+function generateCollor(){
+
+    let r=parseInt(Math.random()*255);// sinh so ngau nhien tu 0 den 255
+    let g=parseInt(Math.random()*255);
+    let b=parseInt(Math.random()*255);
+    return `rgb(${r},${g},${b})`
+}
+
+
 // ham thong to bieu do
 
 function cateChart(id, cateLabels=[],cateInfor=[]){
+
+    let  colors=[];
+
+    for (let i=0; i< cateInfor.length;i++){
+        colors.push(generateCollor())
+    }
+
     const data = {
         labels: cateLabels,
         datasets: [{
             label: 'Thống kê sản phẩm',
             data: cateInfor,
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(180, 205, 86)',
-                'rgb(255,210, 99)'
-            ],
+            backgroundColor:colors,
             hoverOffset: 4
         }]
     };

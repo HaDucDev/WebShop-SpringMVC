@@ -70,7 +70,7 @@
                     <div class="btn-group"
                          style="margin: auto;display: flex;justify-content: center; align-items: center;border: 1px solid green;">
                         <button type="button" class="btn btn-primary" style="margin-right: 5px"
-                                onclick="window.location='<c:url value="/admin/order-list-all"/>' ">Thống kê sản
+                                onclick="window.location='<c:url value="/admin/statistical-cate"/>' ">Thống kê sản
                             phẩm theo danh mục
                         </button>
                         <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu
