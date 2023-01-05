@@ -22,6 +22,10 @@ function cateChart(id){
     const config = {
         type: 'doughnut',
         data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
     };
 
     let  ctx= document.getElementById(id).getContext("2d");

@@ -44,6 +44,11 @@
     <%--  CHARTJS  --%>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="${urljs}/stats.js"></script>
+    <style>
+        body {
+            overflow: hidden; /* Hide scrollbars */
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -51,7 +56,7 @@
     <!-- /. NAV TOP  -->
     <jsp:include page="slide-bar.jsp"></jsp:include>
     <!-- /. NAV SIDE  -->
-    <div id="page-wrapper" style="overflow-y: scroll; height:400px;">
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -65,47 +70,55 @@
                     <div class="btn-group"
                          style="margin: auto;display: flex;justify-content: center; align-items: center;border: 1px solid green;">
                         <button type="button" class="btn btn-primary" style="margin-right: 5px"
-                                onclick="window.location='<c:url value="/admin/order-list-all"/>' ">Thống kê sản phẩm theo danh mục
+                                onclick="window.location='<c:url value="/admin/order-list-all"/>' ">Thống kê sản
+                            phẩm theo danh mục
                         </button>
-                        <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu theo
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu
+                            theo
                             từng sản phẩm
                         </button>
                         <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover"
-                                       id="dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>Mã danh mục</th>
-                                        <th>Tên danh mục</th>
-                                        <th>Số lượng sản phẩm</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${cateStats}" var="c">
+                <div style="width:100%; height:500px; overflow:auto; margin: auto">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover"
+                                           id="dataTables-example">
+                                        <thead>
                                         <tr>
-                                            <td>${c[0]}</td>
-                                            <td>${c[1]}</td>
-                                            <td>${c[2]}</td>
+                                            <th>Mã danh mục</th>
+                                            <th>Tên danh mục</th>
+                                            <th>Số lượng sản phẩm</th>
+
                                         </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${cateStats}" var="c">
+                                            <tr>
+                                                <td>${c[0]}</td>
+                                                <td>${c[1]}</td>
+                                                <td>${c[2]}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h4>Biểu đồ</h4>
+                        <%--CHARTJS --%>
+                        <div style="height: 300px;width: 300px;margin: auto">
+                            <canvas id="myChartCatestats"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <%--CHARTJS --%>
-                <div>
-                    <canvas id="myChartCatestats"></canvas>
-                </div>
             </div>
 
         </div>
@@ -122,9 +135,9 @@
 </script>
 
 <script>
-        window.onload=function (){
-            cateChart("myChartCatestats")
-        }
+    window.onload = function () {
+        cateChart("myChartCatestats")
+    }
 </script>
 
 </body>
