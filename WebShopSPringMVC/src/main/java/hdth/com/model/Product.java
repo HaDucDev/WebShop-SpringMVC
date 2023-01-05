@@ -61,7 +61,7 @@ public class Product implements Serializable {
     @JsonIgnore
     private Set<OrderDetail> orderDetails;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)// mac dinh se ko goi list. nên can sua
     @JsonIgnore
     private Set<Reviews> reviews;
 

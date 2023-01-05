@@ -89,32 +89,33 @@
 								<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
 							</ul>
 							<div class="comment">
-
-								<c:forEach var="row_comment" items="${lstComment}">
+								<c:forEach var="row_comment" items="${productDetail.reviews}">
 									<div class="row style_comment">
-										<div class="col-md-1">
-											<img width="100%" src="${imgPerson}"
+										<div class="col-md-1" style="height: 80px; width: 15%">
+											<img style=" width:100%;height:100%;object-fit: contain;" src="${row_comment.user.avatar}"
 												 class="img img-responsive img-thumbnail">
 										</div>
 										<div class="col-md-10 panel-footer">
-											<p style="color:green;"> ${row_comment.userEntity.fullname}</p>
-											<fmt:formatDate  value = "${row_comment.getWriteDate()}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />
-											<p style="color: #000;"><c:out value = "${parsedMyDate}" /></p>
-											<p> ${row_comment.content}</p>
+											<p style="color:green;"> ${row_comment.user.fullName}</p>
+											<p> ${row_comment.comment}</p>
+											<fmt:formatDate  value = "${row_comment.createdComment}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />
+											<p style="color: green;"><c:out value = "${parsedMyDate}" /></p>
 										</div>
-										<div class="col-md-1 panel-footer" align="right">
-											<p>.</p>
-											<button type="button" class="btn btn-default reply" onclick="replyClicked('${row_comment.getUserEntity().getFullname()}',${row_comment.getId()})" >Reply</button>
-										</div>
+<%--										<div class="col-md-1 panel-footer" align="right">--%>
+<%--											<p>.</p>--%>
+<%--											<button type="button" class="btn btn-default reply" onclick="replyClicked('${row_comment.getUserEntity().getFullname()}',${row_comment.getId()})" >Reply</button>--%>
+<%--										</div>--%>
 									</div>
 								</c:forEach>
 							</div>
-							<p><b>Write Your Review</b></p>
-							<textarea id="content" name="" placeholder="Để lại bình luạn ở đây"></textarea>
-							<%--						<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />--%>
-							<button id="btnSubmit"  type="button" class="btn btn-default pull-right"  onclick="sendComment()">
-								Submit
-							</button>
+							<c:if test="${sessionScope.currentUser != null}">
+								<p><b>Write Your Review</b></p>
+								<textarea id="content" name="" placeholder="Để lại bình luận ở đây"></textarea>
+								<%--						<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />--%>
+								<button id="btnSubmit"  type="button" class="btn btn-default pull-right"  onclick="sendComment()">
+									Submit
+								</button>
+							</c:if>
 						</div>
 					</div>
 
