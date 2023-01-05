@@ -1,5 +1,6 @@
 package hdth.com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,11 +37,13 @@ public class Reviews implements Serializable {
 //    private Order orders;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn (name = "product_id", nullable = false,referencedColumnName = "id",insertable=false, updatable=false)
+    @JoinColumn (name = "product_id", nullable = false,referencedColumnName = "id")
+    @JsonIgnore // cai nay ko co cx dc vi du lieu it.
     private Product product;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id",nullable = false,referencedColumnName = "id",insertable = false,updatable = false)
+    @JoinColumn(name = "user_id",nullable = false,referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
 
