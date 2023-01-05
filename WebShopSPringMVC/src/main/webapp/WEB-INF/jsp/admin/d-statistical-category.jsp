@@ -135,8 +135,16 @@
 </script>
 
 <script>
+
+    let cateLabes=[], cateInfor=[];
+    // c:feach nay cua java nhe
+    <c:forEach items="${cateStats}" var="c">
+        cateLabes.push('${c[1]}');
+        cateInfor.push('${c[2]}')
+    </c:forEach>
+
     window.onload = function () {
-        cateChart("myChartCatestats")
+        cateChart("myChartCatestats",cateLabes,cateInfor)
     }
 </script>
 

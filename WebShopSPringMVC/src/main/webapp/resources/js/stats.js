@@ -1,19 +1,17 @@
 // ham thong to bieu do
 
-function cateChart(id){
+function cateChart(id, cateLabels=[],cateInfor=[]){
     const data = {
-        labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-        ],
+        labels: cateLabels,
         datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
+            label: 'Thống kê sản phẩm',
+            data: cateInfor,
             backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
+                'rgb(255, 205, 86)',
+                'rgb(180, 205, 86)',
+                'rgb(255,210, 99)'
             ],
             hoverOffset: 4
         }]
