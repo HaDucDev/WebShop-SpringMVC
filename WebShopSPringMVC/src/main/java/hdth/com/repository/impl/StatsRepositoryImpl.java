@@ -50,9 +50,9 @@ public class StatsRepositoryImpl implements StatsRepository {
     @Override
     public List<Object[]> productStats(String kw, Date fromdate, Date toDate) {
         // kw: vi chi muon thong ke mot san pham bat ki thoi  khong thong ke list toan
-        Session session= this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder a = session.getCriteriaBuilder();
-        CriteriaQuery<Object[]> q= a.createQuery(Object[].class);
+        Session session= this.sessionFactory.getObject().getCurrentSession();// lenh truy van db
+        CriteriaBuilder a = session.getCriteriaBuilder();// field query
+        CriteriaQuery<Object[]> q= a.createQuery(Object[].class);// model truy van
 
         // join 2 bang cate va product can co 2 root tuong ung
         Root rootP=q.from(Product.class);
@@ -65,7 +65,11 @@ public class StatsRepositoryImpl implements StatsRepository {
         predicates.add(a.equal(rootD.get("order"),rootO.get("id")));// vi tu join 2 bang
 
         // prod nhan 2 field trong csdl, con nhan 2 so thi binh thuong
-        q.multiselect(rootP.get("id"),rootP.get("name"),a.prod(rootP.get("unitPrice"),rootD.get("quantity")));
+        q.multiselect(rootP.get("id"),rootP.get("name"),a.sum(a.prod(rootP.get("unitPrice"),rootD.get("quantity"))));
+        q.where(predicates.toArray(new Predicate[]{}));
+        q.groupBy(rootP.get("id"));
+
+        Query query= session.createQuery(q);
 
 
         return null;
