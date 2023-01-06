@@ -54,8 +54,10 @@ public class OrderController {
     private ModelAndView addOrders(@ModelAttribute Order order, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (order.getMethodPayment() == 0) {
             if (this.orderService.createOrder(order) == true) {
-                String projectUrl = "user/a-map";
-                return new ModelAndView(projectUrl);
+                String projectUrl = "http://localhost:8080/WebShopSPringMVC_war/user/order-manager";
+                //return new ModelAndView(projectUrl);
+                return new ModelAndView("redirect:" + projectUrl);
+
             }
         }
         if (order.getMethodPayment() == 1) {
@@ -96,11 +98,11 @@ public class OrderController {
             ordernew.setMethodPayment(1);
             if (params.isEmpty() == false && (this.paymentMomoService.signature(params) == true)) {// thanh toan that bai khong tao don hang
                 if (this.orderService.createOrder(ordernew) == true) {
-                    return "redirect:/user/a-map";// test
+                    return "redirect:/user/order-manager";// test
                 }
             }
         }
-        return "/user/a-salespolicy";
+        return "/user/404";
     }
 
 

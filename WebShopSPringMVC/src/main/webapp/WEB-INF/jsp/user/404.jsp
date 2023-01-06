@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/views/web/static" var="url"> </c:url>
+<c:url value="/user" var="url"> </c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +21,9 @@
 	</div>
 	<div class="content-404">
 		<img src="${url}/images/404.png" class="img-responsive" alt="" />
-		<h1><b>OPPS!</b> We Couldn’t Find this Page</h1>
-		<p>Uh... So it looks like you brock something. The page you are looking for has up and Vanished.</p>
-		<h2><a href="index.jsp">Bring me back Home</a></h2>
+		<h1><b>OPPS!</b> ERROR</h1>
+		<p>Đã có lỗi xảy ra.</p>
+		<h2><a href="${pageContext.request.contextPath}/">Bring me back Home</a></h2>
 	</div>
 </div>
 
