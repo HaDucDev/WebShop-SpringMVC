@@ -61,8 +61,11 @@ public class StatsRepositoryImpl implements StatsRepository {
 
         //list dieu kien ket noi
         List<Predicate> predicates = new ArrayList<>();
-        a.equal(rootD.get("product"),rootP.get("id"));// thuoc tinh dung vs o model
-        a.equal(rootD.get("order"),rootO.get("id"));// vi tu join 2 bang
+        predicates.add(a.equal(rootD.get("product"),rootP.get("id")));// thuoc tinh dung vs o model
+        predicates.add(a.equal(rootD.get("order"),rootO.get("id")));// vi tu join 2 bang
+
+        // prod nhan 2 field trong csdl, con nhan 2 so thi binh thuong
+        q.multiselect(rootP.get("id"),rootP.get("name"),a.prod(rootP.get("unitPrice"),rootD.get("quantity")));
 
 
         return null;
