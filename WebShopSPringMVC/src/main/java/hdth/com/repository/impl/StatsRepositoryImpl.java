@@ -2,6 +2,8 @@ package hdth.com.repository.impl;
 
 
 import hdth.com.model.Category;
+import hdth.com.model.Order;
+import hdth.com.model.OrderDetail;
 import hdth.com.model.Product;
 import hdth.com.repository.StatsRepository;
 import org.hibernate.Session;
@@ -13,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -41,4 +46,27 @@ public class StatsRepositoryImpl implements StatsRepository {
         Query query= session.createQuery(q);
         return query.getResultList();
     }
+
+    @Override
+    public List<Object[]> productStats(String kw, Date fromdate, Date toDate) {
+        // kw: vi chi muon thong ke mot san pham bat ki thoi  khong thong ke list toan
+        Session session= this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder a = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q= a.createQuery(Object[].class);
+
+        // join 2 bang cate va product can co 2 root tuong ung
+        Root rootP=q.from(Product.class);
+        Root rootO=q.from(Order.class);
+        Root rootD=q.from(OrderDetail.class);
+
+        //list dieu kien ket noi
+        List<Predicate> predicates = new ArrayList<>();
+        a.equal(rootD.get("product"),rootP.get("id"));// thuoc tinh dung vs o model
+        a.equal(rootD.get("order"),rootO.get("id"));// vi tu join 2 bang
+
+
+        return null;
+    }
+
+
 }
