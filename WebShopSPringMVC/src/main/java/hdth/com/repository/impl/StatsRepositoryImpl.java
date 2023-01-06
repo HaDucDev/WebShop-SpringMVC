@@ -66,6 +66,11 @@ public class StatsRepositoryImpl implements StatsRepository {
 
         // prod nhan 2 field trong csdl, con nhan 2 so thi binh thuong
         q.multiselect(rootP.get("id"),rootP.get("name"),a.sum(a.prod(rootP.get("unitPrice"),rootD.get("quantity"))));
+
+        if (kw !=null){
+            a.like(rootP.get("name"),kw);
+        }
+
         q.where(predicates.toArray(new Predicate[]{}));
         q.groupBy(rootP.get("id"));
 
