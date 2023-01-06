@@ -77,7 +77,6 @@ public class OrderRepositoryImpl implements OrderRepository {
             // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date.toString()));
             // ordernew.setCreatedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(LocalDateTime.now().toString()));// parse bien chuoi thanh date.
             ordernew.setCreatedDate(new Date(System.currentTimeMillis()));
-            ;
             if (order.getMethodPayment() == 0) {
                 ordernew.setPaymentStatus(ConstValueWeb.CHUA_THANH_TOAN);
             }

@@ -50,6 +50,9 @@ public class StatsRepositoryImpl implements StatsRepository {
     @Override
     public List<Object[]> productStats(String kw, Date fromdate, Date toDate) {
         // kw: vi chi muon thong ke mot san pham bat ki thoi  khong thong ke list toan
+
+        System.out.println(fromdate);
+        System.out.println(toDate);
         Session session= this.sessionFactory.getObject().getCurrentSession();// lenh truy van db
         CriteriaBuilder a = session.getCriteriaBuilder();// field query
         CriteriaQuery<Object[]> q= a.createQuery(Object[].class);// model truy van
@@ -67,8 +70,8 @@ public class StatsRepositoryImpl implements StatsRepository {
         // prod nhan 2 field trong csdl, con nhan 2 so thi binh thuong
         q.multiselect(rootP.get("id"),rootP.get("productName"),a.sum(a.prod(rootP.get("unitPrice"),rootD.get("quantity"))));
 
-        if (kw !=null){
-            predicates.add(a.like(rootP.get("productName"),kw));
+        if (kw !=null && !kw.isEmpty()){
+            predicates.add(a.like(rootP.get("productName"),String.format("%%%s%%",kw)));
         }
 
         if (fromdate != null){// greaterThanOrEqualTo(): lon hon hoac bang
