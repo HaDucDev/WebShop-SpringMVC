@@ -57,6 +57,7 @@ function productChart(id, proLabels=[],proInfor=[]){
             label: 'Thống kê doanh thu theo sản phẩm',
             data: proInfor,
             backgroundColor:colors,
+            borderColor: 'rgb(75, 192, 192)',
             hoverOffset: 4
         }]
     };
