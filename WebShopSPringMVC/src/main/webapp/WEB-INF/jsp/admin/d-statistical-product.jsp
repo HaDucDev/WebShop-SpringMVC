@@ -113,8 +113,8 @@
           <div class="col-md-12">
             <h4>Biểu đồ</h4>
             <%--CHARTJS --%>
-            <div style="height: 300px;width: 300px;margin: auto">
-              <canvas id="myChartCatestats"></canvas>
+            <div style="height: 600px;width: 600px;margin: auto">
+              <canvas id="myChartProstats"></canvas>
             </div>
           </div>
         </div>
@@ -136,15 +136,15 @@
 
 <script>
 
-  let cateLabes=[], cateInfor=[];
+  let proLabes=[], proInfor=[];
   // c:feach nay cua java nhe
-  <c:forEach items="${cateStats}" var="c">
-  cateLabes.push('${c[1]}');
-  cateInfor.push('${c[2]}')
+  <c:forEach items="${productStats}" var="c">
+    proLabes.push('${c[1]}');
+    proInfor.push(${c[2]})// ko co '' vi day la so. chuoi ms co ''
   </c:forEach>
 
   window.onload = function () {
-    cateChart("myChartCatestats",cateLabes,cateInfor)
+    productChart("myChartProstats",proLabes,proInfor)
   }
 </script>
 

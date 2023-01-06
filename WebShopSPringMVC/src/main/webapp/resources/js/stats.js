@@ -8,8 +8,7 @@ function generateCollor(){
 }
 
 
-// ham thong to bieu do
-
+// ham thong to bieu do thong ke san pham theo cate
 function cateChart(id, cateLabels=[],cateInfor=[]){
 
     let  colors=[];
@@ -30,6 +29,40 @@ function cateChart(id, cateLabels=[],cateInfor=[]){
 
     const config = {
         type: 'doughnut',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    };
+
+    let  ctx= document.getElementById(id).getContext("2d");
+
+    new Chart(ctx, config);
+}
+
+
+// ham thong to bieu do thong ke doanh thu theo san pham
+function productChart(id, proLabels=[],proInfor=[]){
+
+    let  colors=[];
+
+    for (let i=0; i< proInfor.length;i++){
+        colors.push(generateCollor())
+    }
+
+    const data = {
+        labels: proLabels,
+        datasets: [{
+            label: 'Thống kê doanh thu theo sản phẩm',
+            data: proInfor,
+            backgroundColor:colors,
+            hoverOffset: 4
+        }]
+    };
+
+    const config = {
+        type: 'line',
         data: data,
         options: {
             responsive: true,
