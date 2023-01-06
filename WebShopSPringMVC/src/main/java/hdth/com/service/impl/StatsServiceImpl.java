@@ -20,7 +20,12 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public List<Object[]> productStats(String kw, Date fromdate, Date toDate) {
-        return this.statsRepository.productStats(kw,fromdate,toDate);
+    public List<Object[]> productStats(String kw, Date fromDate, Date toDate) {
+        return this.statsRepository.productStats(kw,fromDate,toDate);
+    }
+
+    @Override
+    public List<Object[]> productMonthStats(String kw, Date fromDate, Date toDate) {
+        return this.statsRepository.productMonthStats(kw,fromDate,toDate);
     }
 }

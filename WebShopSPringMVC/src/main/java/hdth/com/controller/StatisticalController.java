@@ -63,4 +63,40 @@ public class StatisticalController {
         return "admin/d-statistical-product";
     }
 
+
+    @GetMapping("/statistical-product-month")
+    public String adminstatisticaProductMonth(Model model, @RequestParam(required = false) Map<String, String> params) {
+
+//        String kw = params.getOrDefault("kw", null);
+//
+//        //chuyen string thanh ngay thang
+//        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+//
+//
+//        Date fromDate = null, toDate = null;
+//
+//
+//        try {
+//            String from = params.getOrDefault("fromDate", null);
+//            if (from != null) {
+//                fromDate = f.parse(from);
+//                System.out.println(fromDate);
+//            }
+//            String to = params.getOrDefault("toDate", null);
+//            if (to != null) {
+//                toDate = f.parse(to);
+//                System.out.println(toDate);
+//            }
+//
+//        } catch (ParseException ex) {
+//            ex.printStackTrace();
+//        }
+
+
+        //model.addAttribute("productStats", this.statsService.productStats(kw, fromDate, toDate));
+        model.addAttribute("productMonthStats", this.statsService.productMonthStats(null, null, null));
+
+        return "admin/d-statistical-product-month";
+    }
+
 }

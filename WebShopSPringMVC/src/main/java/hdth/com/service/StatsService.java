@@ -7,5 +7,7 @@ public interface StatsService {
 
     List<Object[]> cateStats();
 
-    List<Object[]> productStats(String kw, Date fromdate, Date toDate);
+    List<Object[]> productStats(String kw, Date fromDate, Date toDate);
+
+    List<Object[]> productMonthStats(String kw, Date fromDate, Date toDate);
 }
