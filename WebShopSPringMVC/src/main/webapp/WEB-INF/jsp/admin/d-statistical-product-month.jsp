@@ -148,19 +148,19 @@
     });
 </script>
 
-<%--<script>--%>
+<script>
 
-<%--    let proLabes = [], proInfor = [];--%>
-<%--    // c:feach nay cua java nhe--%>
-<%--    <c:forEach items="${productStats}" var="c">--%>
-<%--    proLabes.push('${c[1]}');--%>
-<%--    proInfor.push(${c[2]})// ko co '' vi day la so. chuoi ms co ''--%>
-<%--    </c:forEach>--%>
+    let proLabes = [], proInfor = [];
+    // c:feach nay cua java nhe
+    <c:forEach items="${productMonthStats}" var="c">
+    proLabes.push('${c[0]}/${c[1]}');
+    proInfor.push(${c[2]})// ko co '' vi day la so. chuoi ms co ''
+    </c:forEach>
 
-<%--    window.onload = function () {--%>
-<%--        productChart("myChartProstats", proLabes, proInfor)--%>
-<%--    }--%>
-<%--</script>--%>
+    window.onload = function () {
+        productMonthChart("myChartProMonthStats", proLabes, proInfor)
+    }
+</script>
 
 </body>
 </html>

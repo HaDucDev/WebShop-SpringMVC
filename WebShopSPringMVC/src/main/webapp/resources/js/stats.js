@@ -76,3 +76,37 @@ function productChart(id, proLabels=[],proInfor=[]){
     new Chart(ctx, config);
 }
 
+// doanh thu theo thoi gian
+function productMonthChart(id, proLabels=[],proInfor=[]){
+
+    let  colors=[];
+
+    for (let i=0; i< proInfor.length;i++){
+        colors.push(generateCollor())
+    }
+
+    const data = {
+        labels: proLabels,
+        datasets: [{
+            label: 'Thống kê doanh thu theo tháng',
+            data: proInfor,
+            backgroundColor:colors,
+            borderColor: 'rgb(75, 192, 192)',
+            hoverOffset: 4
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    };
+
+    let  ctx= document.getElementById(id).getContext("2d");
+
+    new Chart(ctx, config);
+}
+
