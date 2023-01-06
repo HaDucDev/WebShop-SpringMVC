@@ -73,7 +73,7 @@
                                 onclick="window.location='<c:url value="/admin/statistical-cate"/>' ">Thống kê sản
                             phẩm theo danh mục
                         </button>
-                        <button type="button" class="btn btn-primary" style="margin-right: 5px">Thống kê doanh thu
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px"  onclick="window.location='<c:url value="/admin/statistical-product"/> '">Thống kê doanh thu
                             theo
                             từng sản phẩm
                         </button>

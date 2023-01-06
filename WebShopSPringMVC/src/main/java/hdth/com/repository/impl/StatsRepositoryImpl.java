@@ -60,24 +60,30 @@ public class StatsRepositoryImpl implements StatsRepository {
         Root rootD=q.from(OrderDetail.class);
 
         //list dieu kien ket noi
-        List<Predicate> predicates = new ArrayList<>();
+        List<Predicate> predicates = new ArrayList<>();// list bieu thuc vi tu
         predicates.add(a.equal(rootD.get("product"),rootP.get("id")));// thuoc tinh dung vs o model
         predicates.add(a.equal(rootD.get("order"),rootO.get("id")));// vi tu join 2 bang
 
         // prod nhan 2 field trong csdl, con nhan 2 so thi binh thuong
-        q.multiselect(rootP.get("id"),rootP.get("name"),a.sum(a.prod(rootP.get("unitPrice"),rootD.get("quantity"))));
+        q.multiselect(rootP.get("id"),rootP.get("productName"),a.sum(a.prod(rootP.get("unitPrice"),rootD.get("quantity"))));
 
         if (kw !=null){
-            a.like(rootP.get("name"),kw);
+            predicates.add(a.like(rootP.get("productName"),kw));
+        }
+
+        if (fromdate != null){// greaterThanOrEqualTo(): lon hon hoac bang
+            predicates.add(a.greaterThanOrEqualTo(rootO.get("createdDate"),fromdate));
+        }
+
+        if (toDate != null){// lessThanOrEqualTo: nho hon hoac bang
+            predicates.add(a.lessThanOrEqualTo(rootO.get("createdDate"),toDate));
         }
 
         q.where(predicates.toArray(new Predicate[]{}));
         q.groupBy(rootP.get("id"));
 
         Query query= session.createQuery(q);
-
-
-        return null;
+        return query.getResultList();
     }
 
 

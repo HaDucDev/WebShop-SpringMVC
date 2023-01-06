@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "`order`")
@@ -66,5 +66,7 @@ public class Order implements Serializable {
     private User user;
 
 
-
+    public Order() {
+        createdDate = new Date();// lay ngay hien tai
+    }
 }

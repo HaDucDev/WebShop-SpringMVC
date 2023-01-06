@@ -23,4 +23,12 @@ public class StatisticalController {
         return "admin/d-statistical-category";
     }
 
+    @GetMapping("/statistical-product")
+    public String adminstatisticaProduct(Model model){
+
+        model.addAttribute("productStats",this.statsService.productStats(null,null, null));
+
+        return "admin/d-statistical-product";
+    }
+
 }
