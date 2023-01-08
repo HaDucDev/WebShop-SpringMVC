@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<nav class="navbar-default navbar-side" role="navigation">
+<nav class="navbar-default navbar-side" role="navigation" style="position: fixed">
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li class="text-center"><img class="hoverimg" src="<c:url value="${sessionScope.currentUser.avatar}"/>"
