@@ -98,6 +98,10 @@ public class OrderController {
             ordernew.setMethodPayment(1);
             if (params.isEmpty() == false && (this.paymentMomoService.signature(params) == true)) {// thanh toan that bai khong tao don hang
                 if (this.orderService.createOrder(ordernew) == true) {
+                    // xoa thong tin don hang tai session
+                    session.removeAttribute("user_recipt");
+                    session.removeAttribute("user_sdt");
+                    session.removeAttribute("user_address");
                     return "redirect:/user/order-manager";// test
                 }
             }
