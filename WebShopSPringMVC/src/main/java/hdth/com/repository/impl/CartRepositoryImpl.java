@@ -86,12 +86,18 @@ public class CartRepositoryImpl implements CartRepository {
     @Override
     public Integer countProductCartbyUser(Integer userId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();// session truy van
-        Query q = session.createQuery("SELECT count(c.product.id), max(c.quantity) FROM Cart c WHERE c.user.id=:x ");
+//        cach1
+//        Query q = session.createQuery("SELECT count(c.product.id), max(c.quantity) FROM Cart c WHERE c.user.id=:x ");
+//        q.setParameter("x", userId);
+//        List<Object[]> list = q.getResultList();// phai co 2 cot tro len ms duoc khong thi no se loi
+//        System.out.println(list.get(0)[0] + " countProductCartbyUser " + list.get(0)[1]);
+//        System.out.println(list.get(0)[0]);
+//        Integer m = Integer.valueOf(list.get(0)[0].toString());// khi minh in ra thi no la Long. minh chuyen Long thanh chuoi sau do chuoi thanh Integer
+        //cach2
+        Query q = session.createQuery("SELECT count(c.product.id) FROM Cart c WHERE c.user.id=:x ");
         q.setParameter("x", userId);
-        List<Object[]> list = q.getResultList();// phai co 2 cot tro len ms duoc khong thi no se loi
-        System.out.println(list.get(0)[0] + " countProductCartbyUser " + list.get(0)[1]);
-        System.out.println(list.get(0)[0]);
-        Integer m = Integer.valueOf(list.get(0)[0].toString());// khi minh in ra thi no la Long. minh chuyen Long thanh chuoi sau do chuoi thanh Integer
+        Integer m = Integer.valueOf( q.getResultList().get(0).toString());
+        System.out.println("hay qua nhe"+m);
         return m;
     }
 
