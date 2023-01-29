@@ -23,6 +23,7 @@
 </head>
 <body>
 <div id="wrapper">
+
     <jsp:include page="nav-bar.jsp"></jsp:include>
     <!-- /. NAV TOP  -->
     <jsp:include page="slide-bar.jsp"></jsp:include>
