@@ -75,7 +75,7 @@
                         <button type="button" class="btn btn-primary" style="margin-right: 5px"
                                 onclick="window.location='<c:url value="/admin/statistical-product"/> '">Thống kê doanh thu theo từng sản phẩm
                         </button>
-                        <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
+                        <button type="button" class="btn btn-primary" onclick="window.location='<c:url value="/admin/statistical-product-month"/> '">Thống kê doang thu theo thời gian</button>
                     </div>
                 </div>
                 <div class="col-md-12">

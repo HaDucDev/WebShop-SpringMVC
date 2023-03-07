@@ -77,7 +77,7 @@
                             theo
                             từng sản phẩm
                         </button>
-                        <button type="button" class="btn btn-primary">Thống kê doang thu theo thời gian</button>
+                        <button type="button" class="btn btn-primary" onclick="window.location='<c:url value="/admin/statistical-product-month"/> '">Thống kê doang thu theo thời gian</button>
                     </div>
                 </div>
                 <div style="width:100%; height:500px; overflow:auto; margin: auto">
