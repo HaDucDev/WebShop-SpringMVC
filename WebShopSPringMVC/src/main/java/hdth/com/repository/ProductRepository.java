@@ -10,6 +10,8 @@ public interface ProductRepository {
 
     List<Product> getProducts();
 
+    List<Product> getProductsText(String text);
+
 
     boolean addOrUpdateProducts(Product product);
 

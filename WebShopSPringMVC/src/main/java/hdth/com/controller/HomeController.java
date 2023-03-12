@@ -26,14 +26,12 @@ public class HomeController {
     private ProductService productService;
 
     @RequestMapping("/")
-    public String index99(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size){
-        //model.addAttribute("productListHome", this.productService.getProducts());
+    public String index99(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size
+            , @RequestParam(defaultValue = "") String keyword){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productList = this.productService.getProductsPagination(pageable);
+        Page<Product> productList = this.productService.getProductsPaginationFind(pageable, keyword);
         model.addAttribute("productsPage", productList);
         model.addAttribute("totalPages", productList.getTotalPages());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("size",size);
         model.addAttribute("number",productList.getNumber());
         return "user/index";
     }

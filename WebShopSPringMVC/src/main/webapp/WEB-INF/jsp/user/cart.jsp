@@ -58,7 +58,7 @@
                             </c:choose>
                         </td>
                         <td>
-                            <p><a href=<c:url value="/product/${cart.product.id}"/>">${cart.product.productName}</a></p>
+                            <p><a href="<c:url value="/product/${p.id}"/>">${cart.product.productName}</a></p>
                         </td>
                         <td>
                             <p>${Math.round(cart.product.unitPrice-cart.product.unitPrice*cart.product.discount/100)} VNĐ</p>

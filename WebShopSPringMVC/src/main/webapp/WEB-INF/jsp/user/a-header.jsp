@@ -71,11 +71,8 @@
         <li><a href="<c:url value="/salespolicy"/>">Chính sách bán hàng</a></li>
         <li><a href="<c:url value="/map"/>">Liên hệ</a></li>
         <div class="search-container">
-            <form action="${pageContext.request.contextPath }/client-product-list">
+            <form action="${pageContext.request.contextPath }/">
                 <input name="keyword" type="text" placeholder="Tìm kiếm.." >
-                <input name="type" type="hidden" value="searchByName">
-                <input name="page" type="hidden" value="1">
-                <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </ul>

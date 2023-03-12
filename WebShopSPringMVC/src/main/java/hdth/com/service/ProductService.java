@@ -12,7 +12,8 @@ public interface ProductService {
     List<Product> getProducts();
 
     //list product co phan trang
-    Page<Product> getProductsPagination (Pageable pageable);
+
+    Page<Product> getProductsPaginationFind (Pageable pageable, String text);
 
     boolean addOrUpdateProducts(Product product);
 

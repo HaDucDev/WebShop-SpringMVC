@@ -29,6 +29,15 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    public List<Product> getProductsText(String text) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Product p WHERE p.productName LIKE :x");
+        q.setParameter("x", "%" + text + "%");
+        List<Product> list = q.getResultList();
+        return list;
+    }
+
+    @Override
     public boolean addOrUpdateProducts(Product product) {
 
         Session session = this.sessionFactory.getObject().getCurrentSession();
