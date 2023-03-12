@@ -7,6 +7,9 @@ import hdth.com.service.ProductService;
 import hdth.com.service.ProductStatusService;
 import hdth.com.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,14 @@ public class ProductController {
     private String getProducts(Model model) {
         model.addAttribute("productList", this.productService.getProducts());
         System.out.println(this.productService.getProducts().get(3).getProductstatus().getName());
+        return "/admin/a-list-product";
+    }
+
+    @GetMapping("/admin/product-list-pagination")
+    private String getProductsPagination(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productList = this.productService.getProductsPagination(pageable);
+        model.addAttribute("productsPage", productList);
         return "/admin/a-list-product";
     }
 
@@ -67,9 +78,10 @@ public class ProductController {
 
     //================> common
     @ModelAttribute
-    public void commonAtrr(Model model){// dung chung cho admin thoi
+    public void commonAtrr(Model model){// dung chung cho admin thoi, CHUC NANG ADD PRODUCT
         model.addAttribute("productStatusList",this.productStatusService.getProductStatuses());
     }
+
 
 
     //================>USER

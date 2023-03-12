@@ -7,9 +7,14 @@ import hdth.com.model.Supplier;
 import hdth.com.repository.ProductRepository;
 import hdth.com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +30,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProducts() {
         return this.productRepository.getProducts();
+    }
+
+    @Override
+    public Page<Product> getProductsPagination(Pageable pageable) {
+        int pageSize = pageable.getPageSize();// dat dau tu 1
+        int currentPage = pageable.getPageNumber();// bat dau tu 0
+        int startItem = currentPage * pageSize;//0
+        List<Product> productList = this.productRepository.getProducts();
+        List<Product> productPage =  new ArrayList<>();
+
+        for(int i= startItem; i<startItem+pageSize && i< productList.size();i++){
+            productPage.add(productList.get(i));
+        }
+        return new PageImpl<>(productPage, PageRequest.of(currentPage, pageSize), productList.size());
     }
 
     @Override
