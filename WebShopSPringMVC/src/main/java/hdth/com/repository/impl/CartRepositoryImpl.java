@@ -1,9 +1,6 @@
 package hdth.com.repository.impl;
 
-import hdth.com.model.Cart;
-import hdth.com.model.OrderDetail;
-import hdth.com.model.Product;
-import hdth.com.model.User;
+import hdth.com.model.*;
 import hdth.com.repository.CartRepository;
 import hdth.com.service.ProductService;
 import hdth.com.service.UserService;
@@ -14,8 +11,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Repository
@@ -106,7 +101,7 @@ public class CartRepositoryImpl implements CartRepository {
         List<Cart> carts = this.getCartByUserId(userId);
         int tong = 0;
         for (Cart c : carts) {
-            tong = tong + c.getQuantity() * c.getProduct().getUnitPrice();
+            tong = tong + c.getQuantity() * (c.getProduct().getUnitPrice()-c.getProduct().getUnitPrice()*c.getProduct().getDiscount()/100);
         }
         return Long.valueOf(tong);
     }
@@ -121,5 +116,24 @@ public class CartRepositoryImpl implements CartRepository {
         List<Cart> list = q.getResultList();
         return list;
     }
+
+
+    public Cart getCartById(Integer cartId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Cart cart = session.get(Cart.class, cartId);
+        return cart;
+    }
+
+    @Override
+    public boolean deleteCartById(Integer id) {
+        Session session=this.sessionFactory.getObject().getCurrentSession();
+        Cart c= this.getCartById(id);
+        if (c != null){
+            session.delete(c);
+            return true;
+        }
+        return false;
+    }
+
 
 }

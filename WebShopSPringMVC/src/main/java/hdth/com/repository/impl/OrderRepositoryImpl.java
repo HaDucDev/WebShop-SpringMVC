@@ -102,7 +102,7 @@ public class OrderRepositoryImpl implements OrderRepository {
                     orderDetail.setOrder(ordernew);// khi dat gia tri thi da co doi tuong roi. luu thoi
                     orderDetail.setProduct(c.getProduct());
                     orderDetail.setQuantity(c.getQuantity());
-                    orderDetail.setAmount(Long.valueOf(c.getQuantity() * c.getProduct().getUnitPrice()));
+                    orderDetail.setAmount(Long.valueOf(c.getQuantity() * (c.getProduct().getUnitPrice()-c.getProduct().getUnitPrice()*c.getProduct().getDiscount()/100)));
                     session.save(orderDetail);
 
                     session.delete(c);

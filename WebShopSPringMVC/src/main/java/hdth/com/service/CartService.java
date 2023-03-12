@@ -13,4 +13,6 @@ public interface CartService {
 
     Integer countProductCartbyUser(Integer userId);
 
+    public boolean deleteCartById(Integer id);
+
 }

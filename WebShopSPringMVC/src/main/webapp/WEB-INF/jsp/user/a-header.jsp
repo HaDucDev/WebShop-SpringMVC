@@ -34,7 +34,7 @@
                             <c:if test="${not empty sessionScope.currentUser.fullName}">
                                 <li><a href="${pageContext.request.contextPath}/user/order-manager"><i class="fa fa-book" aria-hidden="true"></i>Đơn hàng</a></li>
                             </c:if>
-                            <li><a href="${pageContext.request.contextPath}/user/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng<span class="badge badge-danger" id="cart-counter">${cartCounter}</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/cart-list"><i class="fa fa-shopping-cart"></i> Giỏ hàng<span class="badge badge-danger" id="cart-counter">${cartCounter}</span></a></li>
                             <c:if test="${not empty sessionScope.currentUser.fullName}">
                                 <li><a href="#"><i class="fa fa-user"></i>Chào <c:out value="${sessionScope.currentUser.fullName}"></c:out></a></li>
                                 <li><a href="<c:url value="/logout"/>">Đăng xuất</a></li>

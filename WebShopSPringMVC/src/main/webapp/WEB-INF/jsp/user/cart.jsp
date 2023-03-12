@@ -40,14 +40,15 @@
                 <c:forEach items="${cartList}" var="cart">
                     <tr class="table-info ">
                         <th scope="row">
-                            <h4><a href="">${cart.product.id}</a></h4>
+                            <h4>${cart.product.id}</h4>
                         </th>
                         <td>
                             <c:choose>
                                 <c:when test="${cart.product.productImage != null}">
                                     <img style="width: 60px;height: 60px;object-fit: cover"
-                                         src="<c:url value="${cart.product.productImage}"/>"
-                                         alt="${cart.product.productName}">
+                                            src="<c:url value="${cart.product.productImage}"/>"
+                                            alt="${cart.product.productName}">
+
                                 </c:when>
                                 <c:otherwise>
                                     <img style="width: 100px;height: 100px;object-fit: cover"
@@ -57,11 +58,11 @@
                             </c:choose>
                         </td>
                         <td>
-                            <p><a href="">${cart.product.productName}</a></p>
+                            <p><a href=<c:url value="/product/${cart.product.id}"/>">${cart.product.productName}</a></p>
                         </td>
                         <td>
-                            <p>${cart.product.unitPrice} VNĐ</p>
-                            <p>${(cart.product.unitPrice)} giam gia VNĐ</p>
+                            <p>${Math.round(cart.product.unitPrice-cart.product.unitPrice*cart.product.discount/100)} VNĐ</p>
+                            <p><s>${(cart.product.unitPrice)}VNĐ</s></p>
                         </td>
                         <td>
                             <div class="cart_quantity_button">
@@ -77,8 +78,8 @@
                             <p id="total"><fmt:formatNumber type="number" value="${cart.product.unitPrice*cart.quantity}"/> VNĐ</p>
                         </td>
                         <td class="cart_delete">
-                            <a class="cart_quantity_delete" onclick="updateCart(${i.getProductEntity().getId()},'del')"
-                               href=""><i class="fa fa-times"></i></a>
+                            <a class="cart_quantity_delete"
+                               href="<c:url value="/user/delete-cart/${cart.id}"/>"><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -92,7 +93,7 @@
 
 <br>
 <jsp:include page="a-footer.jsp"></jsp:include>
-<c:url value="/user/cart" var="APIurl"> </c:url>
+<c:url value="/user/cart-list" var="APIurl"> </c:url>
 <script>
     function updateCartAdd(productId){
         fetch("/WebShopSPringMVC_war/api/cart/add",{

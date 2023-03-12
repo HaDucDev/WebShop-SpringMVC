@@ -36,4 +36,9 @@ public class CartServiceImpl implements CartService {
     public Integer countProductCartbyUser(Integer userId) {
         return this.cartRepository.countProductCartbyUser(userId);
     }
+
+    @Override
+    public boolean deleteCartById(Integer id) {
+        return this.cartRepository.deleteCartById(id);
+    }
 }

@@ -16,4 +16,6 @@ public interface CartRepository {
     Integer countProductCartbyUser(Integer userId);
     Long totalMoneyCartbyUser(Integer userId);
 
+    boolean deleteCartById(Integer id);
+
 }
