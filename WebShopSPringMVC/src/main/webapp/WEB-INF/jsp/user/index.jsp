@@ -63,6 +63,7 @@
 						<option value="20000000">20.000.000</option>
 						<option value="30000000">30.000.000</option>
 					</select>
+					<input name="page" type="hidden" value="0">
 					<input type="submit" value="Lọc" style="width: 100%; margin-top: 10px">
 				</form>
 			</div>
@@ -100,15 +101,15 @@
 			<ul class="pagination" style="float: right">
 				<c:if test="${totalPages > 1}">
 					<li class="page-item}">
-						<a class="page-link" href="?page=${number - 1}" tabindex="-1">Previous</a>
+						<a class="page-link-custom page-link"  tabindex="-1">Previous</a>
 					</li>
 					<c:forEach begin="0" end="${totalPages - 1}" var="i">
 						<li class="page-item ${i eq number ? 'active' : ''}">
-							<a class="page-link" href="<c:url value="/?page=${i}"/>">${i + 1}</a>
+							<a class="page-link-custom page-link" data-page="${i}">${i + 1}</a>
 						</li>
 					</c:forEach>
 					<li class="page-item">
-						<a class="page-link" href="<c:url value="/?page=${number + 1}"/>">Next</a>
+						<a class="page-link-custom page-link">Next</a>
 					</li>
 				</c:if>
 			</ul>
@@ -166,7 +167,29 @@
 <script src="${url}/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<script>
+	// Lấy các thẻ a có class "page-link-custom"
+	const links = document.querySelectorAll('.page-link-custom');
 
+	// Lặp qua các thẻ a và thêm sự kiện click
+	links.forEach(link => {
+		link.addEventListener('click', function(e) {
+			e.preventDefault(); // Ngăn chặn trình duyệt điều hướng đến đường dẫn trong href
+
+			const currentPageUrl = window.location.href; // Lấy đường dẫn của trang hiện tại
+
+			const pageNumber = this.dataset.page; // Lấy số trang từ thuộc tính "data-page" của thẻ a được nhấn
+
+			// Tạo đường dẫn mới bằng cách thay thế tham số "page" trong đường dẫn hiện tại bằng số trang mới
+			const url = new URL(currentPageUrl);
+			url.searchParams.set('page', pageNumber);
+			const newUrl = url.toString();
+
+			// Điều hướng đến trang mới
+			window.location.href = newUrl;
+		});
+	});
+</script>
 
 </body>
 </html>
