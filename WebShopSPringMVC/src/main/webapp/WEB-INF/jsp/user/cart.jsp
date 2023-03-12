@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/user" var="url"> </c:url>
-<%--<c:url value="/api-user-cart" var="APIurl"> </c:url>--%>
-<%--<c:url value="/api-user-order" var="APIOrderUrl"> </c:url>--%>
-<%--<c:url value="/client-order" var="APIOrderDoneUrl"></c:url>--%>
-<%--<c:url value="/paySuccess" var="PaySuccess"></c:url>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +68,7 @@
                                 <a class="cart_quantity_up" onclick="updateCartAdd(${cart.product.id})"
                                    href=""> + </a>
                                 <input class="cart_quantity_input" type="number" name="quantity" id="cart_quantity_input"
-                                       value="${cart.quantity}" autocomplete="off" size="2" min="1" style="width: 60px">
+                                       value="${cart.quantity}" autocomplete="off" size="2" min="1" style="width: 60px" readonly>
                                 <a class="cart_quantity_down"
                                    onclick="updateCartSub(${cart.product.id})" href=""> - </a>
                             </div>
@@ -93,61 +89,9 @@
     </div>
 </section> <!--/#cart_items-->
 
-<%--<section>--%>
-<%--	<div class="container">--%>
-<%--		<div class="step-one">--%>
-<%--			<h2 class="heading">Tiến hành đặt hàng</h2>--%>
-<%--		</div>--%>
-<%--		<div class="shopper-informations">--%>
-<%--			<div class="row">--%>
-<%--				<div class="col-sm-7">--%>
-<%--					<div class="shopper-info">--%>
-<%--						<p>Thông tin cá nhân</p>--%>
-<%--						<form>--%>
-<%--							<input id="fullname" type="text" placeholder="Tên" value="${user.getFullname()}">--%>
-<%--							<label style="color: red">${errUserName}</label>--%>
-<%--							<input id="email" type="text" placeholder="Email" value="${user.getEmail()}">--%>
-<%--							<label style="color: red">${errEmail}</label>--%>
-<%--							<input id="address" type="text" placeholder="Địa chỉ" value="${user.getAddress()}">--%>
-<%--							<label style="color: red">${errAddress}</label>--%>
-<%--							<input id="phonenumber" type="text" placeholder="Số điện thoại" value="${user.getPhone_number()}">--%>
-<%--							<label style="color: red">${errPhone}</label>--%>
-<%--						</form>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-<%--				<div class="col-sm-1">--%>
-<%--				</div>--%>
-<%--				<div class="col-sm-4">--%>
-<%--					<div class="shopper-info">--%>
-<%--						<h2 style="color: #696763">Tổng thanh toán</h2>--%>
-<%--&lt;%&ndash;						<label style="font-size: 19px; font-weight: 500; color: #696763">${totalPrice}</label>&ndash;%&gt;--%>
-<%--						<label  style="font-size: 19px; font-weight: 500; color: #696763">${totalPrice} VNĐ</label>--%>
-<%--&lt;%&ndash;						<span style="font-size: 19px; color: #696763">VNĐ</span>&ndash;%&gt;--%>
-<%--						<hr>--%>
-<%--						<p>Hình thức thanh toán</p>--%>
-<%--						<div>--%>
-<%--							<input type="radio" id="online" name="check" value="online">--%>
-<%--							<label for="online" style="color: #696763">Trực tuyến</label>--%>
-<%--						</div>--%>
-<%--						<div>--%>
-<%--							<input type="radio" checked id="offline" name="check" value="offline">--%>
-<%--							<label for="offline" style="color: #696763">Trả khi nhận hàng</label>--%>
-<%--						</div>--%>
-<%--				</div>--%>
-<%--			</div>--%>
-<%--		</div>--%>
-<%--		<a class="btn btn-primary" onclick="payCart()" &lt;%&ndash;href="${pageContext.request.contextPath}/payment?check=offline"&ndash;%&gt; >Đặt hàng</a>--%>
-<%--	</div>--%>
-<%--	</div>--%>
-<%--</section>--%>
 
 <br>
 <jsp:include page="a-footer.jsp"></jsp:include>
-<script src="${url}/js/jquery.js"></script>
-<script src="${url}/js/bootstrap.min.js"></script>
-<script src="${url}/js/jquery.scrollUp.min.js"></script>
-<script src="${url}/js/jquery.prettyPhoto.js"></script>
-<script src="${url}/js/main.js"></script>
 <c:url value="/user/cart" var="APIurl"> </c:url>
 <script>
     function updateCartAdd(productId){
@@ -160,13 +104,11 @@
                 "Content-Type":"application/json"
             }
         }).then(function (res){
-            return res.json(); // do mminh lam tra ve so nguyen nen can path sang json
+            return res.json();
         }).then(function (data){
             console.log("9999999");
             <%--window.location.href = "${APIurl}";--%>
-            //location.reload();
-            document.getElementById("cart_quantity_input").contentWindow.location.reload(true);
-            document.getElementById("total").contentWindow.location.reload(true);
+            location.reload();
         })
     }
 
@@ -185,81 +127,9 @@
             return res.json(); // do mminh lam tra ve so nguyen nen can path sang json
         }).then(function (data){
             console.log("9999999");
-            <%--window.location.href = "${APIurl}";--%>
-            // location.reload();
-            document.getElementById("cart_quantity_input").contentWindow.location.reload(true);
-            document.getElementById("total").contentWindow.location.reload(true);
+            window.location.href = "${APIurl}";
         })
     }
 </script>
-<%--<script>--%>
-
-<%--	function updateCart(productId,type){--%>
-<%--		$.ajax({--%>
-
-<%--			url: '${APIurl}?type='+type,--%>
-<%--			type: 'PUT',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(productId),--%>
-<%--			dataType: 'json',--%>
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				console.log(data);--%>
-<%--				&lt;%&ndash;window.location.href = "${PCurl}?type=list&message=insert_success";&ndash;%&gt;--%>
-<%--			},--%>
-<%--			errMode: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	}--%>
-
-
-<%--	function addOrder(){--%>
-<%--		var fullname= $('#fullname').val();--%>
-<%--		var email= $('#email').val();--%>
-<%--		var phonenumber= $('#phonenumber').val();--%>
-<%--		var address= $('#address').val();--%>
-
-<%--		var data={--%>
-<%--			"fullname":fullname,--%>
-<%--			"email":email,--%>
-<%--			"phonenumber":phonenumber,--%>
-<%--			"address":address--%>
-<%--		}--%>
-<%--		$.ajax({--%>
-<%--			url: '${APIOrderUrl}',--%>
-<%--			type: 'POST',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				window.location.href = "${PaySuccess}";--%>
-<%--			},--%>
-<%--			errMode: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	}--%>
-<%--	function payCart(){--%>
-<%--		var isOnline = document.getElementById("online").checked;--%>
-<%--		if (isOnline) {--%>
-<%--			var fullname= $('#fullname').val();--%>
-<%--			var email= $('#email').val();--%>
-<%--			var phonenumber= $('#phonenumber').val();--%>
-<%--			var address= $('#address').val();--%>
-
-<%--			window.location.href="${pageContext.request.contextPath}/payment?fullname="+fullname+"&email="+email+"&phonenumber="+phonenumber+"&address="+address--%>
-<%--		}--%>
-<%--		else {--%>
-<%--			addOrder();--%>
-<%--		}--%>
-<%--	}--%>
-<%--</script>--%>
-
 </body>
 </html>

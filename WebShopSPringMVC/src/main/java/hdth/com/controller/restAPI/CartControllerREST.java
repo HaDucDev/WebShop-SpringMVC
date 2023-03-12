@@ -32,24 +32,24 @@ public class CartControllerREST {
     }
 
     @PutMapping (path = "/api/cart/add")// cart page
-    public Integer addProductoCart(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
+    public ResponseEntity<Integer> addProductoCart(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
         HttpSession httpSession= request.getSession();
         User user = (User) httpSession.getAttribute("currentUser");
         if(user != null &&  this.cartService.addCartbyId(cart.getProductId(),user.getId())==true)
         {
-            return this.cartService.countProductCartbyUser(user.getId());
+            return new ResponseEntity<>(this.cartService.countProductCartbyUser(user.getId()), HttpStatus.OK) ;
         }
-        return  0;
+        return  new ResponseEntity<>(0, HttpStatus.CREATED) ;
     }
 
     @PutMapping(path = "/api/cart/sub")
-    public Integer addProductoCartSub(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
+    public  ResponseEntity<Integer> addProductoCartSub(@RequestBody Cart cart, HttpServletRequest request){// @RequestBody bien json thanh object
         HttpSession httpSession= request.getSession();
         User user = (User) httpSession.getAttribute("currentUser");
         if(this.cartService.addCartbyIdSub(cart.getProductId(),user.getId())==true)
         {
-            return this.cartService.countProductCartbyUser(user.getId());
+            return new ResponseEntity<>(this.cartService.countProductCartbyUser(user.getId()), HttpStatus.OK) ;
         }
-        return  0;
+        return  new ResponseEntity<>(0, HttpStatus.CREATED);
     }
 }

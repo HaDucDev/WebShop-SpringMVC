@@ -2,10 +2,14 @@ package hdth.com.controller;
 
 
 import hdth.com.model.Order;
+import hdth.com.model.Product;
 import hdth.com.service.OrderService;
 import hdth.com.service.PaymentMomoService;
 import hdth.com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +26,15 @@ public class HomeController {
     private ProductService productService;
 
     @RequestMapping("/")
-    public String index99(Model model){
-        model.addAttribute("productListHome", this.productService.getProducts());
+    public String index99(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size){
+        //model.addAttribute("productListHome", this.productService.getProducts());
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productList = this.productService.getProductsPagination(pageable);
+        model.addAttribute("productsPage", productList);
+        model.addAttribute("totalPages", productList.getTotalPages());
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("size",size);
+        model.addAttribute("number",productList.getNumber());
         return "user/index";
     }
 

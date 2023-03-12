@@ -21,7 +21,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" ></script>
 	<script src="${urljs}/main.js"></script>
-	<!--  -->
+
 </head>
 
 <body>
@@ -29,31 +29,69 @@
 <div class="header-middle"><!--header-middle-->
 	<div class="container">
 		<div class="row">
-			<c:forEach var="p" items="${productListHome}">
-				<div class="card col-md-4">
-					<div class="card-body">
+			<div class="col-md-2">
+				<h5>Chọn loại sản phẩm</h5>
+				<select>
+					<c:forEach items="${cateList}" var="a">
+						<option value="${a.id}">${a.name}</option>
+					</c:forEach>
+				</select>
+				<h5>Chọn loại hãng sản xuất</h5>
+				<select>
+					<c:forEach items="${supplierList}" var="s">
+						<option value="${s.id}">${s.supplierName}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="col-md-10">
+				<c:forEach var="p" items="${productsPage.content}">
+					<div class="card col-md-4">
+						<div class="card-body" style="margin: 0px 5px; height: 250px; width: 300px">
 
-						<div style="width:100%;height:300px;object-fit: cover;">
-							<c:choose>
-								<c:when test="${p.productImage != null}">
-									<img class="img-fluid" src="<c:url value="${p.productImage}"/>" alt="{p.name}" style=" width:100%;height:100%;">
-								</c:when>
-								<c:otherwise>
-									<img class="img-fluid" src="<c:url value="images/logo.png"/>" alt="{p.name}" style=" width:100%;height:100%;">
-								</c:otherwise>
-							</c:choose>
+							<div style="width:50%;height:100px;object-fit: cover;">
+								<c:choose>
+									<c:when test="${p.productImage != null}">
+										<img class="img-fluid" src="<c:url value="${p.productImage}"/>" alt="{p.name}" style=" width:100%;height:100%;">
+									</c:when>
+									<c:otherwise>
+										<img class="img-fluid" src="<c:url value="images/logo.png"/>" alt="{p.name}" style=" width:100%;height:100%;">
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div style="font-size: 20px; box-sizing: border-box; padding: 5px">${p.productName}</div>
+							<div style="display: flex;padding: 5px">
+								<div class="card-text" style="margin-right: 5px"> Giá bán: ${Math.round(p.unitPrice-p.unitPrice*p.discount/100)}đ</div>
+								<div class="card-text"><s>${p.unitPrice} đ</s></div>
+							</div>
+							<div style="font-size: 15px; box-sizing: border-box; padding: 5px">Giảm giá: ${p.discount}%</div>
 						</div>
-						<h3 class="card-title">${p.productName}</h3>
-						<p class="card-text">${p.unitPrice} VND</p>
+						<div class="card-footer">
+							<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})" style="float: left">Thêm vào giỏ</a>
+							<a href="<c:url value="/product/${p.id}"/>" class="btn-btn-infi" style="float: right">Chi tiết</a>
+						</div>
 					</div>
-					<div class="card-footer">
-						<a href="javascript:;" class="btn-btn-danger" onclick="addToCart(${p.id})">Thêm vào giỏ</a>
-						<a href="<c:url value="/product/${p.id}"/>" class="btn-btn-infi">Chi tiết</a>
-					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
+		</div>
+		<div>
+			<ul class="pagination" style="float: right">
+				<c:if test="${totalPages > 1}">
+					<li class="page-item}">
+						<a class="page-link" href="?page=${number - 1}" tabindex="-1">Previous</a>
+					</li>
+					<c:forEach begin="0" end="${totalPages - 1}" var="i">
+						<li class="page-item ${i eq number ? 'active' : ''}">
+							<a class="page-link" href="<c:url value="/?page=${i}"/>">${i + 1}</a>
+						</li>
+					</c:forEach>
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/?page=${number + 1}"/>">Next</a>
+					</li>
+				</c:if>
+			</ul>
 		</div>
 	</div>
+
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">

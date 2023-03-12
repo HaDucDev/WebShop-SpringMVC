@@ -2,8 +2,6 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/user" var="url"> </c:url>
-<%--<c:url value="/views/web" var="Pathurl"> </c:url>--%>
-<%--<c:url value="/home" var="HomeUrl"> </c:url>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,22 +54,20 @@
 <nav>
     <ul>
         <li><a href="${pageContext.request.contextPath }/">Trang chủ</a></li>
+<%--        <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Danh mục sản phẩm</a>--%>
 
-
-        <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Danh mục sản phẩm</a>
-
-            <ul>
-                <c:forEach items="${lstCategory}" var="category">
-                    <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=${category.id}&page=1">${category.cateName}</a>
-                        <ul>
-                             <c:forEach items="${category.getDetailCategoryEntityList()}" var="detailCategory">
-                                <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=${detailCategory.id}&page=1">${detailCategory.detailCateName}</a></li>
-                             </c:forEach>
-                        </ul>
-                    </li>
-                </c:forEach>
-            </ul>
-        </li>
+<%--            <ul>--%>
+<%--                <c:forEach items="${lstCategory}" var="category">--%>
+<%--                    <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=${category.id}&page=1">${category.cateName}</a>--%>
+<%--                        <ul>--%>
+<%--                             <c:forEach items="${category.getDetailCategoryEntityList()}" var="detailCategory">--%>
+<%--                                <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=${detailCategory.id}&page=1">${detailCategory.detailCateName}</a></li>--%>
+<%--                             </c:forEach>--%>
+<%--                        </ul>--%>
+<%--                    </li>--%>
+<%--                </c:forEach>--%>
+<%--            </ul>--%>
+<%--        </li>--%>
         <li><a href="<c:url value="/salespolicy"/>">Chính sách bán hàng</a></li>
         <li><a href="<c:url value="/map"/>">Liên hệ</a></li>
         <div class="search-container">

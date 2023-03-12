@@ -38,13 +38,13 @@ public class ProductController {
         return "/admin/a-list-product";
     }
 
-    @GetMapping("/admin/product-list-pagination")
-    private String getProductsPagination(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productList = this.productService.getProductsPagination(pageable);
-        model.addAttribute("productsPage", productList);
-        return "/admin/a-list-product";
-    }
+//    @GetMapping("/admin/product-list-pagination")
+//    private String getProductsPagination(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size) {
+//        Pageable pageable = PageRequest.of(page, size);
+//        Page<Product> productList = this.productService.getProductsPagination(pageable);
+//        model.addAttribute("productsPage", productList);
+//        return "/admin/a-list-product";
+//    }
 
     @GetMapping("/admin/product/add")
     private String getAdd(Model model) {
