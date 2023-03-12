@@ -1,17 +1,18 @@
 package hdth.com.repository.impl;
 
 
-import hdth.com.model.Product;
+import hdth.com.model.*;
 import hdth.com.repository.ProductRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -29,12 +30,20 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public List<Product> getProductsText(String text) {
+    public List<Product> getProductsFilter(String text, Integer categoryId, Integer supplierId, Integer startPrice, Integer endPrice) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Product p WHERE p.productName LIKE :x");
-        q.setParameter("x", "%" + text + "%");
-        List<Product> list = q.getResultList();
-        return list;
+        Query q = session.createQuery("SELECT p FROM Product p WHERE (:categoryId IS NULL OR p.category.id = :categoryId) " +
+                "AND (:supplierId IS NULL OR p.supplier.id = :supplierId) AND (:text IS NULL OR p.productName LIKE :text) " +
+                "AND (:startPrice IS NULL OR (p.unitPrice-p.unitPrice*p.discount/100) >= :startPrice) " +
+                "AND (:endPrice IS NULL OR (p.unitPrice-p.unitPrice*p.discount/100) <= :endPrice)");
+
+        q.setParameter("categoryId", categoryId);
+        q.setParameter("supplierId", supplierId);
+        q.setParameter("text","%" + text + "%");
+        q.setParameter("startPrice", startPrice);
+        q.setParameter("endPrice", endPrice);
+        List<Product> productList = q.getResultList();
+        return productList;
     }
 
     @Override

@@ -26,10 +26,13 @@ public class HomeController {
     private ProductService productService;
 
     @RequestMapping("/")
-    public String index99(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size
-            , @RequestParam(defaultValue = "") String keyword){
+    public String index99(Model model, @RequestParam(defaultValue = "0") int page,
+                          @RequestParam(defaultValue = "9") int size, @RequestParam(defaultValue = "") String keyword,
+                          @RequestParam(required = false) Integer categoryId, @RequestParam(required = false) Integer  supplierId,
+                          @RequestParam(required = false) Integer  startPrice,@RequestParam(required = false) Integer  endPrice){
+
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productList = this.productService.getProductsPaginationFind(pageable, keyword);
+        Page<Product> productList = this.productService.getProductsPaginationFind(pageable, keyword,categoryId,supplierId,startPrice,endPrice);
         model.addAttribute("productsPage", productList);
         model.addAttribute("totalPages", productList.getTotalPages());
         model.addAttribute("number",productList.getNumber());

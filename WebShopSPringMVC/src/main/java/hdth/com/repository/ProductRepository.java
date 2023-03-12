@@ -1,8 +1,6 @@
 package hdth.com.repository;
 
 import hdth.com.model.Product;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -10,7 +8,7 @@ public interface ProductRepository {
 
     List<Product> getProducts();
 
-    List<Product> getProductsText(String text);
+    List<Product> getProductsFilter(String text, Integer categoryId, Integer supplierId, Integer startPrice, Integer endPrice);
 
 
     boolean addOrUpdateProducts(Product product);

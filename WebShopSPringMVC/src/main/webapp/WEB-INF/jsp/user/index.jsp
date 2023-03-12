@@ -30,18 +30,41 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				<h5>Chọn loại sản phẩm</h5>
-				<select>
-					<c:forEach items="${cateList}" var="a">
-						<option value="${a.id}">${a.name}</option>
-					</c:forEach>
-				</select>
-				<h5>Chọn loại hãng sản xuất</h5>
-				<select>
-					<c:forEach items="${supplierList}" var="s">
-						<option value="${s.id}">${s.supplierName}</option>
-					</c:forEach>
-				</select>
+				<form id="product-form-filter" method="get" action="${pageContext.request.contextPath }/">
+					<h5>Chọn loại sản phẩm</h5>
+					<select name="categoryId" >
+						<option value="0">Chọn loại hàng ...</option>
+						<c:forEach items="${cateList}" var="a">
+							<option value="${a.id}">${a.name}</option>
+						</c:forEach>
+					</select>
+					<h5>Chọn hãng</h5>
+					<select name="supplierId">
+						<option value="0">Chọn ...</option>
+						<c:forEach items="${supplierList}" var="s">
+							<option value="${s.id}">${s.supplierName}</option>
+						</c:forEach>
+					</select>
+					<h5>Chọn giá bắt đầu</h5>
+					<select name="startPrice">
+						<option value="0">Chọn ...</option>
+						<option value="100000">100.000</option>
+						<option value="1000000">1.000.000</option>
+						<option value="10000000">10.000.000</option>
+						<option value="20000000">20.000.000</option>
+						<option value="30000000">30.000.000</option>
+					</select>
+					<h5>Chọn giá kết thúc</h5>
+					<select name="endPrice">
+						<option value="0">Chọn ...</option>
+						<option value="100000">100.000</option>
+						<option value="1000000">1.000.000</option>
+						<option value="10000000">10.000.000</option>
+						<option value="20000000">20.000.000</option>
+						<option value="30000000">30.000.000</option>
+					</select>
+					<input type="submit" value="Lọc" style="width: 100%; margin-top: 10px">
+				</form>
 			</div>
 			<div class="col-md-10">
 				<c:forEach var="p" items="${productsPage.content}">
