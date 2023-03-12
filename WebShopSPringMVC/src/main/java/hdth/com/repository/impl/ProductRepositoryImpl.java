@@ -32,16 +32,41 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> getProductsFilter(String text, Integer categoryId, Integer supplierId, Integer startPrice, Integer endPrice) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("SELECT p FROM Product p WHERE (:categoryId IS NULL OR p.category.id = :categoryId) " +
-                "AND (:supplierId IS NULL OR p.supplier.id = :supplierId) AND (:text IS NULL OR p.productName LIKE :text) " +
-                "AND (:startPrice IS NULL OR (p.unitPrice-p.unitPrice*p.discount/100) >= :startPrice) " +
-                "AND (:endPrice IS NULL OR (p.unitPrice-p.unitPrice*p.discount/100) <= :endPrice)");
 
-        q.setParameter("categoryId", categoryId);
-        q.setParameter("supplierId", supplierId);
-        q.setParameter("text","%" + text + "%");
-        q.setParameter("startPrice", startPrice);
-        q.setParameter("endPrice", endPrice);
+        String queryStr = "SELECT p FROM Product p WHERE 1=1 ";
+        if (categoryId != null && categoryId != 0) {
+            queryStr += "AND p.category.id = :categoryId ";
+        }
+        if (supplierId != null && supplierId != 0) {
+            queryStr += "AND p.supplier.id = :supplierId ";
+        }
+        if (text != null && !text.isEmpty()) {
+            queryStr += "AND p.productName LIKE :text ";
+        }
+        if (startPrice != null && startPrice!=0) {
+            queryStr += "AND (p.unitPrice-p.unitPrice*p.discount/100) >= :startPrice ";
+        }
+        if (endPrice != null && endPrice!=0) {
+            queryStr += "AND (p.unitPrice-p.unitPrice*p.discount/100) <= :endPrice ";
+        }
+
+        Query q = session.createQuery(queryStr);
+
+        if (categoryId != null && categoryId != 0) {
+            q.setParameter("categoryId", categoryId);
+        }
+        if (supplierId != null && supplierId != 0) {
+            q.setParameter("supplierId", supplierId);
+        }
+        if (text != null && !text.isEmpty()) {
+            q.setParameter("text","%" + text + "%");
+        }
+        if (startPrice != null && startPrice!=0) {
+            q.setParameter("startPrice", startPrice);
+        }
+        if (endPrice != null && endPrice!=0) {
+            q.setParameter("endPrice", endPrice);
+        }
         List<Product> productList = q.getResultList();
         return productList;
     }

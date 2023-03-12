@@ -51,17 +51,7 @@ public class ProductServiceImpl implements ProductService {
         int pageSize = pageable.getPageSize();// dat dau tu 1
         int currentPage = pageable.getPageNumber();// bat dau tu 0
         int startItem = currentPage * pageSize;//0
-        List<Product> productList=null;
-        if(startPrice==0 && endPrice==0){
-            productList = this.productRepository.getProductsFilter(text,categoryId,supplierId,null,null);
-        }
-        if(startPrice==0){
-            productList = this.productRepository.getProductsFilter(text,categoryId,supplierId,null,endPrice);
-        }
-        if(endPrice==0){
-            productList = this.productRepository.getProductsFilter(text,categoryId,supplierId,startPrice,null);
-        }
-       //roduct> productList = this.productRepository.getProductsFilter(text,categoryId,supplierId,startPrice,endPrice);
+        List<Product> productList = this.productRepository.getProductsFilter(text,categoryId,supplierId,startPrice,endPrice);
         List<Product> productPage =  new ArrayList<>();
         for(int i= startItem; i<startItem+pageSize && i< productList.size();i++){
             productPage.add(productList.get(i));

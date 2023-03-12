@@ -33,7 +33,7 @@
 				<form id="product-form-filter" method="get" action="${pageContext.request.contextPath }/">
 					<h5>Chọn loại sản phẩm</h5>
 					<select name="categoryId" >
-						<option value="0">Chọn loại hàng ...</option>
+						<option value="0">Chọn ...</option>
 						<c:forEach items="${cateList}" var="a">
 							<option value="${a.id}">${a.name}</option>
 						</c:forEach>
