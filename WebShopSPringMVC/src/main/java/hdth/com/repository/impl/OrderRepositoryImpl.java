@@ -126,10 +126,10 @@ public class OrderRepositoryImpl implements OrderRepository {
         int tong = 0;
         if (!carts.isEmpty()){
             for (Cart c : carts) {
-                tong = tong + c.getQuantity() * c.getProduct().getUnitPrice();
+                tong = tong + c.getQuantity() * (c.getProduct().getUnitPrice()-c.getProduct().getUnitPrice()*c.getProduct().getDiscount()/100);
             }
         }
-        Long x = Long.valueOf(tong);// convert int to long
+        Long x = Long.valueOf(Math.round(tong));// convert int to long. lay so nguyen gan nhat
         return x;
     }
 
