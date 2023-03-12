@@ -4,9 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/user" var="url"> </c:url>
 <c:url value="/js" var="urljsa"> </c:url>
-<%--<c:url value="/api-user-cart" var="APIaurl"></c:url>--%>
-<%--<c:url value="/api-user-product" var="ProductUrl"></c:url>--%>
-<%--<c:url value="/client-product-list" var ="PCUrl" ></c:url>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +20,6 @@
 
     <script src="${urljsa}/moment.js"></script>
     <script src="${urljsa}/main.js"></script>
-
 </head>
 
 <body onload="checkReply()">
@@ -32,7 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 padding-right">
-                <div class="product-details"><!--product-details-->
+                <div class="product-details">
                     <div class="col-sm-5">
                         <input type="hidden" id="idproduct" value="${productDetail.id}">
                         <div class="view-product">
@@ -47,7 +43,6 @@
                                     <%--									//sản phẩm liên quan--%>
                                 </div>
                             </div>
-                            <!-- Controls -->
                             <a class="left item-control" href="#similar-product" data-slide="prev">
                                 <i class="fa fa-angle-left"></i>
                             </a>
@@ -62,10 +57,13 @@
                             <h2>${productDetail.productName}</h2>
                             <span>
 
-<%--									<span>${productEntity.getPrice()} ₫</span>--%>
-									<h2><fmt:formatNumber type="number" value="${productDetail.unitPrice}"/> VNĐ</h2>
+                                    <div>Giảm giá: ${productDetail.discount}đ</div>
+									<div style="display: flex">
+                                        <div>Giá bán: ${Math.round(productDetail.unitPrice-productDetail.unitPrice*productDetail.discount/100)}đ </div>
+                                        <div> <s>${productDetail.unitPrice}đ</s> </div>
+                                    </div>
 									<br>
-<%--									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCart(${productEntity.getId()})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>--%>
+									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCartOfProductDetail(${productDetail.id})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
 								</span>
                             <p><b>Mô tả sản phẩm:</b></p>
                             <p>${productDetail.descriptionProduct}</p>
@@ -136,6 +134,45 @@
     </div>
 
 </section>
+<div class="modal fade" id="myModalProduct" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn phải đăng nhập để có thể thêm sản phẩm vào giỏ hàng</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModalDoneProduct" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <p>Sản phẩm đã thêm vào giỏ hàng thành công</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <jsp:include page="a-footer.jsp"></jsp:include>
 
 <script>
@@ -152,107 +189,11 @@
 </script>
 
 
-<%--<script>--%>
-<%--	function addToCart(data){--%>
-<%--		JSalert();--%>
-<%--		$.ajax({--%>
-<%--			url: '${APIaurl}',--%>
-<%--			type: 'POST',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				console.log(data);--%>
-
-<%--				&lt;%&ndash;window.location.href = "${PCurl}?type=list&message=insert_success";&ndash;%&gt;--%>
-<%--			},--%>
-<%--			errMode: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	};--%>
-<%--</script>--%>
-
-<%--<script>--%>
-<%--	function changeQuantity(action){--%>
-<%--		var id = parseInt($('#id').val());--%>
-<%--		var quantity =parseInt($('#txtQuantity').val());--%>
-<%--		var data ={--%>
-<%--			"productId":id,--%>
-<%--			"quantity":quantity--%>
-<%--		};--%>
-<%--		console.log(data);--%>
-<%--		$.ajax({--%>
-<%--			url: '${PCUrl}?type='+action,--%>
-<%--			type: 'PUT',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				window.location.href="/client-product-list?type=detail_product";--%>
-<%--			},--%>
-<%--			errMode: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	};--%>
-
-
-<%--</script>--%>
-
-
-<%--<script>--%>
-
-<%--	function checkReply() {--%>
-
-<%--		const queryString = window.location.search;--%>
-
-<%--		const urlParams = new URLSearchParams(queryString);--%>
-
-<%--		const page_type = urlParams.get('page_type')--%>
-<%--		const name =urlParams.get('name')--%>
-<%--		const parent_id =urlParams.get('parent_id')--%>
-
-<%--		if (page_type == 'adminReply') {--%>
-<%--			replyClicked(name,parent_id);--%>
-
-<%--		}--%>
-<%--	}--%>
-
-<%--	function replyClicked(name,parent_id) {--%>
-
-<%--		console.log("Hlll");--%>
-<%--		&lt;%&ndash;console.log(typeof(${row_comment}));&ndash;%&gt;--%>
-
-<%--		// var comment_id = $(this).attr("id");--%>
-<%--		// $('#comment_id').val(comment_id);--%>
-
-<%--		document.getElementById("content").value = "@"+name+": ";--%>
-<%--		$('#content').focus();--%>
-<%--		document.getElementById("parent").value = parent_id;--%>
-<%--	}--%>
-
-<%--</script>--%>
-
 
 <script src="${url}/js/jquery.js"></script>
 <script src="${url}/js/price-range.js"></script>
 <script src="${url}/js/jquery.scrollUp.min.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>
 <script src="${url}/js/jquery.prettyPhoto.js"></script>
-<script src="${url}/js/main.js"></script>
-<%--<script type="text/javascript">--%>
-<%--	function JSalert(){--%>
-<%--		Swal.fire('Thêm vào giỏ hàng thành công')--%>
-<%--	}--%>
-<%--</script>--%>
 </body>
 </html>
