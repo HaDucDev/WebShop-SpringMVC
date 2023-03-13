@@ -13,6 +13,12 @@ public interface OrderRepository {
 
     Order getDetailOrderByOrderId(Integer orderId);
 
+    boolean confirmOrderById (Integer id);
+
+    boolean deliveryConfirmOrderById (Integer id);
+
+    boolean adminCancelConfirmOrderById (Integer id);
+
 
     // USER
     boolean createOrder(Order order);
@@ -21,7 +27,5 @@ public interface OrderRepository {
 
     Order getDetailOrderByOrderIdAndUserId(Integer orderId,Integer userId);
 
-    boolean confirmOrderById (Integer id);
 
-    boolean deliveryConfirmOrderById (Integer id);
 }

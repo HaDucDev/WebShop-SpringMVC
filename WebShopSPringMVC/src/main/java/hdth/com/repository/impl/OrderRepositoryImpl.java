@@ -183,5 +183,20 @@ public class OrderRepositoryImpl implements OrderRepository {
         return true;
     }
 
+    @Override
+    public boolean adminCancelConfirmOrderById(Integer id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String hql = "UPDATE Order o SET o.statusOrder =:statusOrder WHERE id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("statusOrder", ConstValueWeb.DA_HUY);
+        query.setParameter("id", id);
+        int rowsAffected = query.executeUpdate();
+        if(rowsAffected ==0 ){
+            return false;
+        }
+        System.out.println(rowsAffected + " rows cancel.");
+        return true;
+    }
+
 
 }

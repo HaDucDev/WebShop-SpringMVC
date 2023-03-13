@@ -68,9 +68,9 @@
                                             <td class="center">${order.statusOrder}</td>
                                             <td>
                                                 <a class="center" href="<c:url value="/admin/order-detail/${order.id}"/>" >Chi tiết</a> |
-                                                <a id="btnDelete" onclick="deleteCart(${order.id })"
-                                                   class="center">Hủy đơn</a> |
-
+                                                <c:if test="${order.statusOrder.equals('Đang chờ') == true}">
+                                                    <a id="btnDelete" class="center" href="<c:url value="/admin/order/order-cancel/${order.id}"/>">Hủy đơn</a> |
+                                                </c:if>
                                                 <c:if test="${order.statusOrder.equals('Đang chờ') == true}">
                                                     <a class="center" href="<c:url value="/admin/order/confirm-order/${order.id}"/>">Chấp nhận đơn hàng</a>
                                                 </c:if>

@@ -15,6 +15,8 @@ public interface OrderService {
 
     boolean deliveryConfirmOrderById (Integer id);
 
+    boolean adminCancelConfirmOrderById (Integer id);
+
     //==============> USER
 
     boolean createOrder(Order order);

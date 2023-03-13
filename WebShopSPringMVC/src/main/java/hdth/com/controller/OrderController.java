@@ -65,6 +65,15 @@ public class OrderController {
         return "redirect:/admin/order-list-all";
     }
 
+    @GetMapping("/admin/order/order-cancel/{id}")// huy don
+    private String cancelConfirmOrder(@PathVariable(name = "id") Integer id) {
+        if (this.orderService.adminCancelConfirmOrderById(id)==true)
+        {
+            return "redirect:/admin/order-list-all";
+        }
+        return "redirect:/admin/order-list-all";
+    }
+
 
     //================================================================
 
