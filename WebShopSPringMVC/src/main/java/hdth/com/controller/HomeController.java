@@ -29,16 +29,15 @@ public class HomeController {
     public String index99(Model model, @RequestParam(defaultValue = "0") int page,
                           @RequestParam(defaultValue = "9") int size, @RequestParam(defaultValue = "") String keyword,
                           @RequestParam(required = false) Integer categoryId, @RequestParam(required = false) Integer  supplierId,
-                          @RequestParam(required = false) Integer  startPrice,@RequestParam(required = false) Integer  endPrice){
+                          @RequestParam(defaultValue = "") String price){
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productList = this.productService.getProductsPaginationFind(pageable, keyword,categoryId,supplierId,startPrice,endPrice);
+        Page<Product> productList = this.productService.getProductsPaginationFind(pageable, keyword,categoryId,supplierId,price);
         model.addAttribute("productsPage", productList);
         model.addAttribute("totalPages", productList.getTotalPages());
         model.addAttribute("number",productList.getNumber());
         return "user/index";
     }
-
 
     @GetMapping("/login")
     public String index(){
@@ -68,19 +67,6 @@ public class HomeController {
     public String adminstatistical(){
         return "admin/d-statistical";
     }
-
-
-//    @Autowired
-//    private MomoConfig momoConfig;
-//    @PostMapping("/test/api/momo")
-//    @ResponseBody
-//    public ResponseEntity<CaptureMoMoResponse> testMomo(@RequestBody MoMoObject moMoObject) throws Exception {
-//        return
-//        ResponseEntity.ok(this.momoConfig.process(moMoObject.getA(), moMoObject.getB(),
-//                moMoObject.getC(), moMoObject.getD(),
-//                moMoObject.getE(), moMoObject.getF(), moMoObject.getG()));
-//    }
-
 
 
 }

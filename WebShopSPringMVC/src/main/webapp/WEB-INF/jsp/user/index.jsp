@@ -45,23 +45,14 @@
 							<option value="${s.id}">${s.supplierName}</option>
 						</c:forEach>
 					</select>
-					<h5>Chọn giá bắt đầu</h5>
-					<select name="startPrice">
+					<h5>Chọn giá khoảng giá</h5>
+					<select name="price">
 						<option value="0">Chọn ...</option>
-						<option value="100000">100.000</option>
-						<option value="1000000">1.000.000</option>
-						<option value="10000000">10.000.000</option>
-						<option value="20000000">20.000.000</option>
-						<option value="30000000">30.000.000</option>
-					</select>
-					<h5>Chọn giá kết thúc</h5>
-					<select name="endPrice">
-						<option value="0">Chọn ...</option>
-						<option value="100000">100.000</option>
-						<option value="1000000">1.000.000</option>
-						<option value="10000000">10.000.000</option>
-						<option value="20000000">20.000.000</option>
-						<option value="30000000">30.000.000</option>
+						<option value="100000_1000000">100.000-1.000.000</option>
+						<option value="1000000_10000000">1.000.000-10.000.000</option>
+						<option value="10000000_20000000">10.000.000-20.000.000</option>
+						<option value="20000000_30000000">20.000.000-30.000.000</option>
+						<option value="30000000_0">Trên 30.000.000</option>
 					</select>
 					<input name="page" type="hidden" value="0">
 					<input type="submit" value="Lọc" style="width: 100%; margin-top: 10px">

@@ -32,22 +32,26 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.getProducts();
     }
 
-
-//    public Page<Product> getProductsPagination(Pageable pageable) {
-//        int pageSize = pageable.getPageSize();// dat dau tu 1
-//        int currentPage = pageable.getPageNumber();// bat dau tu 0
-//        int startItem = currentPage * pageSize;//0
-//        List<Product> productList = this.productRepository.getProducts();
-//        List<Product> productPage =  new ArrayList<>();
-//
-//        for(int i= startItem; i<startItem+pageSize && i< productList.size();i++){
-//            productPage.add(productList.get(i));
-//        }
-//        return new PageImpl<>(productPage, PageRequest.of(currentPage, pageSize), productList.size());
-//    }
-
     @Override
-    public Page<Product> getProductsPaginationFind(Pageable pageable, String text, Integer categoryId, Integer supplierId, Integer startPrice, Integer endPrice) {
+    public Page<Product> getProductsPaginationFind(Pageable pageable, String text, Integer categoryId, Integer supplierId, String price) {
+
+        Integer startPrice =0;
+        Integer endPrice =0;
+
+        if(price!="" && price.isEmpty()==false){
+            // xu ly chuoi de lay khoang gia
+            String[] strArray = price.split("_");
+
+            // Khai báo mảng Integer để chứa các số sau khi chuyển đổi
+            Integer[] intArray = new Integer[strArray.length];// mang chi chua 2 phan tu la startPrice va endPrice
+            // Chuyển từng phần tử của mảng từ kiểu String sang kiểu Integer
+            for (int i = 0; i < strArray.length; i++) {
+                intArray[i] = Integer.parseInt(strArray[i]);
+            }
+            startPrice = intArray[0];
+            endPrice = intArray[1];
+        }
+
         int pageSize = pageable.getPageSize();// dat dau tu 1
         int currentPage = pageable.getPageNumber();// bat dau tu 0
         int startItem = currentPage * pageSize;//0
