@@ -17,6 +17,8 @@ public interface UserService extends UserDetailsService {
 
     boolean editUsers(User user);// sua nguoi dung
 
+    boolean deleteUserById(Integer id);// xoa nguoi dung
+
     User getUserById(Integer id);
 
     boolean cofirmPassword(String email);// gui ma ve mail

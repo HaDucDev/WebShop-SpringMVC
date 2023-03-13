@@ -137,6 +137,17 @@ public class UserController {
         return "admin/c-edit-user";
     }
 
+    @GetMapping("/admin/user/delete/{id}")
+    private String deleteProducts(@PathVariable(name = "id") Integer id, Model model) {
+        if (this.userDetailsService.deleteUserById(id)==true)
+        {
+            model.addAttribute("userList", this.userDetailsService.getUsers());
+            model.addAttribute("success", "Bạn đã xóa người dùng có id:"+ id +" thành công");
+            return "/admin/a-list-user";// lay du lieu tra ve form
+        };
+        return "redirect:/admin/user-list";
+    }
+
 
     //====================================================================================================================================> USER
     @GetMapping("/user/account-manager")// thong tin ca nhan loa len de thay doi

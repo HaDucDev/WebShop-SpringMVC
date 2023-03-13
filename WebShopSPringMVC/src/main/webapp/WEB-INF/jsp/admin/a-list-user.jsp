@@ -106,8 +106,9 @@
 													   class="center">Xem/Sửa</a>
 												</button>
 												|
-												<button id="btnDelete" type ="button" onclick = ""
-														class="center">Xóa
+												<button id="btnDelete" type ="button" class="center">
+													<a href="<c:url value="/admin/user/delete/${user.id}"/>"
+													   class="center">Xóa</a>
 												</button>
 											</td>
 

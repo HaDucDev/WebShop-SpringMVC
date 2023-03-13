@@ -117,6 +117,11 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.updateUsers(newUser);
     }
 
+    @Override
+    public boolean deleteUserById(Integer id) {
+        return this.userRepository.deleteUserById(id);
+    }
+
     //=====================================================================================================> USER
 
     //thay doi thong ca nhan

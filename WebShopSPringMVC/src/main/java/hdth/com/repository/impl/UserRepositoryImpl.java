@@ -67,6 +67,21 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    // xoa nguoi dung
+    @Override
+    public boolean deleteUserById(Integer id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String hql = "DELETE FROM User WHERE id = :id";
+        Query q = session.createQuery(hql);
+        q.setParameter("id", id);
+        int rowsAffected = q.executeUpdate();
+        if(rowsAffected ==0 ){
+            return false;
+        }
+        System.out.println(rowsAffected + " rows deleted.");
+        return true;
+    }
+
     @Override
     public User getUserById(Integer id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
