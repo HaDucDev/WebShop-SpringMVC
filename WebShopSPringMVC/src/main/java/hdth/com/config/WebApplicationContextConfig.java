@@ -5,6 +5,7 @@ import hdth.com.config.paymentMoMo.MomoConfig;
 import hdth.com.config.sendMail.EmailService;
 import hdth.com.utils.formatter.CategoryFomatter;
 import hdth.com.utils.formatter.ProducStatusFormatter;
+import hdth.com.utils.formatter.RoleFormatter;
 import hdth.com.utils.formatter.SupplierFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,6 +42,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new CategoryFomatter());
         registry.addFormatter(new SupplierFormatter());
         registry.addFormatter(new ProducStatusFormatter());
+        registry.addFormatter(new RoleFormatter());
     }
 
     @Override

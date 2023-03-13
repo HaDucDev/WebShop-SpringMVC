@@ -40,10 +40,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Cloudinary cloudinary;
 
-    @Override
-    public List<User> getUsers() {
-        return this.userRepository.getUsers();
-    }
 
     @Override
     public List<User> getUsersByUsername(String username) {// ham nay la tim user theo username de dung trong ham load cau hinh
@@ -51,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addOrUpdateUsers(User user) {
+    public boolean registerUsers(User user) {
 
         String pass= user.getPassword();
         user.setPassword(this.passwordEncoder.encode(pass));
@@ -64,6 +60,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(role);
         return this.userRepository.addOrUpdateUsers(user);
     }
+
 
     @Override
     public User getUserById(Integer id) {
@@ -83,8 +80,29 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),auth);
     }
 
+    //=====================================================================================================>ADMIN
 
-    //================================> USER
+    @Override
+    public List<User> getUsers() {
+        return this.userRepository.getUsers();
+    }
+    @Override
+    public boolean addUsers(User user) {
+        User newUser = new User();
+        newUser.setFullName(user.getFullName());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getNewPassword()));// path dung bien newPassword
+        newUser.setEmail(user.getEmail());
+        newUser.setPhone(user.getPhone());
+        newUser.setAddressDefault(user.getAddressDefault());
+        newUser.setRole(user.getRole());// dung formater nhe
+
+        String avatar= "https://res.cloudinary.com/dkdyl2pcy/image/upload/v1670464883/samples/avatar_icon_lo4bff.png";
+        newUser.setAvatar(avatar);
+        return this.userRepository.addOrUpdateUsers(newUser);
+    }
+
+    //=====================================================================================================> USER
 
     //thay doi thong ca nhan
     @Override

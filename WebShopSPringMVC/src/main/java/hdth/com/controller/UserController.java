@@ -2,6 +2,7 @@ package hdth.com.controller;
 
 import hdth.com.model.User;
 import hdth.com.service.CartService;
+import hdth.com.service.RoleService;
 import hdth.com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class UserController {
     @PostMapping("/register")
     private String register(@ModelAttribute User user, Model model) {
         String error = "";
-        if (this.userDetailsService.addOrUpdateUsers(user) == true) {
+        if (this.userDetailsService.registerUsers(user) == true) {
             String mess = "Chúc mừng bạn đã đăng kí thành công";
             model.addAttribute("successregister", mess);
             return "user/login";
@@ -93,9 +94,29 @@ public class UserController {
     //=================================================================================================================================> Admin
 
     @GetMapping("/admin/user-list")
-    private String getSupplier(Model model) {
+    private String getUserAll(Model model) {
         model.addAttribute("userList", this.userDetailsService.getUsers());
         return "/admin/a-list-user";
+    }
+
+
+    @Autowired
+    private RoleService roleService;
+    @GetMapping("/admin/add-user")
+    private String loadNewUser(Model model) {// du lieu trong de chon form add
+        model.addAttribute("accountNew", new User());
+        model.addAttribute("roleList",this.roleService.getAllRole());
+        return "/admin/b-add-user";
+    }
+
+    @PostMapping("/admin/add-user")
+    private String addNewUser(@ModelAttribute User accountNew,Model model) {
+        if(this.userDetailsService.addUsers(accountNew)==true){
+            model.addAttribute("userList", this.userDetailsService.getUsers());
+            model.addAttribute("success", "Bạn đã thêm tài khoản thành công");
+            return "/admin/a-list-user";// lay du lieu tra ve form
+        }
+        return "/admin/b-add-user";
     }
 
 

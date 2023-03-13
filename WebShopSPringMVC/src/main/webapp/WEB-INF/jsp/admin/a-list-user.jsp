@@ -2,8 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <c:url value="/admin" var="url"></c:url>
-<c:url value="/admin-user-list" var="ACurl"></c:url>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +41,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div>
-						<button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value=""/>' style="color: white">Thêm người dùng</a></button>
+						<button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin/add-user"/>' style="color: white">Thêm người dùng</a></button>
+					</div>
+					<div>
+						<label style="color: green">${success}</label>
 					</div>
 					<!-- Advanced Tables -->
 					<div class="panel panel-default">

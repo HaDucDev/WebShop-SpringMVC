@@ -8,4 +8,6 @@ import java.util.List;
 public interface RoleRepository {
 
     Role findByName(ERole name);
+
+    List<Role> getAllRole();
 }

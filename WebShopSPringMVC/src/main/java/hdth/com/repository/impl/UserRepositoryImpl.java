@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean addOrUpdateUsers(User user) {
+    public boolean addOrUpdateUsers(User user) {// dung duoc dang ki user, them user
         Session session= this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(user);

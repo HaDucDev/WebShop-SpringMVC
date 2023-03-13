@@ -2,12 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url value="/admin" var="url"></c:url>
-<%--<c:url value="/admin-product-list" var="PCurl"></c:url>--%>
-<script src="./Validation.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="<c:url value="${url}/ckeditor/ckeditor.js" />"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Edit User</title>
     <!-- BOOTSTRAP STYLES-->

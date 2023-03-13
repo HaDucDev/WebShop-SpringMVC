@@ -6,6 +6,7 @@ import hdth.com.model.User;
 import hdth.com.repository.RoleRepository;
 import hdth.com.utils.enums.ERole;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -43,5 +44,12 @@ public class RoleRepositoryImpl implements RoleRepository {
         List<Role> roles = q.getResultList();// tra ve list
         Role role = roles.get(0);
         return role;
+    }
+
+    @Override
+    public List<Role> getAllRole() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Role ");
+        return q.getResultList();
     }
 }
