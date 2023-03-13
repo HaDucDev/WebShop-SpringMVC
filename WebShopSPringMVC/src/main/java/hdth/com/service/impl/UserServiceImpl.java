@@ -1,5 +1,7 @@
 package hdth.com.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import hdth.com.config.sendMail.EmailService;
 import hdth.com.model.Role;
 import hdth.com.model.User;
@@ -20,10 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 @Service("userDetailsService")
 public class UserServiceImpl implements UserService {
@@ -36,6 +36,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public List<User> getUsers() {
@@ -82,6 +85,39 @@ public class UserServiceImpl implements UserService {
 
 
     //================================> USER
+
+    //thay doi thong ca nhan
+    @Override
+    public boolean changeInforUser(Integer userId, User changeInforUser) {
+        User userData = this.userRepository.getUserById(userId);
+        userData.setFullName(changeInforUser.getFullName());
+        if(userData.getEmail().equals(changeInforUser.getEmail())==false){
+                userData.setEmail(changeInforUser.getEmail());
+        }
+        userData.setAddressDefault(changeInforUser.getAddressDefault());
+        userData.setPhone(changeInforUser.getPhone());
+        if(changeInforUser.getAvatarImage().isEmpty() || changeInforUser.getAvatarImage()==null){
+            userData.setAvatar(userData.getAvatar());
+        }
+        else {
+            try {
+                Map p = this.cloudinary.uploader().upload(changeInforUser.getAvatarImage().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                String img = (String) p.get("secure_url");
+                if(img == null){
+                    System.out.println("loi cua bianary up iamge");
+                }
+                userData.setAvatar(img);
+            }
+            catch (IOException e) {
+                System.out.println("loi post change avatar" + e.getMessage());
+            }
+        }
+        boolean save = this.userRepository.updateUsers(userData);
+        if(save==false){
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public boolean changePassword(User changePasswordRequest) {
@@ -148,4 +184,6 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+
 }

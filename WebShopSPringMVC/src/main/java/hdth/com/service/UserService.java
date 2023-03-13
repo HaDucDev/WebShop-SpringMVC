@@ -21,5 +21,7 @@ public interface UserService extends UserDetailsService {
 
     boolean cofirmSuccessPassNewSendMail(User  user);// gui ma ve mail
 
+    boolean changeInforUser(Integer userId,User changeInforUser);
+
     boolean changePassword(User changePasswordRequest);
 }

@@ -71,7 +71,6 @@ public class ProductServiceImpl implements ProductService {
                     System.out.println(product.getProductName());
                 }
                 product.setProductImage(img);
-                System.out.println(product.getProductName()+ "ok roi chu dm");
                 return this.productRepository.addOrUpdateProducts(product);
             }
             catch (IOException e) {

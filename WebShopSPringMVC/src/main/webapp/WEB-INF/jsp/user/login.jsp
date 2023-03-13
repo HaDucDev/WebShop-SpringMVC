@@ -40,9 +40,12 @@
                         </div>
                         <div class="form-group">
                             <h5>Mật khẩu</h5>
-                            <input id="password" name="password" type="text" class="form-control"
+                            <input id="password" name="password" type="password" class="form-control"
                                    placeholder="Mật khẩu">
                             <span class="form-message"></span>
+                        </div>
+                        <div id="showpassword">
+                            <input type="checkbox" onclick="myFunction()">Hiển thị mật khẩu</input>
                         </div>
                         <input type="submit" class="btn btn-success btn-primary" value="Đăng nhập"
                                style="margin-top: 10px; color: white; background-color: #696763; border: none;"/>
@@ -78,5 +81,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 </html>

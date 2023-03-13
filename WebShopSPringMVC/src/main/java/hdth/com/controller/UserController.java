@@ -100,7 +100,7 @@ public class UserController {
 
 
     //====================================================================================================================================> USER
-    @GetMapping("/user/account-manager")
+    @GetMapping("/user/account-manager")// thong tin ca nhan loa len de thay doi
     private String getUserByUser(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user= (User) session.getAttribute("currentUser");
@@ -113,13 +113,16 @@ public class UserController {
 
 
 
-    @PostMapping("/user/account-manager")
+    @PostMapping("/user/account-manager")// thya doi thong tin
     private String EditUserByUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User usercurrent= (User) session.getAttribute("currentUser");
         if ( user != null && usercurrent !=null) {
-            //User x= this.userDetailsService.getUserById(usercurrent.getId());
-            //model.addAttribute("userinfor", this.userDetailsService.getUserById(userId));
+            if(this.userDetailsService.changeInforUser(usercurrent.getId(),user)==true){
+                model.addAttribute("userinfor", this.userDetailsService.getUserById(usercurrent.getId()));// can goi data the biet da update thanh cong
+                model.addAttribute("success", "Cập nhật thành công");
+                return "user/inforUser";
+            }
         }
         return "/user/inforUser";
     }

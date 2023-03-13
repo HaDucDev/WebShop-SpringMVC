@@ -21,7 +21,6 @@
 
 <body>
 <jsp:include page="a-header.jsp"></jsp:include>
-<c:url value="/user/account-user" var="APIu"> </c:url>
 <section id="cart_items">
 	<div class="container">
 		<div class="step-one">
@@ -32,7 +31,7 @@
 				<div class="col-sm-6">
 					<div class="shopper-info">
 						<p>Thông tin tài khoản</p>
-						<form:form action="${APIu}" method="post" id="info1" modelAttribute="userinfor" enctype="multipart/form-data">
+						<form:form action="" method="post" id="info1" modelAttribute="userinfor" enctype="multipart/form-data">
 
 							<div>
 								<img class="form-one" style="width: 50px;height: 50px;object-fit: cover; display: block; margin-left: auto;
