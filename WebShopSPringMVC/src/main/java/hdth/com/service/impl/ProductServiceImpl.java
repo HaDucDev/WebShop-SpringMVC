@@ -103,6 +103,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean deleteProductById(Integer id) {
-        return false;
+        return this.productRepository.deleteProductById(id);
     }
 }

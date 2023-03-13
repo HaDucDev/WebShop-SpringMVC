@@ -72,7 +72,8 @@
         <li><a href="<c:url value="/map"/>">Liên hệ</a></li>
         <div class="search-container">
             <form action="${pageContext.request.contextPath }/">
-                <input name="keyword" type="text" placeholder="Tìm kiếm.." >
+                <input name="page" type="hidden" value="0">
+                <input name="keyword" type="text" placeholder="Tìm kiếm.." style="width: 250%; z-index: 2">
             </form>
         </div>
     </ul>

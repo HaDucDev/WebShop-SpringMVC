@@ -76,6 +76,16 @@ public class ProductController {
         return "admin/c-edit-product";
     }
 
+    @GetMapping("/admin/product/delete/{id}")
+    private String deleteProducts(@PathVariable(name = "id") Integer id, Model model) {
+        if (this.productService.deleteProductById(id)==true)
+        {
+            return "redirect:/admin/product-list";
+        }
+        else model.addAttribute("msg", "Them bi loi roi. hay thu lai sau");
+        return "/admin/a-list-product";
+    }
+
     //================> common
     @ModelAttribute
     public void commonAtrr(Model model){// dung chung cho admin thoi, CHUC NANG ADD PRODUCT

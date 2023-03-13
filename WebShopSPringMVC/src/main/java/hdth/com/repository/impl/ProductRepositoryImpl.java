@@ -111,6 +111,16 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public boolean deleteProductById(Integer id) {
-        return false;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String hql = "DELETE FROM Product WHERE id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        int rowsAffected = query.executeUpdate();
+
+        if(rowsAffected ==0 ){
+            return false;
+        }
+        System.out.println(rowsAffected + " rows deleted.");
+        return true;
     }
 }
