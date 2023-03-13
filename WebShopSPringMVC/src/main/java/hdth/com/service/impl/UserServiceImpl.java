@@ -102,6 +102,21 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.addOrUpdateUsers(newUser);
     }
 
+    @Override
+    public boolean editUsers(User user) {
+        User newUser = this.getUserById(user.getId());// theo theo ca id
+        newUser.setFullName(user.getFullName());
+        newUser.setUsername(user.getUsername());
+        if(user.getOldPassword() != null &&  user.getOldPassword() != ""){
+            newUser.setPassword(passwordEncoder.encode(user.getOldPassword()));// path dung bien oldPassword
+        }
+        newUser.setEmail(user.getEmail());
+        newUser.setPhone(user.getPhone());
+        newUser.setAddressDefault(user.getAddressDefault());
+        newUser.setRole(user.getRole());// dung formater nhe
+        return this.userRepository.updateUsers(newUser);
+    }
+
     //=====================================================================================================> USER
 
     //thay doi thong ca nhan

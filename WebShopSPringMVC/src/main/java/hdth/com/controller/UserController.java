@@ -127,6 +127,16 @@ public class UserController {
         return "admin/c-edit-user";
     }
 
+    @PostMapping(path = "/admin/user/edit-user")
+    private String editUser(@ModelAttribute User user, Model model){
+        if(this.userDetailsService.editUsers(user)==true){
+            model.addAttribute("userList", this.userDetailsService.getUsers());
+            model.addAttribute("success", "Bạn đã sửa thông tin thành công");
+            return "/admin/a-list-user";// lay du lieu tra ve form
+        }
+        return "admin/c-edit-user";
+    }
+
 
     //====================================================================================================================================> USER
     @GetMapping("/user/account-manager")// thong tin ca nhan loa len de thay doi

@@ -13,7 +13,9 @@ public interface UserService extends UserDetailsService {
 
     // dang ki
     boolean registerUsers(User user);
-    boolean addUsers(User user);
+    boolean addUsers(User user);// them nguoi dung
+
+    boolean editUsers(User user);// sua nguoi dung
 
     User getUserById(Integer id);
 

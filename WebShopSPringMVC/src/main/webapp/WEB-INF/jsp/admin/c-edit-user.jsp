@@ -43,7 +43,8 @@
 							<div class="row">
 								<div class="col-md-6">
 									<h3>Thông tin người dùng</h3>
-									<form:form role="form"  id="edit-user" action="" modelAttribute="user">
+									<c:url value="/admin/user/edit-user" var="action"></c:url>
+									<form:form role="form"  id="edit-user" action="${action}" modelAttribute="user">
 										<div class="form-group">
 											<label>Mã người dùng</label>
 											<form:input class="form-control" name="id" id="id" path="id" readonly="true"/>
