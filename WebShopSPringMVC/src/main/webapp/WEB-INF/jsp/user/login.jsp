@@ -24,6 +24,7 @@
                 <h4>Đăng nhập</h4>
                 <c:url var="action" value="/login"/>
                 <c:url var="register" value="/register"/>
+                <c:url var="forgetPass" value="/forget-pass"/>
                 <c:if test="${usernotnull != null}">
                     <div class="alert alert-danger">
                         Bạn phải đăng nhập mới có thể mua hàng
@@ -46,10 +47,11 @@
                         <input type="submit" class="btn btn-success btn-primary" value="Đăng nhập"
                                style="margin-top: 10px; color: white; background-color: #696763; border: none;"/>
                         <button type="submit" class="btn btn-link"><a href="${register}">Đăng kí</a></button>
+                        <button type="submit" class="btn btn-link"><a href="${forgetPass}">Quên mật khẩu</a></button>
                     </form>
                     <c:if test="${param.error != null}">
                         <div class="alert alert-danger">
-                            Ten dang nhap hoac mat khau khong dung
+                            Tên đăng nhập hoặc mật khẩu không đúng.
                         </div>
                     </c:if>
                     <c:if test="${successregister != null}">

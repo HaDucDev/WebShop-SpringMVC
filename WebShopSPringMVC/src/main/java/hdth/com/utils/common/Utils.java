@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Utils {
 
-    public static String getRandomNumber(int len) {
+    public static String getRandomNumber(int len) {// tao chuoi ngau nhien tu 0 den 9
         Random rnd = new Random();
         String chars = "0123456789";
         StringBuilder sb = new StringBuilder(len);

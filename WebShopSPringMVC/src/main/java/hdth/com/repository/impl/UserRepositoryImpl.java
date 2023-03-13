@@ -95,4 +95,27 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 
+    //quen mat khau
+    @Override
+    public User getUserByEmail(String email) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM User u WHERE u.email =:email");
+        q.setParameter("email", email);
+        List<User> users = q.getResultList();
+        return users.get(0);
+    }
+
+    @Override
+    public boolean updateUsers(User user) {
+        Session session= this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(user);
+            return true;
+        }
+        catch (HibernateException ex){
+            System.err.println(ex.getMessage());
+
+        }
+        return false;
+    }
 }

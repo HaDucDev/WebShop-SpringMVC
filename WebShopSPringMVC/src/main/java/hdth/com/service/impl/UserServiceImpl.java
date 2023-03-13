@@ -1,11 +1,14 @@
 package hdth.com.service.impl;
 
+import hdth.com.config.sendMail.EmailService;
 import hdth.com.model.Role;
 import hdth.com.model.User;
 import hdth.com.repository.UserRepository;
 import hdth.com.service.RoleService;
 import hdth.com.service.UserService;
+import hdth.com.utils.common.Utils;
 import hdth.com.utils.enums.ERole;
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,7 +67,6 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUserById(id);
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users= this.getUsersByUsername(username);
@@ -82,5 +86,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean changePassword(User changePasswordRequest) {
         return this.userRepository.changePassword(changePasswordRequest);
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.getUserByEmail(email);
+    }
+    @Autowired
+    private EmailService emailService;
+    @Override
+    public boolean cofirmPassword(String email) {
+        User userData = this.getUserByEmail(email);
+        if(userData!=null){
+            String textCode = Utils.getRandomNumber(9);
+            userData.setResetPasswordCode(textCode);
+            // thoi gian het han
+            Date expirationTime = new Date(System.currentTimeMillis() + 10 * 60 * 1000); // thêm 10 phút
+            userData.setExpirationTimeToken(expirationTime);
+            if(this.userRepository.updateUsers(userData)==true){
+
+                String toEmail = userData.getEmail();
+                String subject = "Mã xác nhận quên mật khẩu";
+                String message = "Chào mừng quý khách đến với SHOP. Đây là mã xác nhận của bạn của bạn: " + textCode +". Sau 10 phút sẽ hết hạn";
+                try {
+                    this.emailService.sendEmail(toEmail, subject, message);// gui mail
+                    return  true;
+                } catch (EmailException | MessagingException e) {
+                    System.out.println("Ngoại lệ xảy ra khi gửi email");
+                    return false;
+                }
+            }
+            return  false;
+        }
+        return false;
     }
 }

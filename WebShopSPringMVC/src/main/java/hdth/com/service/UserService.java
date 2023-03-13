@@ -17,5 +17,7 @@ public interface UserService extends UserDetailsService {
 
     User getUserById(Integer id);
 
+    boolean cofirmPassword(String email);// gui ma ve mail
+
     boolean changePassword(User changePasswordRequest);
 }

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -50,7 +51,9 @@ public class User implements Serializable {
 
     @Column(name = "reset_password_code")
     private String resetPasswordCode;
-
+    @Column(name = "expiration_time_token")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expirationTimeToken;// thoi gian ma token doi mat khau het han
 
     @Transient
     private MultipartFile avatarImage;

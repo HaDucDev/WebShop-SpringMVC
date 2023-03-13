@@ -12,5 +12,9 @@ public interface UserRepository {
     User getUserById(Integer id);// lay nguoi dung theo id dung o phan them gio hang
 
 
+    User getUserByEmail(String email);// quen mat khau
     boolean changePassword(User changePasswordRequest);
+
+    // important
+    boolean updateUsers(User user);// do co username khong dc trung
 }
