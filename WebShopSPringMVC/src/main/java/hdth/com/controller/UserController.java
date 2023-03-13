@@ -119,6 +119,14 @@ public class UserController {
         return "/admin/b-add-user";
     }
 
+    //load thong nguoi dung len sua
+    @GetMapping(path = "/admin/user/edit/{id}")
+    private String getEdit(@PathVariable(name = "id") Integer id, Model model){
+        model.addAttribute("user",this.userDetailsService.getUserById(id));
+        model.addAttribute("roleList",this.roleService.getAllRole());//can de load du lieu role
+        return "admin/c-edit-user";
+    }
+
 
     //====================================================================================================================================> USER
     @GetMapping("/user/account-manager")// thong tin ca nhan loa len de thay doi

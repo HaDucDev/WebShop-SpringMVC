@@ -102,7 +102,7 @@
 											</td>
 											<td>
 												<button style="width: 70px;">
-													<a href="<c:url value=""/>"
+													<a href="<c:url value="/admin/user/edit/${user.id}"/>"
 													   class="center">Xem/Sửa</a>
 												</button>
 												|

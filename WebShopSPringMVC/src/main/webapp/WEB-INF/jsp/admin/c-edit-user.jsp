@@ -18,14 +18,6 @@
 	<!-- GOOGLE FONTS-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
 		  rel='stylesheet' type='text/css' />
-	<!-- JQUERY SCRIPTS -->
-	<script src="${url}/js/jquery-1.10.2.js"></script>
-	<!-- BOOTSTRAP SCRIPTS -->
-	<script src="${url}/js/bootstrap.min.js"></script>
-	<!-- METISMENU SCRIPTS -->
-	<script src="${url}/js/jquery.metisMenu.js"></script>
-	<!-- CUSTOM SCRIPTS -->
-	<script src="${url}/js/custom.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -37,7 +29,7 @@
 		<div id="page-inner">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Thêm người dùng</h2>
+					<h2>Chỉnh sửa người dùng</h2>
 				</div>
 			</div>
 			<!-- /. ROW  -->
@@ -50,12 +42,15 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-6">
-									<h3>Thông tin chi tiết người dùng</h3>
-
-									<form:form role="form"  id="add-user" method="post" modelAttribute="accountNew" action="">
+									<h3>Thông tin người dùng</h3>
+									<form:form role="form"  id="edit-user" action="" modelAttribute="user">
+										<div class="form-group">
+											<label>Mã người dùng</label>
+											<form:input class="form-control" name="id" id="id" path="id" readonly="true"/>
+										</div>
 										<div class="form-group">
 											<label>Tên người dùng</label>
-											<form:input class="form-control" placeholder="Nhập tên người dùng" name="fullName" id="fullname" path="fullName"/>
+											<form:input class="form-control"  placeholder="Nhập tên người dùng" name="fullname" id="fullName" path="fullName"/>
 											<span style="color: red" class="form-message"></span>
 										</div>
 										<div class="form-group">
@@ -65,17 +60,17 @@
 										</div>
 										<div class="form-group">
 											<label>Mật khẩu</label>
-											<form:input class="form-control" placeholder="Nhập mật khẩu" type="text" name="password" id="password" path="newPassword"/>
+											<form:input class="form-control" placeholder="Nhập mật khẩu" type="password" name="password" id="password" path="oldPassword"/>
 											<span style="color: red" class="form-message"></span>
 										</div>
 										<div class="form-group">
 											<label>Email</label>
-											<form:input class="form-control" placeholder="Nhập email" name="email" id="email" path="email"/>
+											<form:input class="form-control" name="email" id="email" path="email" />
 											<span style="color: red" class="form-message"></span>
 										</div>
 										<div class="form-group">
 											<label>Số điện thoại</label>
-											<form:input path="phone" class="form-control" min="0" type="number" placeholder="Nhập số điện thoại" name="phonenumber" id="phonenumber" />
+											<form:input class="form-control" path="phone" type="number" min="0" placeholder="Please enter phone number" name="phonenumber" id="phonenumber" />
 											<span style="color: red" class="form-message"></span>
 										</div>
 										<div class="form-group">
@@ -84,32 +79,46 @@
 											<span style="color: red" class="form-message"></span>
 										</div>
 										<div class="form-group">
-											<label>Chức vụ</label>
-											<div class="form-group">
-												<label for="role">Chọn vai trò</label>
+											<label for="role">Chọn vai trò</label>
 												<div class="checkbox">
 													<form:select path="role" name="roleId" id="role">
+														<option value="${user.role.id}">${user.role.name.toString()}</option>
 														<c:forEach items="${roleList}" var="c">
-															<option value="${c.id}">${c.name}</option>
+															<c:if test = "${user.role.id != c.id}">
+																<option value="${c.id}">${c.name}</option>
+															</c:if>
 														</c:forEach>
 													</form:select>
 												</div>
-											</div>
 										</div>
-
-										<button type="submit" class="btn btn-default" id="btnAdd">Thêm</button>
+										<button type="submit" class="btn btn-default" id="btnEdit">Cập nhật</button>
 									</form:form>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- End Form Elements -->
 				</div>
 			</div>
+			<!-- /. ROW  -->
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+			<!-- /. ROW  -->
 		</div>
 		<!-- /. PAGE INNER  -->
 	</div>
 	<!-- /. PAGE WRAPPER  -->
 </div>
 <!-- /. WRAPPER  -->
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+<!-- JQUERY SCRIPTS -->
+<script src="${url}/js/jquery-1.10.2.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="${url}/js/bootstrap.min.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="${url}/js/jquery.metisMenu.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="${url}/js/custom.js"></script>
 </body>
 </html>
