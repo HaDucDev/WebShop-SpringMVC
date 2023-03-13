@@ -2,6 +2,7 @@ package hdth.com.config;
 
 
 import hdth.com.config.paymentMoMo.MomoConfig;
+import hdth.com.config.sendMail.EmailService;
 import hdth.com.utils.formatter.CategoryFomatter;
 import hdth.com.utils.formatter.ProducStatusFormatter;
 import hdth.com.utils.formatter.SupplierFormatter;
@@ -54,6 +55,11 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     @Bean
     public MomoConfig momoConfig(){
         return new MomoConfig();
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new EmailService();
     }
 
     @Bean

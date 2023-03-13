@@ -2,6 +2,7 @@ package hdth.com.config;
 
 import hdth.com.config.Cloudinary.CloudinaryConfig;
 import hdth.com.config.hibernate.HibernateConfig;
+import hdth.com.config.sendMail.EmailService;
 import hdth.com.config.springSecurity.SpringSecurityConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -13,8 +14,9 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{
                 HibernateConfig.class,
+                EmailService.class,
                 CloudinaryConfig.class,
-                SpringSecurityConfig.class
+                SpringSecurityConfig.class,
         };
     }
 
