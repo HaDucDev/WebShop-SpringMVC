@@ -47,10 +47,8 @@
                         <a class="center"
                            href="<c:url value="/user/order-detail/${order.id}"/>">Chi
                             tiết</a>
-                        <c:if test="${order.statusOrder.equals('Đang chờ')}">
-                            |
-                            <a id="btnDelete" onclick="deleteCart(${order.id })" style="cursor: pointer"
-                               class="center">Hủy đơn</a> |
+                        <c:if test="${order.statusOrder.equals('Đang chờ')}"> |
+                            <a id="btnDelete" class="center" href="<c:url value="/order/order-cancel/${order.id}"/>">Hủy đơn</a> |
                         </c:if>
                     </td>
                 </tr>

@@ -163,6 +163,16 @@ public class OrderController {
     }
 
 
+    // user cancel order
+    @GetMapping("/order/order-cancel/{id}")// huy don
+    private String cancelConfirmOrderBuýUer(@PathVariable(name = "id") Integer id) {
+        if (this.orderService.adminCancelConfirmOrderById(id)==true)// ham nay dung chung duoc
+        {
+            return "redirect:/user/order-manager";
+        }
+        return "redirect:/user/order-manager";
+    }
+
 
 
 
