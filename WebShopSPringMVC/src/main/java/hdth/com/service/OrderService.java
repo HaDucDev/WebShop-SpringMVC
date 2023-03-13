@@ -22,4 +22,6 @@ public interface OrderService {
     List<Order> getAllOrdersByUserId(Integer userId);
 
     Order getDetailOrderByOrderIdAndUserId(Integer orderId,Integer userId);
+
+    boolean confirmOrderById (Integer id);
 }

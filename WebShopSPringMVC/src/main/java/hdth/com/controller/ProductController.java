@@ -86,6 +86,7 @@ public class ProductController {
         return "/admin/a-list-product";
     }
 
+
     //================> common
     @ModelAttribute
     public void commonAtrr(Model model){// dung chung cho admin thoi, CHUC NANG ADD PRODUCT

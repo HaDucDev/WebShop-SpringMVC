@@ -46,6 +46,16 @@ public class OrderController {
     }
 
 
+    @GetMapping("/admin/order/confirm-order/{id}")
+    private String confirmOrder(@PathVariable(name = "id") Integer id, Model model) {
+        if (this.orderService.confirmOrderById(id)==true)
+        {
+            return "redirect:/admin/order-list-all";
+        }
+        return "redirect:/admin/order-list-all";
+    }
+
+
     //================================================================
 
 

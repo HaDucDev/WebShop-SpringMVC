@@ -70,7 +70,11 @@
                                                 <a class="center" href="<c:url value="/admin/order-detail/${order.id}"/>" >Chi tiết</a> |
                                                 <a id="btnDelete" onclick="deleteCart(${order.id })"
                                                    class="center">Hủy đơn</a> |
-                                                <a class="center" onclick="updateCart(${order.id})">Chấp nhận đơn hàng</a>
+
+                                                <c:if test="${order.statusOrder.equals('Đang chờ') == true}">
+                                                    <a class="center" href="<c:url value="/admin/order/confirm-order/${order.id}"/>">Chấp nhận đơn hàng</a>
+                                                </c:if>
+
                                             </td>
                                         </tr>
                                     </c:forEach>

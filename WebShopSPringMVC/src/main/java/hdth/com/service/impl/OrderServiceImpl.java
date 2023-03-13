@@ -31,6 +31,11 @@ public class OrderServiceImpl implements OrderService {
         return this.orderRepository.getDetailOrderByOrderId(orderId);
     }
 
+    @Override
+    public boolean confirmOrderById(Integer id) {
+        return this.orderRepository.confirmOrderById(id);
+    }
+
 
     //=============> USER
     @Override
@@ -52,4 +57,6 @@ public class OrderServiceImpl implements OrderService {
     public Order getDetailOrderByOrderIdAndUserId(Integer orderId, Integer userId) {
         return this.orderRepository.getDetailOrderByOrderIdAndUserId(orderId,userId);
     }
+
+
 }

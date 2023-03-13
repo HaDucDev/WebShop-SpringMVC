@@ -20,4 +20,6 @@ public interface OrderRepository {
     List<Order> getAllOrdersByUserId(Integer userId);
 
     Order getDetailOrderByOrderIdAndUserId(Integer orderId,Integer userId);
+
+    boolean confirmOrderById (Integer id);
 }
