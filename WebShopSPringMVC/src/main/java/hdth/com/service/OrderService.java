@@ -11,7 +11,9 @@ public interface OrderService {
 
     Order getDetailOrderByOrderId(Integer orderId);
 
+    boolean confirmOrderById (Integer id);
 
+    boolean deliveryConfirmOrderById (Integer id);
 
     //==============> USER
 
@@ -23,5 +25,5 @@ public interface OrderService {
 
     Order getDetailOrderByOrderIdAndUserId(Integer orderId,Integer userId);
 
-    boolean confirmOrderById (Integer id);
+
 }

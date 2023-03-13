@@ -46,9 +46,19 @@ public class OrderController {
     }
 
 
-    @GetMapping("/admin/order/confirm-order/{id}")
-    private String confirmOrder(@PathVariable(name = "id") Integer id, Model model) {
+    @GetMapping("/admin/order/confirm-order/{id}")//chap nhan don
+    private String confirmOrder(@PathVariable(name = "id") Integer id) {
         if (this.orderService.confirmOrderById(id)==true)
+        {
+            return "redirect:/admin/order-list-all";
+        }
+        return "redirect:/admin/order-list-all";
+    }
+
+
+    @GetMapping("/admin/order/confirm-delivery-order/{id}")// da giao don
+    private String deliveryConfirmOrder(@PathVariable(name = "id") Integer id) {
+        if (this.orderService.deliveryConfirmOrderById(id)==true)
         {
             return "redirect:/admin/order-list-all";
         }

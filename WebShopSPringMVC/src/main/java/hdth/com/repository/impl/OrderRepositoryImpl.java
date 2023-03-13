@@ -157,7 +157,23 @@ public class OrderRepositoryImpl implements OrderRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         String hql = "UPDATE Order o SET o.statusOrder =:statusOrder WHERE id = :id";
         Query query = session.createQuery(hql);
-        query.setParameter("statusOrder", ConstValueWeb.CHAP_NHAN);
+        query.setParameter("statusOrder", ConstValueWeb.DANG_GIAO);
+        query.setParameter("id", id);
+        int rowsAffected = query.executeUpdate();
+        if(rowsAffected ==0 ){
+            return false;
+        }
+        System.out.println(rowsAffected + " rows update.");
+        return true;
+    }
+
+    @Override
+    public boolean deliveryConfirmOrderById(Integer id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String hql = "UPDATE Order o SET o.statusOrder =:statusOrder, o.paymentStatus =:paymentStatus WHERE id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("statusOrder", ConstValueWeb.DA_GIAO);
+        query.setParameter("paymentStatus", ConstValueWeb.DA_THANH_TOAN);
         query.setParameter("id", id);
         int rowsAffected = query.executeUpdate();
         if(rowsAffected ==0 ){

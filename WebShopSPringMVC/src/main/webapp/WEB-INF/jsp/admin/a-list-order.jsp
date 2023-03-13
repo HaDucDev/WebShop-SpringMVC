@@ -74,6 +74,9 @@
                                                 <c:if test="${order.statusOrder.equals('Đang chờ') == true}">
                                                     <a class="center" href="<c:url value="/admin/order/confirm-order/${order.id}"/>">Chấp nhận đơn hàng</a>
                                                 </c:if>
+                                                <c:if test="${order.statusOrder.equals('Đang giao') == true}">
+                                                    <a class="center" href="<c:url value="/admin/order/confirm-delivery-order/${order.id}"/>">Xác nhận đã giao đơn</a>
+                                                </c:if>
 
                                             </td>
                                         </tr>
@@ -86,59 +89,6 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
-            <c:forEach items="${lstCart}" var="cart">
-                <div class="modal fade" id="oderlist${cart.id}">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Chi tiết đơn hàng</h4>
-                            </div>
-                            <div class="modal-body">
-                                <table class="table table-condensed">
-                                    <thead>
-                                    <tr class="cart_menu">
-                                        <td class="image">Ảnh</td>
-                                        <td class="description">Tên Sản Phẩm</td>
-                                        <td class="price">Giá</td>
-                                        <td class="quantity">Số Lượng</td>
-                                        <td class="total">Tổng Tiền</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <c:forEach items="${cart.getProductCartEntityList()}" var="item">
-                                        <tr>
-                                            <c:url value="/image/${item.getProductEntity().getImage()}"
-                                                   var="imgUrl"></c:url>
-                                            <td class="cart_product">
-                                                <img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}"
-                                                     alt="#">
-                                            </td>
-                                            <td class="description">${item.getProductEntity().getProName()}</td>
-                                                <%--												<td class="price">${item.getUnitPrice()}<span>VNĐ</span></td>--%>
-                                            <td><fmt:formatNumber type="number" value="${item.getUnitPrice()}"/> VNĐ
-                                            </td>
-
-                                            <td class="quantity">${item.getQuantity()}</td>
-                                                <%--												<td class="total">${item.getUnitPrice()*item.getQuantity()}<span>VNĐ</span></td>--%>
-                                            <td><fmt:formatNumber type="number"
-                                                                  value="${item.getUnitPrice()*item.getQuantity()}"/>
-                                                VNĐ
-                                            </td>
-
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end modal -->
-            </c:forEach>
         </div>
     </div>
     <!-- /. PAGE INNER  -->
@@ -160,45 +110,5 @@
 </script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
-<%--<script>--%>
-
-<%--	function deleteCart(data){--%>
-<%--		$.ajax({--%>
-<%--			url: '${APIUrl}',--%>
-<%--			type: 'DELETE',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				window.location.href = "${CCUrl}?type=list";--%>
-<%--			},--%>
-<%--			error: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	}--%>
-
-<%--	function updateCart(data){--%>
-<%--		$.ajax({--%>
-<%--			url: '${APIUrl}',--%>
-<%--			type: 'PUT',--%>
-<%--			enctype: 'multipart/form-data',--%>
-<%--			processData:false,--%>
-<%--			contentType: 'application/json',--%>
-<%--			data:JSON.stringify(data),--%>
-<%--			dataType: 'json',--%>
-<%--			success: function (result){--%>
-<%--				console.log("Success");--%>
-<%--				window.location.href = "${CCUrl}?type=list";--%>
-<%--			},--%>
-<%--			error: function (error){--%>
-<%--				console.log("Error");--%>
-<%--			}--%>
-<%--		})--%>
-<%--	}--%>
-<%--</script>--%>
 </body>
 </html>

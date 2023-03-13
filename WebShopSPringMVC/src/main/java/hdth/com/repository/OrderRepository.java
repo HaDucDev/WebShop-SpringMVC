@@ -22,4 +22,6 @@ public interface OrderRepository {
     Order getDetailOrderByOrderIdAndUserId(Integer orderId,Integer userId);
 
     boolean confirmOrderById (Integer id);
+
+    boolean deliveryConfirmOrderById (Integer id);
 }

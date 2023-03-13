@@ -36,6 +36,11 @@ public class OrderServiceImpl implements OrderService {
         return this.orderRepository.confirmOrderById(id);
     }
 
+    @Override
+    public boolean deliveryConfirmOrderById(Integer id) {
+        return this.orderRepository.deliveryConfirmOrderById(id);
+    }
+
 
     //=============> USER
     @Override
