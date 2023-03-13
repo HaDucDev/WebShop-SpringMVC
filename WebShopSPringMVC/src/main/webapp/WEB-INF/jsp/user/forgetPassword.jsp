@@ -38,7 +38,7 @@
                    style="margin-top: 10px; color: white; background-color: #696763; border: none;"/>
           </form>
           <button type="button" class="btn btn-primary" onclick="window.location='<c:url value="/login"/>'">Trở lại trang đăng nhập</button>
-          <c:if test="${param.error != null}">
+          <c:if test="${param.errorEmail != null}">
             <div class="alert alert-danger">
               Email không tồn lại
             </div>

@@ -49,6 +49,11 @@
                         <button type="submit" class="btn btn-link"><a href="${register}">Đăng kí</a></button>
                         <button type="submit" class="btn btn-link"><a href="${forgetPass}">Quên mật khẩu</a></button>
                     </form>
+                    <c:if test="${param.successPass != null}">
+                        <div class="alert alert-danger">
+                            Bạn đã đổi mật khẩu thành công, hãy đăng nhập và đổi mật khẩu
+                        </div>
+                    </c:if>
                     <c:if test="${param.error != null}">
                         <div class="alert alert-danger">
                             Tên đăng nhập hoặc mật khẩu không đúng.
@@ -61,7 +66,7 @@
                     </c:if>
                     <c:if test="${param.accessDenied != null}">
                         <div class="alert alert-danger">
-                            Ban khong co quyen lam dieu nay
+                            Bạn không có quyền làm điều này
                         </div>
                     </c:if>
                 </div>

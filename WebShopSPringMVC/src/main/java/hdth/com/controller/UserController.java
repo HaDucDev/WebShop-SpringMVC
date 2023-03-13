@@ -64,17 +64,17 @@ public class UserController {
         return "user/forgetPassword";
     }
 
-    //post de xac nha doi9 mat khau
+    //post de xac nha doi mat khau, mot mat khau moi se gui ve mail
     @PostMapping("/forget-pass-confirm")
-    public String postConfirmForget(@ModelAttribute User user, Model model) {// model ơ day la dung cho form xac nhan, hung thi la jsp servlet
-//        if(this.userDetailsService.getUserByEmail(email)==null){
-//            String mess = "Lỗi";
-//            model.addAttribute("errorEmail",mess);
-//            return "user/forgetPassword";
-//        }
-        //tao doi tuong va gui sang form xac nhan ma
-        model.addAttribute("userForget", user);
-        return "user/confirmForgetPass";
+    public String postConfirmForget(@ModelAttribute User userForget, Model model) {// model ơ day la dung cho form xac nhan, hung thi la jsp servlet
+        if(this.userDetailsService.cofirmSuccessPassNewSendMail(userForget)==true){
+            String mess = "Chúc mừng bạn thành công";
+            model.addAttribute("successPass",mess);
+            return "user/login";
+        }
+        String mess = "Lỗi";
+        model.addAttribute("error",mess);
+        return "user/forgetPassword";
     }
 
     // so luong san pham co trong gio nguoi dung sau khi dang nhap

@@ -46,7 +46,7 @@
                         </div>
                         <input type="submit" class="btn btn-success btn-primary" value="Xác nhận"
                                style="margin-top: 10px; color: white; background-color: #696763; border: none;"/>
-                        <button type="submit" class="btn btn-link"><a href="${login}">Xác nhận</a></button>
+                        <button type="button" class="btn btn-link"><a href="${login}">Trở lại đăng nhập</a></button>
                     </form:form>
                     <c:if test="${param.error != null}">
                         <div class="alert alert-danger">

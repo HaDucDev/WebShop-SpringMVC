@@ -119,4 +119,33 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public boolean cofirmSuccessPassNewSendMail(User user) {// xac nhan thanh cong mat khau ms ve mail
+        User userData = this.getUserByEmail(user.getEmail());
+
+        // lay thoi gian thuc hien xac nhan
+        Date currentDate = new Date(System.currentTimeMillis());
+        //lay thoi gian trong csdl len de kiem tra
+        Date dateExpiration = userData.getExpirationTimeToken();
+
+        if(userData!=null && user.getResetPasswordCode().equals(userData.getResetPasswordCode()) && currentDate.compareTo(dateExpiration)<0){
+            String textCode = Utils.getRandomNumber(8)+"ok";//tao mat kahu ms
+            userData.setPassword(this.passwordEncoder.encode(textCode));
+            if(this.userRepository.updateUsers(userData)==true){
+                String toEmail = userData.getEmail();
+                String subject = "Mã xác nhận quên mật khẩu";
+                String message = "Chào mừng quý khách đến với SHOP. Mật khẩu mởi của bạn là: " + textCode +". Hãy đăng nhập và đổi mật khẩu nhé";
+                try {
+                    this.emailService.sendEmail(toEmail, subject, message);// gui mail
+                    return  true;
+                } catch (EmailException | MessagingException e) {
+                    System.out.println("Ngoại lệ xảy ra khi gửi email mật khẩu mới");
+                    return false;
+                }
+            }
+            return  false;
+        }
+        return false;
+    }
 }
