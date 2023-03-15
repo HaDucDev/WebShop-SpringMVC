@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
         Integer startPrice =0;
         Integer endPrice =0;
 
+        System.out.println("chay den day");
         if(price!="" && price.isEmpty()==false){
             // xu ly chuoi de lay khoang gia
             String[] strArray = price.split("_");

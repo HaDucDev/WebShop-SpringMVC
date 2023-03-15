@@ -47,7 +47,7 @@
 					</select>
 					<h5>Chọn giá khoảng giá</h5>
 					<select name="price">
-						<option value="0">Chọn ...</option>
+						<option value="0_0">Chọn ...</option>
 						<option value="100000_1000000">100.000-1.000.000</option>
 						<option value="1000000_10000000">1.000.000-10.000.000</option>
 						<option value="10000000_20000000">10.000.000-20.000.000</option>
