@@ -20,6 +20,17 @@ public class CartServiceImpl implements CartService {
         return this.cartRepository.getCartByUserId(userId);
     }
 
+
+    @Override
+    public Integer totalMoneyOrder(Integer userId) {
+        List<Cart> carts = this.getCartByUserId(userId);
+
+        Integer total = carts.stream().reduce(0,(init,item)-> init+
+                ((item.getProduct().getUnitPrice() - (item.getProduct().getUnitPrice()*item.getProduct().getDiscount()/100)) *item.getQuantity())  ,Integer::sum );
+        return total;
+    }
+
+
     @Override
     public boolean addCartbyId(Integer productId, Integer userId) {
         System.out.println("HD1");
@@ -41,4 +52,8 @@ public class CartServiceImpl implements CartService {
     public boolean deleteCartById(Integer id) {
         return this.cartRepository.deleteCartById(id);
     }
+
+
+
+
 }

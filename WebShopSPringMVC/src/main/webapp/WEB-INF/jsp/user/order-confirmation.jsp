@@ -98,8 +98,8 @@
                                         <p><a href="">${cart.product.productName}</a></p>
                                     </td>
                                     <td class="text-center">
-                                        <p>${cart.product.unitPrice} VNĐ</p>
-                                        <p>${(cart.product.unitPrice)} giam gia VNĐ</p>
+                                        <p>${cart.product.unitPrice - cart.product.unitPrice*cart.product.discount/100} đ</p>
+                                        <p><s>${(cart.product.unitPrice)} đ</s></p>
                                     </td>
                                     <td class="text-center">
                                         <div class="cart_quantity_button">
@@ -109,7 +109,7 @@
                                     </td>
                                     <td class="text-center">
                                         <p id="total"><fmt:formatNumber type="number"
-                                                                        value="${cart.product.unitPrice*cart.quantity}"/>
+                                                                        value="${(cart.product.unitPrice - cart.product.unitPrice*cart.product.discount/100)*cart.quantity}"/>
                                             VNĐ</p>
                                     </td>
                                 </tr>
@@ -120,7 +120,7 @@
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
                                 <td class="no-line text-center"><strong>Shipping</strong></td>
-                                <td class="no-line text-right">$15</td>
+                                <td class="no-line text-right">Miễn phí</td>
                             </tr>
                             <tr>
                                 <td class="no-line"></td>
@@ -128,7 +128,7 @@
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
                                 <td class="no-line text-center"><strong>Total</strong></td>
-                                <td class="no-line text-right">$685.99</td>
+                                <td class="no-line text-right">${total} đ</td>
                             </tr>
                             </tbody>
                         </table>

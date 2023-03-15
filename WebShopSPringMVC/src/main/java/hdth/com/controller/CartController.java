@@ -41,6 +41,7 @@ public class CartController {
             if(!this.cartService.getCartByUserId(userId).isEmpty()){
                 model.addAttribute("cartList",this.cartService.getCartByUserId(userId));
                 model.addAttribute("order",new Order());
+                model.addAttribute("total", this.cartService.totalMoneyOrder(userId));
                 return "user/order-confirmation";
             }
             else {

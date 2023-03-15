@@ -75,7 +75,7 @@
                             </div>
                         </td>
                         <td>
-                            <p id="total"><fmt:formatNumber type="number" value="${cart.product.unitPrice*cart.quantity}"/> VNĐ</p>
+                            <p id="total"><fmt:formatNumber type="number" value="${Math.round((cart.product.unitPrice - cart.product.unitPrice*cart.product.discount/100)*cart.quantity)}"/> VNĐ</p>
                         </td>
                         <td class="cart_delete">
                             <a class="cart_quantity_delete"

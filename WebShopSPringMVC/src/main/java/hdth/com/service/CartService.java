@@ -13,6 +13,8 @@ public interface CartService {
 
     Integer countProductCartbyUser(Integer userId);
 
-    public boolean deleteCartById(Integer id);
+    boolean deleteCartById(Integer id);
+
+    Integer totalMoneyOrder (Integer integer);
 
 }
