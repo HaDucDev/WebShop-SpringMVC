@@ -27,12 +27,19 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         HttpSession session=httpServletRequest.getSession();
         session.setAttribute("currentUser",user);
+        StringBuffer url = httpServletRequest.getRequestURL();
+        String contextPath = httpServletRequest.getContextPath();
+        // Tìm vị trí của context path trong URL
+        int contextPathIndex = url.indexOf(contextPath) + contextPath.length();
+        url.setLength(contextPathIndex);// lay gia tri tu dau den ki tu dau tien cua context path
         if(user.getRole().getName().equals(ERole.ROLE_ADMIN)){
-            httpServletResponse.sendRedirect("/WebShopSPringMVC_war/admin/index");
-            //httpServletRequest.getRequestDispatcher("/admin").forward(httpServletRequest,httpServletResponse);
+            url.append("/admin/index");
+//            httpServletResponse.sendRedirect("/WebShopSPringMVC_war/admin/index");
+//            httpServletRequest.getRequestDispatcher("/admin").forward(httpServletRequest,httpServletResponse);
         }
-        if(user.getRole().getName().equals(ERole.ROLE_USER)){
-            httpServletResponse.sendRedirect("/WebShopSPringMVC_war");
-        }
+//        if(user.getRole().getName().equals(ERole.ROLE_USER)){
+//            httpServletResponse.sendRedirect("/WebShopSPringMVC_war");
+//        }
+        httpServletResponse.sendRedirect(url.toString());
     }
 }
